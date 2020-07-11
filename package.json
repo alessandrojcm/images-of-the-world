@@ -1,0 +1,45 @@
+{
+    "name": "images-of-the-world",
+    "version": "1.0.0",
+    "description": "A job application test turned side project",
+    "main": "index.js",
+    "repository": "git@github.com:alessandrojcm/images-of-the-world.git",
+    "author": "Alessandro Cuppari <me@alessandrojcm.dev>",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "lint-staged": "lint-staged",
+        "develop": "yarn start",
+        "start": "parcel ./src/index.html",
+        "build": "parcel build ./src/index.html --public-url '/'"
+    },
+    "devDependencies": {
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.11",
+        "parcel-bundler": "^1.12.4",
+        "prettier": "^2.0.5"
+    },
+    "dependencies": {
+        "@emotion/core": "^10.0.28",
+        "@emotion/css": "^10.0.27",
+        "@emotion/styled": "^10.0.27",
+        "ky": "^0.20.0",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-helmet": "^6.1.0",
+        "react-query": "^2.4.15",
+        "react-router-dom": "^5.2.0",
+        "rxjs": "^6.6.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{tsx,ts,scss}": [
+            "prettier --write",
+            "git add ."
+        ]
+    }
+}
