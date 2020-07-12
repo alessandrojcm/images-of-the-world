@@ -2,7 +2,6 @@
     "name": "images-of-the-world",
     "version": "1.0.0",
     "description": "A job application test turned side project",
-    "main": "index.js",
     "repository": "git@github.com:alessandrojcm/images-of-the-world.git",
     "author": "Alessandro Cuppari <me@alessandrojcm.dev>",
     "license": "MIT",
@@ -20,6 +19,10 @@
         "@babel/preset-react": "^7.10.4",
         "@babel/preset-typescript": "^7.10.4",
         "@emotion/babel-plugin-jsx-pragmatic": "^0.1.5",
+        "@parcel/transformer-react-refresh-wrap": "^2.0.0-alpha.3",
+        "@parcel/transformer-svg-react": "^2.0.0-nightly.1739",
+        "@parcel/validator-eslint": "^2.0.0-alpha.3",
+        "@parcel/validator-typescript": "^2.0.0-alpha.3",
         "@testing-library/dom": "^7.20.0",
         "@testing-library/jest-dom": "^5.11.0",
         "@testing-library/react": "^10.4.5",
@@ -32,6 +35,7 @@
         "@types/react-router-dom": "^5.1.5",
         "@typescript-eslint/eslint-plugin": "^3.6.0",
         "@typescript-eslint/parser": "^3.6.0",
+        "babel-jest": "^26.1.0",
         "babel-plugin-macros": "^2.8.0",
         "babel-plugin-transform-inline-environment-variables": "^0.4.3",
         "babel-plugin-transform-react-jsx": "^6.24.1",
@@ -50,23 +54,23 @@
         "lint-staged": "^10.2.11",
         "parcel": "^2.0.0-beta.1",
         "prettier": "^2.0.5",
+        "tailwindcss": "^1.4.6",
         "ts-jest": "^26.1.1",
+        "twin.macro": "^1.5.0",
         "typescript": "^3.9.6"
     },
     "dependencies": {
         "@emotion/core": "^10.0.28",
         "@emotion/css": "^10.0.27",
         "@emotion/styled": "^10.0.27",
-        "babel-jest": "^26.1.0",
         "ky": "^0.20.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-helmet": "^6.1.0",
         "react-query": "^2.4.15",
         "react-router-dom": "^5.2.0",
-        "rxjs": "^6.6.0",
-        "tailwindcss": "^1.4.6",
-        "twin.macro": "^1.5.0"
+        "react-useanimations": "^2.0.3-RC",
+        "rxjs": "^6.6.0"
     },
     "husky": {
         "hooks": {
@@ -79,6 +83,9 @@
             "prettier --write",
             "git add ."
         ]
+    },
+    "alias": {
+        "static": "./static/*"
     },
     "browserslist": [
         "defaults",
