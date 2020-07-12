@@ -213,4 +213,8 @@ psd
 thumb
 sketch
 
+src/**/*.map
+src/**/*.js
+.parcel-cache/**
+
 # End of https://www.toptal.com/developers/gitignore/api/react,intellij+all,node

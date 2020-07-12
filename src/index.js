@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import 'tailwindcss/dist/base.min.css';
-import tw from 'twin.macro';
-
-const GreenDiv = tw.div`text-blue-500 text-3xl`;
-
-const App = () => {
-    return <GreenDiv>Hello!</GreenDiv>;
+/*const GreenDiv = tw.div`
+    text-blue-500 text-3xl
+`;*/
+var App = function () {
+    return React.createElement("p", null, "'a'");
 };
-
-ReactDOM.render(<App />, document.getElementById('root'));
+render(React.createElement(App, null), document.getElementById('root'));
+//# sourceMappingURL=index.js.map

@@ -1,9 +1,16 @@
 {
     "plugins": [
-        "babel-plugin-macros"
+        "babel-plugin-transform-inline-environment-variables",
+        "babel-plugin-macros",
+        [
+            "@emotion/babel-plugin-jsx-pragmatic",
+            {
+                "export": "jsx",
+                "import": "__cssprop",
+                "module": "@emotion/core"
+            }
+        ],
+        ["babel-plugin-transform-react-jsx", { "pragma": "__cssprop" }]
     ],
-    "presets": [
-        "@babel/preset-react",
-        "@babel/preset-env"
-    ]
+    "presets": ["@babel/preset-typescript", "@babel/preset-react", "@babel/preset-env"]
 }

@@ -10,18 +10,29 @@
     "scripts": {
         "lint-staged": "lint-staged",
         "develop": "yarn start",
-        "start": "parcel ./src/index.html",
+        "start": "parcel ./src/index.html --open",
         "build": "parcel build ./src/index.html --public-url '/'"
     },
     "devDependencies": {
         "@babel/core": "^7.10.4",
+        "@babel/plugin-transform-react-jsx": "^7.10.4",
         "@babel/preset-env": "^7.10.4",
         "@babel/preset-react": "^7.10.4",
+        "@babel/preset-typescript": "^7.10.4",
+        "@emotion/babel-plugin-jsx-pragmatic": "^0.1.5",
+        "@types/react": "^16.9.43",
+        "@types/react-dom": "^16.9.8",
+        "@types/react-helmet": "^6.0.0",
+        "@types/react-query": "^1.1.2",
+        "@types/react-router-dom": "^5.1.5",
         "babel-plugin-macros": "^2.8.0",
+        "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+        "babel-plugin-transform-react-jsx": "^6.24.1",
         "husky": "^4.2.5",
         "lint-staged": "^10.2.11",
-        "parcel-bundler": "^1.12.4",
-        "prettier": "^2.0.5"
+        "parcel": "^2.0.0-beta.1",
+        "prettier": "^2.0.5",
+        "typescript": "^3.9.6"
     },
     "dependencies": {
         "@emotion/core": "^10.0.28",
@@ -47,5 +58,11 @@
             "prettier --write",
             "git add ."
         ]
-    }
+    },
+    "browserslist": [
+        "defaults",
+        "not IE 11",
+        "not IE_Mob 11",
+        "maintained node versions"
+    ]
 }
