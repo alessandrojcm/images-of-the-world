@@ -17,6 +17,11 @@ module.exports = {
             },
             black: '#223E3F',
         },
+        fontFamily: {
+            display: ['"Kaushan Script"', 'serif'],
+            subtitle: ['Andada'],
+            body: ['"Alegreya Sans"', 'sans-serif'],
+        },
         extend: {},
     },
     variants: {},
