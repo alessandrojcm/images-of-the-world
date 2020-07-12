@@ -9,7 +9,8 @@
         "moduleResolution": "node",
         "baseUrl": "./src",
         "paths": {
-            "~/*": ["./*"]
+            "~/*": ["./*"],
+            "static/*": ["./static/*"]
         },
         "typeRoots": ["node_modules/@types"],
         "allowSyntheticDefaultImports": true,
