@@ -9,8 +9,10 @@
     "scripts": {
         "lint-staged": "lint-staged",
         "develop": "yarn start",
-        "start": "parcel ./src/index.html --open",
-        "build": "parcel build ./src/index.html --public-url '/'"
+        "start": "yarn concurrently 'yarn serve:app' 'yarn serve:locales'",
+        "build": "parcel build ./src/index.html --public-url '/'",
+        "serve:app": "parcel ./src/index.html --open --public-url '/'",
+        "serve:locales": "yarn live-server ./static --port=12345 --watch=./static/locales --no-browser"
     },
     "devDependencies": {
         "@babel/core": "^7.10.4",
@@ -39,6 +41,7 @@
         "babel-plugin-macros": "^2.8.0",
         "babel-plugin-transform-inline-environment-variables": "^0.4.3",
         "babel-plugin-transform-react-jsx": "^6.24.1",
+        "concurrently": "^5.2.0",
         "eslint": "^7.4.0",
         "eslint-config-airbnb": "^18.2.0",
         "eslint-config-prettier": "^6.11.0",
@@ -47,11 +50,13 @@
         "eslint-plugin-jsx-a11y": "^6.3.1",
         "eslint-plugin-react": "^7.20.0",
         "eslint-plugin-react-hooks": "^4.0.7",
+        "http-proxy-middleware": "^1.0.5",
         "husky": "^4.2.5",
         "jest": "^26.1.0",
         "jest-emotion": "^10.0.32",
         "jsdom": "^16.3.0",
         "lint-staged": "^10.2.11",
+        "live-server": "^1.2.1",
         "parcel": "^2.0.0-beta.1",
         "prettier": "^2.0.5",
         "ts-jest": "^26.1.1",
