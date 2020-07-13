@@ -13,10 +13,15 @@ module.exports = {
             diagnostics: false,
         },
     },
-    testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
+    testRegex: '(/__tests__/*.test|spec)\\.tsx?$',
     testEnvironment: 'jsdom',
     collectCoverage: true,
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-    moduleNameMapper: { ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/' }), '\\.css$': '<rootDir>/__tests__/styleMocks.js' },
+    moduleNameMapper: {
+        ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/' }),
+        '\\.css$': '<rootDir>/__mocks__/styleMocks.js',
+        '\\.svg': '<rootDir>/__mocks__/svgMock.js',
+    },
     snapshotSerializers: ['jest-emotion'],
+    setupFiles: ['jest-canvas-mock'],
 };
