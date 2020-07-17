@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { render } from 'react-dom';
 
-import 'tailwindcss/dist/base.min.css';
 import App from './App';
+import FullPageLoader from './components/FullPageLoader';
 
-render(<App />, document.getElementById('root'));
+import './core/i18n';
+import 'tailwindcss/dist/base.min.css';
+
+render(
+    <Suspense fallback={<FullPageLoader />}>
+        <App />
+    </Suspense>,
+    document.getElementById('root')
+);
