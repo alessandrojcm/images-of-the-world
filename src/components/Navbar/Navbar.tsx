@@ -1,11 +1,10 @@
 import React from 'react';
 
 import tw, { css, styled } from 'twin.macro';
-import UseAnimations from 'react-useanimations';
-import settings from 'react-useanimations/lib/settings2';
 
-import Home from '../../static/icons/home.svg';
-import tailwind from '../../tailwind.config.js';
+import { useTranslation } from 'react-i18next';
+import Home from '../../../static/icons/home.svg';
+import TranslationSelector from './TranslationSelector';
 
 const NavbarStyle = tw.nav`
     fixed
@@ -26,11 +25,9 @@ const HomeIcon = styled(Home)`
     ${tw`mr-4 cursor-pointer`}
 `;
 
-const Settings = styled(UseAnimations)`
-    ${tw`cursor-pointer`}
-`;
-
 const Navbar = () => {
+    const { t } = useTranslation();
+
     return (
         <NavbarStyle>
             <div
@@ -42,10 +39,10 @@ const Navbar = () => {
                     css={css`
                         ${tw`cursor-pointer italic`}
                     `}>
-                    Images of the World
+                    {t('siteTitle')}
                 </h1>
             </div>
-            <Settings animation={settings} strokeColor={tailwind.theme.colors.orange['200']} />
+            <TranslationSelector />
         </NavbarStyle>
     );
 };
