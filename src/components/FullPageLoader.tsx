@@ -67,7 +67,7 @@ const LoaderInner = styled.div`
 const FullPageLoader = () => {
     return (
         <div
-            aria-busy={'true'}
+            aria-busy="true"
             css={css`
                 ${tw`h-screen w-screen flex flex-row justify-center items-center bg-black`}
             `}>

@@ -6,6 +6,7 @@
     "author": "Alessandro Cuppari <me@alessandrojcm.dev>",
     "license": "MIT",
     "private": true,
+    "browser": "./src/index.html",
     "scripts": {
         "lint-staged": "lint-staged",
         "develop": "yarn start",
@@ -99,7 +100,8 @@
         ]
     },
     "alias": {
-        "static": "./static/*"
+        "static": "./static",
+        "~app": "./src"
     },
     "browserslist": [
         "defaults",

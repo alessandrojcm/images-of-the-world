@@ -17,6 +17,7 @@ const MainLayout = tw.main`
     tracking-wide
 `;
 
+// eslint-disable-next-line react/prop-types
 const Layout: React.FC = ({ children }) => {
     return (
         <MainLayout>

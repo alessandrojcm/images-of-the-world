@@ -9,7 +9,7 @@
         "moduleResolution": "node",
         "baseUrl": "./src",
         "paths": {
-            "~/*": ["./*"],
+            "~/app/*": ["./src/*"],
             "static/*": ["./static/*"]
         },
         "typeRoots": ["node_modules/@types"],
