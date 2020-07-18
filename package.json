@@ -10,11 +10,11 @@
     "scripts": {
         "lint-staged": "lint-staged",
         "develop": "yarn start",
-        "start": "yarn concurrently 'yarn serve:app' 'yarn serve:locales'",
-        "build": "parcel build ./src/index.html --public-url '/'",
-        "serve:app": "parcel ./src/index.html --open --public-url '/'",
-        "serve:locales": "yarn live-server ./static --port=12345 --watch=./static/locales --no-browser",
-        "test": "yarn jest --maxWorkers=4"
+        "start": "concurrently 'yarn serve:app' 'yarn serve:locales'",
+        "build": "cross-env NODE_ENV=production parcel build ./src/index.html --public-url '/'",
+        "serve:app": "cross-env NODE_ENV=development parcel ./src/index.html --open --public-url '/'",
+        "serve:locales": "live-server ./static --port=12345 --watch=./static/locales --no-browser",
+        "test": "jest --maxWorkers=4"
     },
     "devDependencies": {
         "@babel/core": "^7.10.4",
@@ -45,6 +45,7 @@
         "babel-plugin-transform-inline-environment-variables": "^0.4.3",
         "babel-plugin-transform-react-jsx": "^6.24.1",
         "concurrently": "^5.2.0",
+        "cross-env": "^7.0.2",
         "eslint": "^7.4.0",
         "eslint-config-airbnb": "^18.2.0",
         "eslint-config-prettier": "^6.11.0",
@@ -61,6 +62,7 @@
         "jsdom": "^16.3.0",
         "lint-staged": "^10.2.11",
         "live-server": "^1.2.1",
+        "panic-overlay": "^1.0.42",
         "parcel": "^2.0.0-beta.1",
         "prettier": "^2.0.5",
         "ts-jest": "^26.1.1",
