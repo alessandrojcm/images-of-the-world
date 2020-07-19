@@ -911,6 +911,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.6.2":
+  version "7.10.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.5.tgz#303d8bd440ecd5a491eae6117fd3367698674c5c"
+  integrity sha512-otddXKhdNn7d0ptoFRHtMLa8LqDxLYwTjB4nYgM1yy5N6gU/MUf8zqyyLltCH3yAVitBzmwK4us+DD0l/MauAg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.0.0", "@babel/template@^7.10.4", "@babel/template@^7.2.2", "@babel/template@^7.3.3":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.10.4.tgz#3251996c4200ebc71d1a8fc405fba940f36ba278"
@@ -2176,76 +2183,193 @@
     chrome-trace-event "^1.0.2"
     nullthrows "^1.1.1"
 
-"@reach/auto-id@0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.10.5.tgz#fa78c71ce2f565ebed1ad91a8d9a685176d23c48"
-  integrity sha512-we4/bwjFxJ3F+2eaddQ1HltbKvJ7AB8clkN719El7Zugpn/vOjfPMOVUiBqTmPGLUvkYrq4tpuFwLvk2HyOVHg==
+"@react-aria/button@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/button/-/button-3.0.2.tgz#5da13b7a93eb82590658bfaa867282608e4c1436"
+  integrity sha512-fjsAbi3HEXScIZ2jrkvcYukV7qtkl5AhBYlfkO2KmLUg/tpMdQkeRUlsjX9Wapmj1yXkhV2wkIexhE6xLS3jPA==
   dependencies:
-    "@reach/utils" "0.10.5"
-    tslib "^2.0.0"
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.0.2"
+    "@react-aria/i18n" "^3.0.2"
+    "@react-aria/interactions" "^3.0.2"
+    "@react-aria/utils" "^3.0.2"
+    "@react-types/button" "^3.0.2"
 
-"@reach/descendants@0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@reach/descendants/-/descendants-0.10.5.tgz#2611174e9e9b326dba548356221e2f8c8f5c8612"
-  integrity sha512-8HhN4DwS/HsPQ+Ym/Ft/XJ1spXBYdE8hqpnbYR9UcU7Nx3oDbTIdhjA6JXXt23t5avYIx2jRa8YHCtVKSHuiwA==
+"@react-aria/focus@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/focus/-/focus-3.0.2.tgz#e56b2d66c2d11fc59f4e6e0755b2fa8e889055ac"
+  integrity sha512-1P8saw0YRcFi+gi+UpqaBwNuki/PvK/OQEvZEHuitbOYmI6MPigyAJHq+1qUwG155xdHmMVkWtZzdPDqXuy4uQ==
   dependencies:
-    "@reach/utils" "0.10.5"
-    tslib "^2.0.0"
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.0.2"
+    "@react-aria/utils" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
+    classnames "^2.2.5"
 
-"@reach/menu-button@^0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@reach/menu-button/-/menu-button-0.10.5.tgz#b023044fa199bc256572830740049a50fea1d690"
-  integrity sha512-PQzFzexk9K7Q5qTGmXcg3qYp+F36H0MaeyzybR5t4lB1e56nAh1u/C2bocwpHssIoy25xOR8Nu+LVMVf6k6cUw==
+"@react-aria/i18n@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/i18n/-/i18n-3.0.2.tgz#e2430164681fe6f4ab1ba332123835e05cf92add"
+  integrity sha512-fI7l/eHG8MIv5gEaTsASENgVyA0aFM0cJ4HqA+gNZlZyLKHoCGPxp9o8zLx2Em+JoHb9UI/W7dUG73fOJGvKvA==
   dependencies:
-    "@reach/auto-id" "0.10.5"
-    "@reach/descendants" "0.10.5"
-    "@reach/popover" "0.10.5"
-    "@reach/utils" "0.10.5"
-    prop-types "^15.7.2"
-    tslib "^2.0.0"
+    "@babel/runtime" "^7.6.2"
+    "@react-types/shared" "^3.0.2"
+    intl-messageformat "^2.2.0"
 
-"@reach/observe-rect@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@reach/observe-rect/-/observe-rect-1.2.0.tgz#d7a6013b8aafcc64c778a0ccb83355a11204d3b2"
-  integrity sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==
-
-"@reach/popover@0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@reach/popover/-/popover-0.10.5.tgz#ccf89f6540e6477d8d087e78a8294e89295a743d"
-  integrity sha512-S+qWIsjrN1yMpHjgELhjpdGc4Q3q1plJtXBGGQRxUAjmCUA/5OY7t5w5C8iqMNAEBwCvYXKvK/pLcXFxxLykSw==
+"@react-aria/interactions@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.0.2.tgz#3f1ef9ba2bec1148e98c79330a7efee342df8e10"
+  integrity sha512-TtLHlfz/2IWcRhTxuhVM/hxM2z3L7QZRDL6Cs+ZjHDHPyGAPEsEvxS0s0lQpx7KmIhNPV+nU5i+iFQ37exJ8kg==
   dependencies:
-    "@reach/portal" "0.10.5"
-    "@reach/rect" "0.10.5"
-    "@reach/utils" "0.10.5"
-    tabbable "^4.0.0"
-    tslib "^2.0.0"
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/utils" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
 
-"@reach/portal@0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.10.5.tgz#532ce8472fc99d6c556520f6c8d53333d89e49a4"
-  integrity sha512-K5K8gW99yqDPDCWQjEfSNZAbGOQWSx5AN2lpuR1gDVoz4xyWpTJ0k0LbetYJTDVvLP/InEcR7AU42JaDYDCXQw==
+"@react-aria/menu@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/menu/-/menu-3.0.2.tgz#6ba6ad00693c40cca0c622426114a1a935f84ee9"
+  integrity sha512-LDY0/h3j0BTtgw/6YwVmIepCaqL5lNNOnI8LaH2D0pNvIF95ldNFLXQHyu6Yj8QR6V6t/+ebLTIBaB1kPz1XlA==
   dependencies:
-    "@reach/utils" "0.10.5"
-    tslib "^2.0.0"
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.0.2"
+    "@react-aria/overlays" "^3.0.2"
+    "@react-aria/selection" "^3.0.2"
+    "@react-aria/utils" "^3.0.2"
+    "@react-stately/collections" "^3.0.2"
+    "@react-stately/menu" "^3.0.2"
+    "@react-stately/tree" "^3.0.2"
+    "@react-types/button" "^3.0.2"
+    "@react-types/menu" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
 
-"@reach/rect@0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@reach/rect/-/rect-0.10.5.tgz#ba68722f155b146c6790e7d10a97dca1fd7ab14e"
-  integrity sha512-JBKs2HniYecq5zLO6UFReX28SUBPM3n0aizdNgHuvwZmDcTfNV4jsuJYQLqJ+FbCQsrSHkBxKZqWpfGXY9bUEg==
+"@react-aria/overlays@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/overlays/-/overlays-3.0.2.tgz#f6c26dd25ec9ff9bdb35f3156509ad107769c396"
+  integrity sha512-LIHI0bv/xsA1h4Vm7ZPh87VmP4OxjJ3sDXmMOcCzKX5qLsXGcV1NOsxOytVTarC9ps3cgBBxsjZvuRJWo7Noyg==
   dependencies:
-    "@reach/observe-rect" "1.2.0"
-    "@reach/utils" "0.10.5"
-    prop-types "^15.7.2"
-    tslib "^2.0.0"
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.0.2"
+    "@react-aria/interactions" "^3.0.2"
+    "@react-aria/utils" "^3.0.2"
+    "@react-aria/visually-hidden" "^3.0.2"
+    "@react-stately/overlays" "^3.0.2"
+    "@react-types/button" "^3.0.2"
+    "@react-types/overlays" "^3.0.2"
+    dom-helpers "^3.3.1"
 
-"@reach/utils@0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.10.5.tgz#fbac944d29565f6dd7abd0e1b13950e99b1e470b"
-  integrity sha512-5E/xxQnUbmpI/LrufBAOXjunl96DnqX6B4zC2MO2KH/dRzLug5gM5VuOwV26egsp0jvsSPxojwciOhS43px3qw==
+"@react-aria/selection@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/selection/-/selection-3.0.2.tgz#59f71713afd0df5063dd311a5af5e242ba8f5369"
+  integrity sha512-bqkl1coX7dKdt36+afUu9zxzOnlrLmmyEE/EmDbGhNKIFM+BTJQIv0DWofjb64nWmOZBUCCCghCDEDzfudpngA==
   dependencies:
-    "@types/warning" "^3.0.0"
-    tslib "^2.0.0"
-    warning "^4.0.3"
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.0.2"
+    "@react-aria/i18n" "^3.0.2"
+    "@react-aria/interactions" "^3.0.2"
+    "@react-aria/utils" "^3.0.2"
+    "@react-stately/collections" "^3.0.2"
+    "@react-stately/selection" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
+
+"@react-aria/utils@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.0.2.tgz#08b991c98c5b44fcc0dd6cb08d09fb6247d9bf3d"
+  integrity sha512-75rBhdZXYXk73QhL+p9eeXvp5HpKrtrbC7R0+aGOvLCnc8HQkzg6kdSwsXwyjUdRJOz1KpLOlzRVwVpsOaIiJw==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-types/shared" "^3.0.2"
+    classnames "^2.2.5"
+
+"@react-aria/visually-hidden@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-aria/visually-hidden/-/visually-hidden-3.0.2.tgz#7b9774dcb8312d414272845efd46cf7cfff2c8e6"
+  integrity sha512-GoLL6Tv2NWe0RcpmHita2bSug5c3PHcJ93dNM2Vz4l4VqZtXh3JOkBXSW4/Q+CjDDC0Q/sN43b3bGVg8Qc+oww==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    classnames "^2.2.5"
+
+"@react-stately/collections@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-stately/collections/-/collections-3.0.2.tgz#4b42f1dc7d984fa8b03c73056a5847e5ad33b68a"
+  integrity sha512-MJUtPsZAhQSEGRTpfCfR5iHR7MI6CMoLUaUft+C0QNhnY9vUN0mE3WiSFWMGaLSzcMC64HkUBupYNL6LCNt7Eg==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-types/shared" "^3.0.2"
+    react "^16.8.0"
+
+"@react-stately/menu@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-stately/menu/-/menu-3.0.2.tgz#2d402a5309f52f5a0160f0be5a42509dc93bc293"
+  integrity sha512-wuhZ8M3vJOFLNI77My9JdmSBWwqkY+afwuOuHbWQLXIMOSh0dFA4393YHxOc5kYupe8btTwa86O2fK7RAi9Ecw==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/overlays" "^3.0.2"
+    "@react-stately/utils" "^3.0.2"
+    "@react-types/menu" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
+
+"@react-stately/overlays@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-stately/overlays/-/overlays-3.0.2.tgz#59be458ad8a13d2be6e429af1f57ab5681a82b64"
+  integrity sha512-GSWllWanQT2tgL9vphiRFenB9GkYxySo4saJVXJSex8JI+LOGlSXP7dlxRJ2UOQlbiBnQRiikVN9ffHWCZiHbQ==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.0.2"
+    "@react-types/overlays" "^3.0.2"
+
+"@react-stately/selection@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-stately/selection/-/selection-3.0.2.tgz#947546aa0949b5d75358dd7f2523ff5409aacc8c"
+  integrity sha512-oLZX79HNJYeNFa8zSZ03mIFkxLkQu0Lk5J3S5gXHbtO+RoSqYdxUpy17CekpIg13gBk44IBYtFcxZw3ZMKwFxQ==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/collections" "^3.0.2"
+    "@react-stately/utils" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
+
+"@react-stately/tree@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-stately/tree/-/tree-3.0.2.tgz#d53ee1dded6f4adecf6ce7520d30580a63a2c4e8"
+  integrity sha512-PCzbI4wZ/IkTRNjW/xRMTDokVFylgwR8iyRjoDA9MliWnBNtcLS0J9SB1FUfIcq69hjA52y1g2CdfUZzUsr1sA==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/collections" "^3.0.2"
+    "@react-stately/selection" "^3.0.2"
+    "@react-stately/utils" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
+
+"@react-stately/utils@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-stately/utils/-/utils-3.0.2.tgz#42465eb580a5ef5310fa69bda2dfd0c07a28ee96"
+  integrity sha512-xmSfevGwq1CfbnKf/BILa4dLsYhxslBOIOikz3MwZxIIU0wswFfLTSgN90FVmpNR4lDI1aCVqpKs0RW+gGVh0A==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
+"@react-types/button@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-types/button/-/button-3.0.2.tgz#84ec26b51a446bf51e85cb41b70de6043e2e9080"
+  integrity sha512-vf4GISpn9TvYhh4DuCt+BgZWPMbcL7EuIlpHs7wlkm8XxxdkZ8CAiofZXYHdVgFBREalqVjeVi8DEr221zovPg==
+  dependencies:
+    "@react-types/shared" "^3.0.2"
+
+"@react-types/menu@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-types/menu/-/menu-3.0.2.tgz#bda9131b4f0ec43963b2931594bf38ab90dc7993"
+  integrity sha512-9R4sZdgS5wIJTaHtgGxLSix3+4fELlDdcbH5Qj3MYEBuFCZkuWyxQI9QxsQg3UId3CB9iPMGkzhgPZ2+my9Sqw==
+  dependencies:
+    "@react-types/overlays" "^3.0.2"
+    "@react-types/shared" "^3.0.2"
+
+"@react-types/overlays@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-types/overlays/-/overlays-3.0.2.tgz#caf711ee28a6ea8bd6e5fbd4ec383b7f0f4e673e"
+  integrity sha512-bT1iTysgMPLVWaaDxWgCOymKJ83/pukosMrbTiHaKdKSKBX3Ddbwj+4pDuzkACslkChw30BY+z2TdF48Y5Tk9Q==
+  dependencies:
+    "@react-types/shared" "^3.0.2"
+
+"@react-types/shared@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.0.2.tgz#99aed8bbc902e40c796e8cab6d554eee02a4ed5e"
+  integrity sha512-j7wuNbh/o+iMqyCWL0HybxWmThPBoEaPVALCS3Q8eUmNbsnZUMGqMrbartmN1YVBbceDbBl3D840NolL3Gx6wA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.0"
@@ -2509,11 +2633,6 @@
   integrity sha512-yYn5EKHO3MPEMSOrcAb1dLWY+68CG29LiXKsWmmpVHqoP5+ZRiAVLyUHvPNrO2dABDdUGZvavMsaGpWNjM6N2g==
   dependencies:
     "@types/jest" "*"
-
-"@types/warning@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/warning/-/warning-3.0.0.tgz#0d2501268ad8f9962b740d387c4654f5f8e23e52"
-  integrity sha1-DSUBJorY+ZYrdA04fEZU9fjiPlI=
 
 "@types/yargs-parser@*":
   version "15.0.0"
@@ -3494,6 +3613,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.5:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+
 clean-set@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/clean-set/-/clean-set-1.1.2.tgz#76d8bf238c3e27827bfa73073ecdfdc767187070"
@@ -4321,6 +4445,13 @@ dom-accessibility-api@^0.4.5:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/dom-accessibility-api/-/dom-accessibility-api-0.4.5.tgz#d9c1cefa89f509d8cf132ab5d250004d755e76e3"
   integrity sha512-HcPDilI95nKztbVikaN2vzwvmv0sE8Y2ZJFODy/m15n7mGXLeOKGiys9qWVbFbh+aq/KYj2lqMLybBOkYAEXqg==
+
+dom-helpers@^3.3.1:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
+  integrity sha512-LnuPJ+dwqKDIyotW1VzmOZ5TONUN7CwkCR5hrgawTUbkBGYdeoNLZo6nNfGkCrjtE1nXXaj7iMMpDa8/d9WoIA==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
 
 dom-serializer@0:
   version "0.2.2"
@@ -5734,6 +5865,18 @@ internal-slot@^1.0.2:
     es-abstract "^1.17.0-next.1"
     has "^1.0.3"
     side-channel "^1.0.2"
+
+intl-messageformat-parser@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/intl-messageformat-parser/-/intl-messageformat-parser-1.4.0.tgz#b43d45a97468cadbe44331d74bb1e8dea44fc075"
+  integrity sha1-tD1FqXRoytvkQzHXS7Ho3qRPwHU=
+
+intl-messageformat@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-2.2.0.tgz#345bcd46de630b7683330c2e52177ff5eab484fc"
+  integrity sha1-NFvNRt5jC3aDMwwuUhd/9eq0hPw=
+  dependencies:
+    intl-messageformat-parser "1.4.0"
 
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
@@ -8576,7 +8719,7 @@ react-useanimations@^2.0.0:
   dependencies:
     lottie-web "^5.5.7"
 
-react@^16.13.1, react@^16.7.0:
+react@^16.13.1, react@^16.7.0, react@^16.8.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
@@ -9641,11 +9784,6 @@ symbol-tree@^3.2.2, symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-tabbable@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-4.0.0.tgz#5bff1d1135df1482cf0f0206434f15eadbeb9261"
-  integrity sha512-H1XoH1URcBOa/rZZWxLxHCtOdVUEev+9vo5YdYhC9tCY4wnybX+VQrCYuy9ubkg69fCBxCONJOSLGfw0DWMffQ==
-
 table@^5.2.3:
   version "5.4.6"
   resolved "https://registry.yarnpkg.com/table/-/table-5.4.6.tgz#1292d19500ce3f86053b05f0e8e7e4a3bb21079e"
@@ -9896,11 +10034,6 @@ tslib@^1.8.1, tslib@^1.9.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
   integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
-
-tslib@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.0.tgz#18d13fc2dce04051e20f074cc8387fd8089ce4f3"
-  integrity sha512-lTqkx847PI7xEDYJntxZH89L2/aXInsyF2luSafe/+0fHOMjlBNXdH6th7f70qxLDhul7KZK0zC8V5ZIyHl0/g==
 
 tsutils@^3.17.1:
   version "3.17.1"
@@ -10232,13 +10365,6 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
-
-warning@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
-  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
-  dependencies:
-    loose-envify "^1.0.0"
 
 wcwidth@^1.0.1:
   version "1.0.1"

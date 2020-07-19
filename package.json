@@ -14,7 +14,7 @@
         "build": "cross-env NODE_ENV=production parcel build ./src/index.html --public-url '/'",
         "serve:app": "cross-env NODE_ENV=development parcel ./src/index.html --open --public-url '/'",
         "serve:locales": "live-server ./static --port=12345 --watch=./static/locales --no-browser",
-        "test": "jest --maxWorkers=4"
+        "test": "jest --bail"
     },
     "devDependencies": {
         "@babel/core": "^7.10.4",
@@ -27,6 +27,8 @@
         "@parcel/transformer-svg-react": "^2.0.0-nightly.1739",
         "@parcel/validator-eslint": "^2.0.0-alpha.3",
         "@parcel/validator-typescript": "^2.0.0-alpha.3",
+        "@react-types/menu": "^3.0.2",
+        "@react-types/shared": "^3.0.2",
         "@testing-library/dom": "^7.20.0",
         "@testing-library/jest-dom": "^5.11.0",
         "@testing-library/react": "^10.4.5",
@@ -72,7 +74,15 @@
         "@emotion/core": "^10.0.28",
         "@emotion/css": "^10.0.27",
         "@emotion/styled": "^10.0.27",
-        "@reach/menu-button": "^0.10.5",
+        "@react-aria/button": "^3.0.2",
+        "@react-aria/focus": "^3.0.2",
+        "@react-aria/interactions": "^3.0.2",
+        "@react-aria/menu": "^3.0.2",
+        "@react-aria/overlays": "^3.0.2",
+        "@react-aria/utils": "^3.0.2",
+        "@react-stately/collections": "^3.0.2",
+        "@react-stately/menu": "^3.0.2",
+        "@react-stately/tree": "^3.0.2",
         "i18next": "^19.6.0",
         "i18next-http-backend": "^1.0.16",
         "ky": "^0.20.0",
@@ -90,8 +100,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged",
-            "pre-push": "test"
+            "pre-commit": "lint-staged"
         }
     },
     "lint-staged": {
@@ -100,10 +109,6 @@
             "prettier --write",
             "git add ."
         ]
-    },
-    "alias": {
-        "static": "./static",
-        "~app": "./src"
     },
     "browserslist": [
         "defaults",

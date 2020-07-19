@@ -9,11 +9,15 @@
         "moduleResolution": "node",
         "baseUrl": "./src",
         "paths": {
-            "~/*": ["./*"]
+            "/app/*": ["./*"],
+            "/static/**/*": ["./../static/*"],
+            "/types/*": ["./types/*"],
+            "/tailwind.config": ["./../tailwind.config.js"]
         },
         "typeRoots": ["node_modules/@types"],
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "downlevelIteration": true
     },
     "include": ["src/**/*", "tailwind.config.js", "src/types/*"]
 }

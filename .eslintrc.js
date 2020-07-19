@@ -29,6 +29,8 @@ module.exports = {
     plugins: ['react', 'react-hooks', '@typescript-eslint', 'import'],
     rules: {
         'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': ['error'],
         'import/extensions': [
             'error',
             'ignorePackages',
@@ -40,6 +42,8 @@ module.exports = {
                 tsx: 'off',
             },
         ],
+        'react/prop-types': 'off',
+        'react/jsx-props-no-spreading': 'off',
     },
     ignorePatterns: ['*.d.ts'],
 };
