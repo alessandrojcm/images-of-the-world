@@ -17,7 +17,7 @@ const DropdownTrigger: React.FC<IDropdownTriggerProps> = (props) => {
 
     const state = useTreeState({ ...rest, selectionMode: 'none' });
     const triggerRef = useRef<HTMLUListElement>(null);
-    const { menuProps } = useMenu(rest, state, triggerRef);
+    const { menuProps } = useMenu({ ...rest, 'aria-label': rest.label }, state, triggerRef);
 
     const overlayRef = useRef<HTMLDivElement>(null);
     const { overlayProps } = useOverlay(

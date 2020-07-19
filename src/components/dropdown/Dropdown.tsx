@@ -9,7 +9,7 @@ import tailwind from '../../../tailwind.config.js';
 import DropdownTrigger from './DropdownTrigger';
 
 const Dropdown: React.FC<IDropdownProps> = (props) => {
-    const { button, strokeColor = tailwind.theme.colors.primary, ...rest } = props;
+    const { button = null, strokeColor = tailwind.theme.colors.primary, ...rest } = props;
     const state = useMenuTriggerState(rest);
 
     const ref = useRef(null);
@@ -18,11 +18,11 @@ const Dropdown: React.FC<IDropdownProps> = (props) => {
     return (
         <div>
             <button type="button" {...buttonProps} ref={ref}>
-                <UseAnimations animation={button} strokeColor={strokeColor} />
+                {button ? <UseAnimations animation={button} strokeColor={strokeColor} /> : 'Menu'}
             </button>
             {state.isOpen && (
                 <DropdownTrigger {...rest} domProps={menuProps} autoFocus={state.focusStrategy} onClose={() => state.close()}>
-                    {rest.children}
+                    {rest.children ? rest.children : []}
                 </DropdownTrigger>
             )}
         </div>

@@ -7,4 +7,5 @@ export interface IDropdownTriggerProps extends TreeProps<any> {
     onSelect: (key: Key) => void;
     autoFocus: FocusStrategy;
     domProps: HTMLAttributes<HTMLElement>;
+    label: string;
 }

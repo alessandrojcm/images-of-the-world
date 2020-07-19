@@ -4,9 +4,9 @@ import type { CollectionChildren } from '@react-types/shared';
 import { Key } from 'react';
 
 export interface IDropdownProps extends MenuTriggerProps {
-    button: Animation;
-    strokeColor: string;
+    button?: Animation;
+    strokeColor?: string;
     onSelect: (key: Key) => void;
-    children: CollectionChildren<any>;
+    children?: CollectionChildren<any>;
     label: string;
 }
