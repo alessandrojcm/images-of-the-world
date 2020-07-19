@@ -1,10 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
-import 'panic-overlay';
 
 import App from './App';
 
 import './core/i18n';
 import 'tailwindcss/dist/base.min.css';
 
-render(<App />, document.getElementById('root'));
+async function renderApp() {
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.warn('Running in dev mode, activating error overlay for React.');
+    await import('panic-overlay');
+  }
+  render(<App />, document.getElementById('root'));
+}
+
+renderApp();
