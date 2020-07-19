@@ -13,7 +13,7 @@
         "start": "concurrently 'yarn serve:app' 'yarn serve:locales'",
         "build": "cross-env NODE_ENV=production parcel build ./src/index.html --public-url '/'",
         "serve:app": "cross-env NODE_ENV=development parcel ./src/index.html --open --public-url '/'",
-        "serve:locales": "live-server ./static --port=12345 --watch=./static/locales --no-browser",
+        "serve:locales": "live-server ./static --port=12345 --watch=./static/locales/* --no-browser",
         "test": "jest --bail"
     },
     "devDependencies": {
@@ -27,6 +27,7 @@
         "@parcel/transformer-svg-react": "^2.0.0-nightly.1739",
         "@parcel/validator-eslint": "^2.0.0-alpha.3",
         "@parcel/validator-typescript": "^2.0.0-alpha.3",
+        "@react-types/button": "^3.0.2",
         "@react-types/menu": "^3.0.2",
         "@react-types/shared": "^3.0.2",
         "@testing-library/dom": "^7.20.0",

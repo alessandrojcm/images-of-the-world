@@ -22,6 +22,14 @@ module.exports = {
             subtitle: ['Andada'],
             body: ['"Alegreya Sans"', 'sans-serif'],
         },
+        borderColor: (theme) => ({
+            ...theme('colors'),
+            default: theme('colors.primary', 'currentColor'),
+        }),
+        backgroundColor: (theme) => ({
+            ...theme('colors'),
+            default: theme('colors.primary', 'currentColor'),
+        }),
         animations: {
             'slide-down': {
                 '0%': {
