@@ -216,5 +216,7 @@ sketch
 src/**/*.map
 src/**/*.js
 .parcel-cache/**
+.env.*
+!.env.example
 
 # End of https://www.toptal.com/developers/gitignore/api/react,intellij+all,node
