@@ -5,6 +5,9 @@ const orange200 = '#DCD3B6';
 module.exports = {
     purge: ['./src/**/*.html', './src/**/*.{j,t}sx'],
     theme: {
+        textShadow: {
+            default: '0 2px 5px rgba(0, 0, 0, 0.5)',
+        },
         colors: {
             primary: red,
             secondary: yellow,
@@ -52,5 +55,5 @@ module.exports = {
         },
     },
     variants: {},
-    plugins: [require('tailwindcss-animations')],
+    plugins: [require('tailwindcss-animations'), require('tailwindcss-typography')],
 };

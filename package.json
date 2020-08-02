@@ -101,6 +101,7 @@
         "rxjs": "^6.6.0",
         "tailwindcss": "^1.4.6",
         "tailwindcss-animations": "^2.0.0",
+        "tailwindcss-typography": "^3.1.0",
         "twin.macro": "^1.5.0"
     },
     "husky": {

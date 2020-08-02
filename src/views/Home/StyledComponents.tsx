@@ -16,11 +16,13 @@ export const Title = tw.h1`
     text-5xl
     font-display
     pb-4
+    text-shadow
 `;
 
 export const Subtitle = tw.h2`
     text-3xl
     font-subtitle
+    text-shadow
 `;
 
 export const ButtonsContainer = tw.div`
@@ -34,12 +36,12 @@ export const ButtonsContainer = tw.div`
 const ButtonCommon = styled(Button)`
     ${tw`rounded border-2`}
     *:first-child {
-        ${tw`px-2 font-light`}
+        ${tw`px-2`}
     }
 `;
 
 export const LeaderBoardButton = styled(ButtonCommon)`
-    ${tw`border-orange-200 text-orange-200`}
+    ${tw`border-orange-200 bg-orange-200 text-black`}
     *:first-child {
         ${tw`hover:text-primary`}
     }
