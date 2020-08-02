@@ -3,7 +3,7 @@
         "target": "es5",
         "module": "esnext",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
-        "types": ["node"],
+        "types": ["node", "jest"],
         "jsx": "react",
         "sourceMap": true,
         "strict": true,
