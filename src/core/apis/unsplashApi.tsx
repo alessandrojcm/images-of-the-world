@@ -1,30 +1,34 @@
-import ky from 'ky';
+import ky from 'ky-universal';
 import { from, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import * as process from 'process';
+import { map } from 'rxjs/operators';
 import { IPhoto } from '~types/models';
 import { IUnplashResponsiveParameters } from '~types/models/IUnplashResponsiveParameters';
 
+const authHeaders = {
+    'Accept-Version': 'v1',
+    Authorization: `Client-ID ${process.env.UNSPLASH_API_KEY}`,
+};
+
 const unsplashApi = ky.create({
-    prefixUrl: process.env.UNSPLASH_API,
+    prefixUrl: process.env.UNSPLASH_API_URL,
     headers: {
-        'Accept-Version': 'v1',
-        Authorization: `Client-ID ${process.env.UNSPLASH_API_KEY}`,
+        ...authHeaders,
     },
 });
 
 const searchRandomPhoto = (term: string, count = 1, options: IUnplashResponsiveParameters = {}) =>
     from(
-        unsplashApi.get('/photos/random', {
-            // @ts-ignore
-            searchParams: {
-                query: term,
-                count,
-                ...options,
-            },
-        })
+        unsplashApi
+            .get('photos/random', {
+                // @ts-ignore
+                searchParams: {
+                    query: term,
+                    count,
+                    ...options,
+                },
+            })
+            .then((t) => t.json())
     ).pipe(
-        switchMap((response) => from(response.json())),
         map((photos: IPhoto[]) => {
             return photos.map((photo: IPhoto) => ({
                 id: photo.id,
@@ -37,15 +41,20 @@ const searchRandomPhoto = (term: string, count = 1, options: IUnplashResponsiveP
 
 const getPhoto = (id: string, options: IUnplashResponsiveParameters = {}): Observable<IPhoto> =>
     from(
-        ky.get(`/photos/${id}`, {
+        unsplashApi
+            .get(`photos/${id}`, {
+                // @ts-ignore
+                searchParams: { ...options },
+            })
             // @ts-ignore
-            searchParams: { ...options },
-        })
-    ).pipe(switchMap((response) => from(response.json())));
+            .then((t) => t.json() as IPhoto)
+    );
 
 const unsplash = {
     searchRandomPhoto,
     getPhoto,
 };
+
+export { authHeaders };
 
 export default unsplash;
