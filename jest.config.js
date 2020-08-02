@@ -1,6 +1,8 @@
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
 const { compilerOptions } = require('./tsconfig');
 
+process.env = Object.assign(process.env, { UNSPLASH_API_KEY: 'akey', UNSPLASH_API_URL: 'https://api.unsplash.com' });
+
 module.exports = {
     roots: ['<rootDir>/__tests__', '<rootDir>/src'],
     transform: {
@@ -24,4 +26,5 @@ module.exports = {
     },
     snapshotSerializers: ['jest-emotion'],
     setupFiles: ['jest-canvas-mock'],
+    setupFilesAfterEnv: ['<rootDir>/__tests__/setup/setup-env.ts'],
 };

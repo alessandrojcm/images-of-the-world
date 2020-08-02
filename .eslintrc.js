@@ -5,6 +5,7 @@ module.exports = {
     env: {
         browser: true,
         es2020: true,
+        jest: true,
     },
     extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react', 'prettier/@typescript-eslint'],
     parser: '@typescript-eslint/parser',
@@ -14,7 +15,7 @@ module.exports = {
         },
         ecmaVersion: 11,
         sourceType: 'module',
-        project: './tsconfig.json',
+        project: ['./tsconfig.json', './tsconfig.test.json'],
         tsconfigRootDir: './',
     },
     settings: {

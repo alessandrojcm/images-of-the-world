@@ -20,5 +20,5 @@
         "esModuleInterop": true,
         "downlevelIteration": true
     },
-    "include": ["src/**/*", "tailwind.config.js", "src/types/*"]
+    "include": ["src/**/*", "tailwind.config.js", "src/types/*", "__tests__/**/*"]
 }
