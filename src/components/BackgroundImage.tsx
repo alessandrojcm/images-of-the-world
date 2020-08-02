@@ -6,7 +6,8 @@ import useProgressiveImage from '../utils/hooks/useProgressiveImage';
 
 const backgroundImage = (imageUrl: string, imageLoaded: boolean = false) => css`
     background-image: url(${imageUrl});
-    filter: ${!imageLoaded ? 'blur(80px)' : ''} ${tw`bg-no-repeat bg-cover`};
+    filter: ${!imageLoaded ? 'blur(20px);' : ''} ${tw`bg-no-repeat bg-cover`};
+    transition: all 0.2s ease-out;
 `;
 
 const Background = styled.div`
@@ -22,7 +23,6 @@ const BackgroundImage: React.FC<IBackgroundImageProps> = (props) => {
 
     useEffect(() => {
         if (!image) {
-            setBackgroundImageSrc(placeholderImage);
         } else {
             setBackgroundImageSrc(image);
         }
