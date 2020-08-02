@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { Container, Subtitle, Title, ButtonsContainer, LeaderBoardButton, StartButton } from './StyledComponents';
+import { ButtonsContainer, Container, LeaderBoardButton, StartButton, Subtitle, Title } from './StyledComponents';
 
 const Home = () => {
     const { t } = useTranslation();

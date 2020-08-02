@@ -30,6 +30,9 @@ module.exports = {
             ...theme('colors'),
             default: theme('colors.primary', 'currentColor'),
         }),
+        zIndex: {
+            '-10': '-10',
+        },
         animations: {
             'slide-down': {
                 '0%': {
