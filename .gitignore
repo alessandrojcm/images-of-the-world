@@ -163,7 +163,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+.env.development
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -216,5 +216,7 @@ sketch
 src/**/*.map
 src/**/*.js
 .parcel-cache/**
+.env.*
+!.env.example
 
 # End of https://www.toptal.com/developers/gitignore/api/react,intellij+all,node

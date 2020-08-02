@@ -9,7 +9,7 @@ import tailwind from '../../../tailwind.config.js';
 import i18n from '../../core/i18n';
 
 const Language = styled.p`
-    ${(props: { language: string; selectedLanguage: string }) => (props.language === props.selectedLanguage ? tw`text-primary` : tw`cursor-pointer text-color-orange-200 hover:text-yellow`)}
+    ${(props: { language: string; selectedLanguage: string }) => (props.language === props.selectedLanguage ? tw`text-primary` : tw`cursor-pointer text-orange-200 hover:text-yellow`)}
     ${tw`font-body text-sm font-medium`}
 `;
 

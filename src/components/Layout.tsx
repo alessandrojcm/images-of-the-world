@@ -1,29 +1,40 @@
 import React from 'react';
-import tw from 'twin.macro';
-import Navbar from './Navbar';
+import tw, { styled } from 'twin.macro';
+import { useRouteMatch } from 'react-router-dom';
 
-const MainLayout = tw.main`
-    flex
+import Navbar from './Navbar';
+import BackgroundImage from './BackgroundImage';
+
+const BACKGROUND_IMAGE_ID = 'W_-6PWGbYaU';
+
+const MainLayout = styled.main`
+    ${tw` flex
     flex-col
     flex-no-wrap
     items-center
     justify-center
     h-screen
-    bg-black
     text-orange-200
     text-lg
     antialiased
     font-semibold
     tracking-wide
+    relative`}
+    ${(props: { match: boolean }) => (props.match ? '' : `bg-primary`)}
 `;
 
 // eslint-disable-next-line react/prop-types
 const Layout: React.FC = ({ children }) => {
+    const match = useRouteMatch(['']);
+
     return (
-        <MainLayout>
-            <Navbar />
-            {children}
-        </MainLayout>
+        <>
+            {Boolean(match) && <BackgroundImage photoId={BACKGROUND_IMAGE_ID} width={1280} backgroundColor="bg-color-primary" />}
+            <MainLayout match={Boolean(match)}>
+                <Navbar />
+                {children}
+            </MainLayout>
+        </>
     );
 };
 

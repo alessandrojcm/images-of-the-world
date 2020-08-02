@@ -3,6 +3,7 @@
         "target": "es5",
         "module": "esnext",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "types": ["jest", "node"],
         "jsx": "react",
         "sourceMap": true,
         "strict": true,
@@ -19,5 +20,5 @@
         "esModuleInterop": true,
         "downlevelIteration": true
     },
-    "include": ["src/**/*", "tailwind.config.js", "src/types/*"]
+    "include": ["src/**/*", "tailwind.config.js", "src/types/*", "__tests__/**/*"]
 }
