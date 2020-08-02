@@ -26,12 +26,14 @@ const useProgressiveImage = (photoId: string, width: number): IuseProgressiveIma
         ...commonQueryOptions,
         enabled: photoUrl,
         onSuccess: (url: string) => setPlaceholderImage(url),
+        onError: () => setPlaceholderImage(null),
     });
 
     useQuery([`image-${queryKey}`, { photoUrl, width }], getHighQualityImageAsBase64, {
         ...commonQueryOptions,
         enabled: photoUrl,
         onSuccess: (url: string) => setImage(url),
+        onError: () => setImage(null),
     });
 
     return {

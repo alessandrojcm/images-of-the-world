@@ -12,7 +12,7 @@
         "paths": {
             "~": ["./*"],
             "~app/*": ["./*"],
-            "~static/**/*": ["./../static/*"],
+            "~static/*": ["./../static/*"],
             "~types/*": ["./types/*"],
             "~tailwind.config": ["./../tailwind.config.js"]
         },
