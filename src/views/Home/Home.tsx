@@ -2,7 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { ButtonsContainer, Container, LeaderBoardButton, StartButton, Subtitle, Title } from './StyledComponents';
+import { LeaderBoardButton, StartButton } from './StyledComponents';
+import { Subtitle, Title } from '../../components/Typography';
+import { ButtonsContainer } from '../../components/Form';
+import Container from '../../components/Container';
 
 const Home = () => {
     const { t } = useTranslation();
@@ -11,10 +14,10 @@ const Home = () => {
             <Title>{t('mainTitle')}</Title>
             <Subtitle>{t('mainSubtitle')}</Subtitle>
             <ButtonsContainer>
-                <LeaderBoardButton onClick={() => {}}>
+                <LeaderBoardButton>
                     <Link to="leaderboard">{t('leaderboard')}</Link>
                 </LeaderBoardButton>
-                <StartButton onClick={() => {}}>
+                <StartButton>
                     <Link to="start">{t('start')}</Link>
                 </StartButton>
             </ButtonsContainer>
