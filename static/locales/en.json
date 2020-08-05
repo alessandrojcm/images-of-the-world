@@ -9,5 +9,7 @@
     "email": "Email",
     "tooShort": "{{val}} too short.",
     "invalid": "{{val}} is invalid.",
-    "required": "{{val}} is required."
+    "required": "{{val}} is required.",
+    "startMessage": "Great, lets get started",
+    "startMessageSub": "Please enter your details"
 }

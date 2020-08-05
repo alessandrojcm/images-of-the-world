@@ -1,8 +1,8 @@
-import yup from 'yup';
+import * as yup from 'yup';
 
 import i18n from '../../core/i18n';
 
-const startFormSchema = yup.object({
+export const startFormSchema = yup.object({
     name: yup
         .string()
         .min(2, i18n.t('tooShort', { val: '$t(name)' }))
