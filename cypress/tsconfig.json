@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "types": ["node", "@types/jest", "cypress", "@types/testing-library__cypress"],
+        "sourceMap": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "baseUrl": "./**/*",
+        "typeRoots": ["../node_modules/@types"],
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "downlevelIteration": true
+    },
+    "include": ["./**/*"]
+}

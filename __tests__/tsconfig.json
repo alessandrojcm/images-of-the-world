@@ -3,7 +3,7 @@
         "target": "es5",
         "module": "esnext",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
-        "types": ["jest", "node"],
+        "types": ["node", "@types/jest"],
         "jsx": "react",
         "sourceMap": true,
         "strict": true,
@@ -15,10 +15,10 @@
             "/types/*": ["./types/*"],
             "/tailwind.config": ["./../tailwind.config.js"]
         },
-        "typeRoots": ["node_modules/@types"],
+        "typeRoots": ["../node_modules/@types"],
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "downlevelIteration": true
     },
-    "include": ["src/**/*", "tailwind.config.js", "src/types/*", "__tests__/**/*"]
+    "include": ["../src/**/*", "../tailwind.config.js", "../src/types/*", "./**/*"]
 }

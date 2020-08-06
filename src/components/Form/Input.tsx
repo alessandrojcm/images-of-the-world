@@ -13,6 +13,7 @@ const InputStyle = styled.input`
         text-black
         rounded
         placeholder-black
+        placeholder-opacity-50
         p-1
         border-2
         border-transparent
