@@ -7,7 +7,7 @@ module.exports = {
         es2020: true,
         jest: true,
     },
-    extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react', 'prettier/@typescript-eslint'],
+    extends: ['plugin:react/recommended', 'plugin:cypress/recommended', 'airbnb', 'prettier', 'prettier/react', 'prettier/@typescript-eslint'],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
@@ -15,7 +15,7 @@ module.exports = {
         },
         ecmaVersion: 11,
         sourceType: 'module',
-        project: ['./tsconfig.json', './tsconfig.test.json'],
+        project: ['./tsconfig.json', './__tests__/tsconfig.json', './cypress/tsconfig.json'],
         tsconfigRootDir: './',
     },
     settings: {
@@ -23,7 +23,7 @@ module.exports = {
         'import/resolver': {
             typescript: {},
             node: {
-                extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.spec.tsx'],
             },
         },
     },
