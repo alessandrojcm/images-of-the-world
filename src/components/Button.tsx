@@ -6,11 +6,11 @@ import tw, { styled } from 'twin.macro';
 import { IButtonProps } from '~types/props';
 
 const Style = styled.button`
-    ${tw`rounded border-2 w-auto font-body h-auto`}
-    *:first-child {
-        ${tw`px-2`}
-    }
-    ${(props) => (props.disabled ? tw`bg-opacity-25 border-opacity-25 cursor-not-allowed` : '')};
+    ${tw`
+        rounded border-2 w-auto font-body h-auto
+        disabled:bg-opacity-25 disabled:border-opacity-25 disabled:cursor-not-allowed
+        first:px-2
+    `}
 `;
 
 const Button: React.FC<IButtonProps> = (props) => {

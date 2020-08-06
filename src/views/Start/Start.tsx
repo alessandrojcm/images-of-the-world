@@ -27,7 +27,7 @@ const Start = () => {
     }, []);
 
     return (
-        <Container id="form-box">
+        <Container>
             <Title>{t('startMessage')}</Title>
             <Subtitle>{t('startMessageSub')}</Subtitle>
             <Form onSubmit={handleSubmit(onSubmit)}>

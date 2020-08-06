@@ -6,7 +6,7 @@ import BaseButton from '../../components/Button';
 import BaseContainer from '../../components/Container';
 
 export const Container = styled(BaseContainer)`
-    ${tw`w-auto items-start bg-orange-100 bg-opacity-75 rounded-lg shadow`};
+    ${tw`w-auto items-start bg-orange-100 bg-opacity-50 rounded-lg shadow`};
     @supports (backdrop-filter: blur(5px) invert(15%)) {
         backdrop-filter: blur(5px) invert(15%);
         ${tw`bg-opacity-25`}

@@ -1,6 +1,8 @@
 const red = '#AA1D4E';
 const yellow = '#CDC569';
 const orange200 = '#DCD3B6';
+const green = '#41660B';
+const gold = '#CDC569';
 
 module.exports = {
     purge: ['./src/**/*.html', './src/**/*.{j,t}sx'],
@@ -14,6 +16,8 @@ module.exports = {
             neutral: orange200,
             red,
             yellow,
+            green,
+            gold,
             orange: {
                 '100': '#EEEEE3',
                 '200': orange200,
@@ -28,6 +32,7 @@ module.exports = {
         borderColor: (theme) => ({
             ...theme('colors'),
             default: theme('colors.primary', 'currentColor'),
+            transparent: 'rgba(0,0,0,0)',
         }),
         backgroundColor: (theme) => ({
             ...theme('colors'),
@@ -54,6 +59,6 @@ module.exports = {
             },
         },
     },
-    variants: {},
+    variants: { borderColor: ['responsive', 'hover', 'focus', 'active'] },
     plugins: [require('tailwindcss-animations'), require('tailwindcss-typography')],
 };

@@ -8,20 +8,30 @@ import { IInputProps } from '~types/props/IInputProps';
 const InputStyle = styled.input`
     ${tw`
         w-full
-        bg-primary
+        bg-opacity-75
+        bg-gold
+        text-black
         rounded
-        placeholder-orange-200
-        placeholder-opacity-75
+        placeholder-black
         p-1
+        border-2
+        border-transparent
+        disabled:bg-opacity-50 disabled:cursor-not-allowed
+        hover:border-green
+        focus:border-green
+        active:border-green
     `};
-    ${(props) => (props.disabled ? tw`bg-opacity-50 cursor-not-allowed` : 'bg-opacity-100')}
+    :invalid {
+        ${tw`border-2 border-primary`}
+    }
 `;
 
 const Label = styled.label`
     ${tw`text-shadow
+    text-orange-200
     font-body
     font-bold`}
-    ${(props: { labelVisible: boolean }) => (props.labelVisible ? '' : tw`hidden`)}
+    ${(props: { labelVisible: boolean }) => (props.labelVisible ? '' : tw`invisible`)}
 `;
 
 const Input = React.forwardRef<any, IInputProps>((props, ref) => {
