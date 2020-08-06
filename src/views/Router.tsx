@@ -5,6 +5,8 @@ import MainLayout from '../components/Layout';
 import Home from './Home';
 import Start from './Start';
 
+import CurrentUserContext from '../context/CurrentUserContext/CurrentUserContext';
+
 const Router: React.FC = () => {
     return (
         <BrowserRouter>
@@ -13,7 +15,9 @@ const Router: React.FC = () => {
                     <Home />
                 </Route>
                 <Route exact path="/start">
-                    <Start />
+                    <CurrentUserContext>
+                        <Start />
+                    </CurrentUserContext>
                 </Route>
             </MainLayout>
         </BrowserRouter>

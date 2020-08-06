@@ -25,4 +25,15 @@ describe('Start e2e test', () => {
             cy.findByText('Go ahead!').should('be.disabled');
         });
     });
+
+    it('Should navigate away when click', () => {
+        cy.findByText('Go ahead!').click();
+        cy.fixture('userStart').then(({ name, lastName, email }) => {
+            cy.findByLabelText('Name').type(name);
+            cy.findByLabelText('Last name').type(lastName);
+            cy.findByLabelText('Email').type(email);
+            cy.findByText('Go ahead!').click();
+            cy.url().should('contain', 'journey');
+        });
+    });
 });

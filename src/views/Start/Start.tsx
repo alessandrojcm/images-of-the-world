@@ -1,17 +1,22 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import tw, { css } from 'twin.macro';
 
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 import { startFormSchema, StartFormSchema } from '../../types/form-schemas/startForm';
 import { Button, ButtonsContainer, Container, Subtitle } from './StyledComponents';
 import { Control, Form, Input } from '../../components/Form';
 import { Title } from '../../components/Typography';
+import { useCurrentUser, useCurrentUserDispatchers } from '../../context';
 
 const Start = () => {
     const { t } = useTranslation();
+    const { userLoggedIn } = useCurrentUser();
+    const { setUser } = useCurrentUserDispatchers();
+    const { push } = useHistory();
 
     const {
         handleSubmit,
@@ -22,9 +27,19 @@ const Start = () => {
         mode: 'onChange',
     });
 
-    const onSubmit = useCallback((data: StartFormSchema) => {
-        console.log(data);
-    }, []);
+    const onSubmit = useCallback(
+        (data: StartFormSchema) => {
+            setUser(data);
+        },
+        [setUser]
+    );
+
+    useEffect(() => {
+        if (!userLoggedIn) {
+            return;
+        }
+        push('/journey');
+    }, [userLoggedIn]);
 
     return (
         <Container>
