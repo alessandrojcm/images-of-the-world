@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import MainLayout from '../components/Layout';
 import Home from './Home';
-import Start from './Start';
+import Registration from './Registration';
 
 import CurrentUserContext from '../context/CurrentUserContext/CurrentUserContext';
 
@@ -14,9 +14,9 @@ const Router: React.FC = () => {
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route exact path="/start">
+                <Route exact path="/journey">
                     <CurrentUserContext>
-                        <Start />
+                        <Registration />
                     </CurrentUserContext>
                 </Route>
             </MainLayout>

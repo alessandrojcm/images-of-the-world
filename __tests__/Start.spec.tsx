@@ -4,13 +4,13 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import TestWrapper from './utils/TestWrapper';
-import Start from '../src/views/Start';
+import Registration from '../src/views/Registration';
 
-describe('Start test suite', () => {
+describe('Registration test suite', () => {
     it('should render', async () => {
         await render(
             <TestWrapper>
-                <Start />
+                <Registration />
             </TestWrapper>
         );
     });
@@ -18,7 +18,7 @@ describe('Start test suite', () => {
     it('Should not allow submit without filling fields', async () => {
         render(
             <TestWrapper>
-                <Start />
+                <Registration />
             </TestWrapper>
         );
         await waitFor(() => {});
@@ -29,7 +29,7 @@ describe('Start test suite', () => {
     it('Should enable the button if form is filled correctly', async () => {
         render(
             <TestWrapper>
-                <Start />
+                <Registration />
             </TestWrapper>
         );
         await waitFor(() => {});
@@ -46,7 +46,7 @@ describe('Start test suite', () => {
     it('Should not enabled button if form is filled incorrectly', async () => {
         render(
             <TestWrapper>
-                <Start />
+                <Registration />
             </TestWrapper>
         );
         await waitFor(() => {});

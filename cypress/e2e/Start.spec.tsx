@@ -1,9 +1,9 @@
-describe('Start e2e test', () => {
+describe('Registration e2e test', () => {
     beforeEach(() => cy.visit(''));
 
     it('Should navigate to start', () => {
         cy.findByText('Go ahead!').click();
-        cy.url().should('include', '/start');
+        cy.url().should('include', '/journey');
     });
 
     it('Should allow to click with correct data', () => {

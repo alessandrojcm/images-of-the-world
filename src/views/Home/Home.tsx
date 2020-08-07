@@ -18,7 +18,7 @@ const Home = () => {
                     <Link to="leaderboard">{t('leaderboard')}</Link>
                 </LeaderBoardButton>
                 <StartButton>
-                    <Link to="start">{t('start')}</Link>
+                    <Link to="journey">{t('start')}</Link>
                 </StartButton>
             </ButtonsContainer>
         </Container>

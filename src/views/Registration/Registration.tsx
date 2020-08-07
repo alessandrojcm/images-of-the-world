@@ -12,7 +12,7 @@ import { Control, Form, Input } from '../../components/Form';
 import { Title } from '../../components/Typography';
 import { useCurrentUser, useCurrentUserDispatchers } from '../../context';
 
-const Start = () => {
+const Registration = () => {
     const { t } = useTranslation();
     const { userLoggedIn } = useCurrentUser();
     const { setUser } = useCurrentUserDispatchers();
@@ -71,4 +71,4 @@ const Start = () => {
     );
 };
 
-export default Start;
+export default Registration;
