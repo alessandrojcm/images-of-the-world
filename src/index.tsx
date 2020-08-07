@@ -11,15 +11,9 @@ async function renderApp() {
         // eslint-disable-next-line no-console
         console.warn('Running in dev mode, activating error overlay for React.');
         await import('panic-overlay');
-        const { ReactQueryDevtools } = await import('react-query-devtools');
 
-        render(
-            <>
-                <ReactQueryDevtools />
-                <App />
-            </>,
-            document.getElementById('root')
-        );
+        await import('./dev-tools').then((r) => r.default());
+        render(<App />, document.getElementById('root'));
     } else {
         render(<App />, document.getElementById('root'));
     }
