@@ -20,18 +20,18 @@ const useProgressiveImage = (photoId: string, width: number): IuseProgressiveIma
 
     const queryKey = useId();
 
-    const { data: photoUrl } = useQuery([`image-url-${queryKey}`, { photoId }], getRawUrl, { ...commonQueryOptions });
+    const { data } = useQuery([`image-url-${queryKey}`, { photoId }], getRawUrl, { ...commonQueryOptions });
 
-    useQuery([`placeholder-image-${queryKey}`, { photoUrl }], getPlaceHolderImageAsBase64, {
+    useQuery([`placeholder-image-${queryKey}`, { photoUrl: data?.photoUrl ?? null }], getPlaceHolderImageAsBase64, {
         ...commonQueryOptions,
-        enabled: photoUrl,
+        enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setPlaceholderImage(url),
         onError: () => setPlaceholderImage(null),
     });
 
-    useQuery([`image-${queryKey}`, { photoUrl, width }], getHighQualityImageAsBase64, {
+    useQuery([`image-${queryKey}`, { photoUrl: data?.photoUrl ?? null, width }], getHighQualityImageAsBase64, {
         ...commonQueryOptions,
-        enabled: photoUrl,
+        enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setImage(url),
         onError: () => setImage(null),
     });
@@ -39,6 +39,9 @@ const useProgressiveImage = (photoId: string, width: number): IuseProgressiveIma
     return {
         placeholderImage,
         image,
+        ...(data?.alt && { alt: data.alt }),
+        ...(data?.author && { author: data.author }),
+        ...(data?.authorProfileUrl && { authorProfileUrl: data.authorProfileUrl }),
     };
 };
 

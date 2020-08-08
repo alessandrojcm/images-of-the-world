@@ -7,6 +7,12 @@ import authorize from './utils/serverUtils';
 
 import useProgressiveImage from '../src/utils/hooks/useProgressiveImage/useProgressiveImage';
 
+const assertImageData = (data: any) => {
+    expect(data.alt).toBe('a photo');
+    expect(data.author).toBe('auser');
+    expect(data.authorProfileUrl).toBe(`${process.env.UNSPLASH_API_URL}/users/auser`);
+};
+
 describe('useProgressiveImage testing suite', () => {
     it('should work', () => {
         renderHook(() => useProgressiveImage('aphoto', 250));
@@ -19,6 +25,7 @@ describe('useProgressiveImage testing suite', () => {
         });
 
         expect(result.current.placeholderImage).toBe(expectedBase64());
+        assertImageData(result.current);
     });
 
     it('should return the whole image after it is fetched', async () => {
@@ -45,6 +52,7 @@ describe('useProgressiveImage testing suite', () => {
             await waitForValueToChange(() => result.current.image);
         });
         expect(result.current.image).toBe(expectedBase64());
+        assertImageData(result.current);
     });
 
     it('should leave image as null if there was a request error', async () => {
@@ -68,6 +76,7 @@ describe('useProgressiveImage testing suite', () => {
         expect(result.current.placeholderImage).toBe(expectedBase64());
 
         expect(result.current.image).toBe(null);
+        assertImageData(result.current);
     });
 
     it('should leave placeholder as null if there was a request error', async () => {
@@ -91,5 +100,6 @@ describe('useProgressiveImage testing suite', () => {
             await waitForValueToChange(() => result.current.image);
         });
         expect(result.current.image).toBe(expectedBase64());
+        assertImageData(result.current);
     });
 });

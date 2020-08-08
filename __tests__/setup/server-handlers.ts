@@ -16,6 +16,13 @@ export default [
     rest.get(`${unsplashApi}/photos/:id`, (req, res, ctx) => {
         authorize(req, res, ctx);
         const response = {
+            alt_description: 'a photo',
+            user: {
+                name: 'auser',
+            },
+            links: {
+                self: `${unsplashApi}/users/auser`,
+            },
             urls: {
                 raw: `${unplashImagesApi}/a-photo-mock-id`,
             },
