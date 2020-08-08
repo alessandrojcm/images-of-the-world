@@ -60,5 +60,6 @@ module.exports = {
         },
     },
     variants: { borderColor: ['responsive', 'hover', 'focus', 'active'] },
-    plugins: [require('tailwindcss-animations'), require('tailwindcss-typography')],
+    // eslint-disable-next-line
+    plugins: [require('tailwindcss-typography')],
 };
