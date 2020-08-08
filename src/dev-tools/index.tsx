@@ -1,3 +1,3 @@
-import dv from './dev-tools';
+import l from './load';
 
-export default dv;
+export default l;
