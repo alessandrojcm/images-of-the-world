@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import tw, { styled, css } from 'twin.macro';
 
+import { useTranslation } from 'react-i18next';
 import useProgressiveImage from '../utils/hooks/useProgressiveImage';
 
 const imageSrc = (src: string | undefined) => css`
@@ -15,11 +16,10 @@ const Image = styled.img`
 `;
 
 const Figure = styled.figure`
-    ${tw`rounded-b
+    ${tw`
       relative
       bg-orange-100
-      w-1/2
-      bg-opacity-75
+      w-auto
       border-orange-100
       border-4
       h-auto`};
@@ -39,6 +39,7 @@ const Figcaption = tw.figcaption`
 `;
 
 const Picture: React.FC<{ photoId: string; width: number; className?: string }> = (props) => {
+    const { t } = useTranslation();
     const { photoId, width, className = '' } = props;
 
     const [src, setSrc] = useState<string | null>(null);
@@ -66,7 +67,7 @@ const Picture: React.FC<{ photoId: string; width: number; className?: string }> 
             {authorProfileUrl && author && (
                 <Figcaption>
                     <a href={authorProfileUrl} target="_blank" rel="noreferrer">
-                        Photo by {author} on Unsplash
+                        {t('photoCaption', { val: author })}
                     </a>
                 </Figcaption>
             )}

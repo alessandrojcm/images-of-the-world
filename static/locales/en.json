@@ -11,5 +11,6 @@
     "invalid": "{{val}} is invalid.",
     "required": "{{val}} is required.",
     "startMessage": "Great, lets get started",
-    "startMessageSub": "Please enter your details"
+    "startMessageSub": "Please enter your details.",
+    "photoCaption": "Photo by {{val}} on Unsplash.",
 }

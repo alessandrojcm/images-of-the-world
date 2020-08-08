@@ -14,6 +14,14 @@ const commonQueryOptions: QueryOptions<any> = {
     cacheTime: Infinity,
 };
 
+/**
+ * @description This hook with search a photo from unsplash and fetch two photos
+ * one with the resolution given and another with reduced resolution to use
+ * as a placeholder
+ * @param photoId The photoId from unsplash.
+ * @param width The width for the full res photo
+ * @return {IuseProgressiveImage}
+ */
 const useProgressiveImage = (photoId: string, width: number): IuseProgressiveImage => {
     const [placeholderImage, setPlaceholderImage] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);

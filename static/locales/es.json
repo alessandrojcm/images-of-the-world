@@ -10,6 +10,6 @@
     "tooShort": "{{val}} muy corto.",
     "invalid": "{{val}} es inválido.",
     "required": "{{val}} es requerido.",
-    "startMessage": "Genial, empecemos",
-    "startMessageSub": "Por favor, ingresa tus detalles"
+    "startMessage": "Genial, empecemos.",
+    "startMessageSub": "Por favor, ingresa tus detalles.",
 }
