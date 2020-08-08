@@ -60,7 +60,7 @@ const getHighQualityImageAsBase64 = (_: string, { photoUrl, width }: { photoUrl:
 const getPlaceHolderImageAsBase64 = (_: string, { photoUrl }: { photoUrl: string }) => {
     const params = new URLSearchParams(photoUrl.split('?')[1]);
     params.append('q', '0');
-    params.append('w', '256');
+    params.append('w', '128');
 
     return from(
         ky.get(photoUrl, {
