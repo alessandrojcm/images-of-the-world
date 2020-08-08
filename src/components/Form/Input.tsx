@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useLabel } from '@react-aria/label';
+import { useTranslation } from 'react-i18next';
 
 import tw, { styled } from 'twin.macro';
 import { IInputProps } from '~types/props/IInputProps';
@@ -35,8 +36,18 @@ const Label = styled.label`
     ${(props: { labelVisible: boolean }) => (props.labelVisible ? '' : tw`invisible`)}
 `;
 
+const ErrorMessage = tw.p`
+  text-sm
+  text-primary
+  text-shadow
+  font-thin
+  pt-1
+  mr-4
+`;
+
 const Input = React.forwardRef<any, IInputProps>((props, ref) => {
-    const { inputName, required = false, labelVisible = true, type = 'text', label = 'label', placeholder } = props;
+    const { inputName, required = false, labelVisible = true, type = 'text', label = 'label', placeholder, error = undefined } = props;
+    const { t } = useTranslation();
 
     const { labelProps, fieldProps } = useLabel({
         label,
@@ -51,6 +62,7 @@ const Input = React.forwardRef<any, IInputProps>((props, ref) => {
                 {label}
             </Label>
             <InputStyle {...fieldProps} name={inputName} type={type} ref={ref} placeholder={placeholder} />
+            {error?.message && <ErrorMessage>{t(error.message, { val: t(error.type) })}</ErrorMessage>}
         </>
     );
 });

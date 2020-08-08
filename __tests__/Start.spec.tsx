@@ -58,5 +58,6 @@ describe('Registration test suite', () => {
         });
 
         expect(screen.getByText('Go ahead!')).toBeDisabled();
+        expect(screen.getByText('Email is invalid.')).toBeInTheDocument();
     });
 });

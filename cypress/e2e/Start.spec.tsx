@@ -23,6 +23,7 @@ describe('Registration e2e test', () => {
             cy.findByLabelText('Last name').type(lastName);
             cy.findByLabelText('Email').type(email.split('@')[1]);
             cy.findByText('Go ahead!').should('be.disabled');
+            cy.findByText('Email is invalid.').should('exist');
         });
     });
 

@@ -19,6 +19,7 @@ const Registration = () => {
     const { push } = useHistory();
 
     const {
+        errors,
         handleSubmit,
         register,
         formState: { isSubmitting, isValid },
@@ -52,13 +53,13 @@ const Registration = () => {
                         ${tw`w-3/4`}
                     `}>
                     <Control>
-                        <Input ref={register} inputName="name" placeholder="John" label={t('name')} required />
+                        <Input ref={register} inputName="name" placeholder="John" label={t('name')} error={errors.name} required />
                     </Control>
                     <Control>
-                        <Input ref={register} inputName="lastName" placeholder="Doe" label={t('lastName')} required />
+                        <Input ref={register} inputName="lastName" placeholder="Doe" label={t('lastName')} error={errors.lastName} required />
                     </Control>
                     <Control>
-                        <Input type="email" ref={register} inputName="email" placeholder="john@doe.com" label={t('email')} required />
+                        <Input type="email" ref={register} inputName="email" placeholder="john@doe.com" label={t('email')} error={errors.email} required />
                     </Control>
                     <ButtonsContainer>
                         <Button disabled={isSubmitting || !isValid} type="submit">

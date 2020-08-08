@@ -1,3 +1,5 @@
+import { FieldError } from 'react-hook-form';
+
 export interface IInputProps {
     inputName: string;
     label?: string;
@@ -5,4 +7,5 @@ export interface IInputProps {
     required?: boolean;
     labelVisible?: boolean;
     type?: string;
+    error?: FieldError;
 }

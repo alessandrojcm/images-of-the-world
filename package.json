@@ -12,10 +12,11 @@
         "develop": "yarn start",
         "start": "concurrently 'yarn serve:app' 'yarn serve:locales'",
         "build": "parcel build ./src/index.html --public-url '/'",
-        "serve:app": "parcel serve ./src/index.html --open --public-url '/'",
+        "serve:app": "parcel serve ./src/index.html --public-url '/'",
         "serve:locales": "live-server ./static --port=12345 --watch=./static/locales/* --no-browser",
         "test": "jest --bail",
         "e2e:gui": "cypress open",
+        "e2e:gui:serve": "concurrently 'yarn start' 'yarn e2e:gui'",
         "e2e:cli": "cypress run"
     },
     "devDependencies": {
