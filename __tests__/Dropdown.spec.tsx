@@ -4,7 +4,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import userEvent from '@testing-library/user-event';
-import { Dropdown, Item } from '../src/components/dropdown';
+import { Dropdown, Item } from '../src/components/Dropdown';
 
 describe('Dropdown component test suite', () => {
     it('should render and have level', () => {

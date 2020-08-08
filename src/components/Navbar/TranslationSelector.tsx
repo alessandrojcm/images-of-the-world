@@ -3,7 +3,7 @@ import React, { Key, useCallback, useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
 import settings from 'react-useanimations/lib/settings2';
 
-import { Dropdown, Item } from '../dropdown';
+import { Dropdown, Item } from '../Dropdown';
 
 import tailwind from '../../../tailwind.config.js';
 import i18n from '../../core/i18n';
