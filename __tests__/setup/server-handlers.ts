@@ -19,9 +19,9 @@ export default [
             alt_description: 'a photo',
             user: {
                 name: 'auser',
-            },
-            links: {
-                self: `${unsplashApi}/users/auser`,
+                links: {
+                    html: `${unsplashApi}/users/auser`,
+                },
             },
             urls: {
                 raw: `${unplashImagesApi}/a-photo-mock-id`,
