@@ -74,9 +74,9 @@ const getPlaceHolderImageAsBase64 = (_: string, { photoUrl }: { photoUrl: string
         .toPromise();
 };
 
-const getRawUrl = (_: string, { photoId }: { photoId: string }) =>
+const getRawUrl = (_: string, { photoId }: { photoId: string | null }) =>
     unsplash
-        .getPhoto(photoId)
+        .getPhoto(photoId as string)
         .pipe(
             map((photo) => ({
                 photoUrl: photo.urls.raw,

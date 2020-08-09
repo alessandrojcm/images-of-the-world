@@ -5,6 +5,7 @@ import { QueryOptions, useQuery } from 'react-query';
 
 import { getHighQualityImageAsBase64, getPlaceHolderImageAsBase64, getRawUrl } from './imageFetchingUtils';
 import { IuseProgressiveImage } from '~types/hooks';
+import { IPhoto } from '~types/models';
 
 const commonQueryOptions: QueryOptions<any> = {
     retry: 5,
@@ -12,6 +13,7 @@ const commonQueryOptions: QueryOptions<any> = {
     refetchInterval: false,
     refetchIntervalInBackground: false,
     cacheTime: Infinity,
+    refetchOnWindowFocus: false,
 };
 
 /**
@@ -20,15 +22,28 @@ const commonQueryOptions: QueryOptions<any> = {
  * as a placeholder
  * @param photoId The photoId from unsplash.
  * @param width The width for the full res photo
+ * @param initialPhoto In case the photo information has alreday been fetched
+ * this will act as the initial cache.
  * @return {IuseProgressiveImage}
  */
-const useProgressiveImage = (photoId: string, width: number): IuseProgressiveImage => {
+const useProgressiveImage = (photoId: string | null, width: number, initialPhoto?: IPhoto): IuseProgressiveImage => {
     const [placeholderImage, setPlaceholderImage] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
 
     const queryKey = useId();
 
-    const { data } = useQuery([`image-url-${queryKey}`, { photoId }], getRawUrl, { ...commonQueryOptions });
+    const { data } = useQuery([`image-url-${queryKey}`, { photoId }], getRawUrl, {
+        ...commonQueryOptions,
+        enabled: photoId,
+        ...(initialPhoto && {
+            initialData: {
+                photoUrl: initialPhoto.urls.raw,
+                alt: initialPhoto.alt_description,
+                author: initialPhoto.user.name,
+                authorProfileUrl: initialPhoto.user.links.html,
+            },
+        }),
+    });
 
     useQuery([`placeholder-image-${queryKey}`, { photoUrl: data?.photoUrl ?? null }], getPlaceHolderImageAsBase64, {
         ...commonQueryOptions,

@@ -1,6 +1,6 @@
 import ky from 'ky-universal';
 import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 import { IPhoto } from '~types/models';
 import { IUnplashResponsiveParameters } from '~types/models/IUnplashResponsiveParameters';
 
@@ -16,27 +16,16 @@ const unsplashApi = ky.create({
     },
 });
 
-const searchRandomPhoto = (term: string, count = 1, options: IUnplashResponsiveParameters = {}) =>
+const searchRandomPhoto = (term: string): Observable<IPhoto> =>
     from(
         unsplashApi
             .get('photos/random', {
                 // @ts-ignore
                 searchParams: {
                     query: term,
-                    count,
-                    ...options,
                 },
             })
-            .then((t) => t.json())
-    ).pipe(
-        map((photos: IPhoto[]) => {
-            return photos.map((photo: IPhoto) => ({
-                id: photo.id,
-                alt: photo.alt_description,
-                name: photo.description,
-                url: photo.urls.raw,
-            }));
-        })
+            .json() as Promise<IPhoto>
     );
 
 const getPhoto = (id: string, options: IUnplashResponsiveParameters = {}): Observable<IPhoto> =>
@@ -46,8 +35,7 @@ const getPhoto = (id: string, options: IUnplashResponsiveParameters = {}): Obser
                 // @ts-ignore
                 searchParams: { ...options },
             })
-            // @ts-ignore
-            .then((t) => t.json() as IPhoto)
+            .json() as Promise<IPhoto>
     );
 
 const unsplash = {
