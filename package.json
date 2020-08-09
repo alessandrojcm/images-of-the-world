@@ -6,7 +6,7 @@
     "author": "Alessandro Cuppari <me@alessandrojcm.dev>",
     "license": "MIT",
     "private": true,
-    "main": "./src/index.html",
+    "main": "./dist/index.html",
     "scripts": {
         "lint-staged": "lint-staged",
         "develop": "yarn start",
