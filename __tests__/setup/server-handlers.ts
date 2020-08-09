@@ -15,6 +15,21 @@ const sellers: IImageSeller[] = Array.from({ length: 3 }).map((_, i) => ({
     collectedPhotos: [],
 }));
 
+const returnImage = () => {
+    return {
+        alt_description: 'a photo',
+        user: {
+            name: 'auser',
+            links: {
+                html: `${unsplashApi}/users/auser`,
+            },
+        },
+        urls: {
+            raw: `${unplashImagesApi}/a-photo-mock-id`,
+        },
+    };
+};
+
 export default [
     rest.get('*/locales/:lng', async (req, res, ctx) => {
         const locale = await loadLocale(req.params.lng);
@@ -26,18 +41,12 @@ export default [
     }),
     rest.get(`${unsplashApi}/photos/:id`, (req, res, ctx) => {
         authorize(req, res, ctx);
-        const response = {
-            alt_description: 'a photo',
-            user: {
-                name: 'auser',
-                links: {
-                    html: `${unsplashApi}/users/auser`,
-                },
-            },
-            urls: {
-                raw: `${unplashImagesApi}/a-photo-mock-id`,
-            },
-        };
+        const response = returnImage();
+        return res(ctx.json(response));
+    }),
+    rest.get(`${unsplashApi}/photos/random`, (req, res, ctx) => {
+        authorize(req, res, ctx);
+        const response = returnImage();
         return res(ctx.json(response));
     }),
     rest.get(`${unplashImagesApi}/:id`, async (req, res, ctx) => {
