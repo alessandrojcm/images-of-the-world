@@ -3,6 +3,7 @@ import tw, { styled, css } from 'twin.macro';
 
 import { useTranslation } from 'react-i18next';
 import useProgressiveImage from '../utils/hooks/useProgressiveImage';
+import { IPhoto } from '~types/models';
 
 const imageSrc = (src: string | undefined) => css`
     filter: ${!src ? 'blur(20px);' : ''} ${tw`bg-no-repeat bg-cover`};
@@ -38,13 +39,15 @@ const Figcaption = tw.figcaption`
     text-lg
 `;
 
-const Picture: React.FC<{ photoId: string; width: number; className?: string }> = (props) => {
+const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: string }> = (props) => {
     const { t } = useTranslation();
-    const { photoId, width, className = '' } = props;
+    const { photo, width, className = '' } = props;
+
+    const { id: photoId } = photo ?? { id: null };
 
     const [src, setSrc] = useState<string | null>(null);
     const [alt, setAlt] = useState<string | undefined>(undefined);
-    const { placeholderImage, image, alt: desc, authorProfileUrl, author } = useProgressiveImage(photoId, width);
+    const { placeholderImage, image, alt: desc, authorProfileUrl, author } = useProgressiveImage(photoId, width, photo);
 
     useEffect(() => {
         if (!image) {

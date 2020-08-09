@@ -10,7 +10,7 @@ describe('Picture test suite', () => {
     it('should render', () => {
         render(
             <TestWrapper>
-                <Picture photoId="eMylnOiSJx0" width={512} />
+                <Picture photo={{ id: 'a' }} width={512} />
             </TestWrapper>
         );
     });
@@ -18,7 +18,7 @@ describe('Picture test suite', () => {
     it('should have alt', async () => {
         render(
             <TestWrapper>
-                <Picture photoId="eMylnOiSJx0" width={512} />
+                <Picture photo={{ id: 'a' }} width={512} />
             </TestWrapper>
         );
 

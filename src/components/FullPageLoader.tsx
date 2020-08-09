@@ -64,9 +64,11 @@ const LoaderInner = styled.div`
     }
 `;
 
-const FullPageLoader = () => {
+const FullPageLoader: React.FC<{ className?: string }> = (props) => {
+    const { className } = props;
     return (
         <div
+            className={className}
             aria-busy="true"
             css={css`
                 ${tw`h-screen w-screen flex flex-row justify-center items-center bg-black`}
