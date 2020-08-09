@@ -1,0 +1,13 @@
+import { IImageSeller } from '~types/models/IImageSeller';
+
+export interface IJourneyState {
+    sellers: Record<string, IImageSeller>;
+    searchTerm: string | null;
+    winner: IImageSeller | null;
+}
+
+export interface IJourneyDispatchers {
+    loadSellers: (sellers: IImageSeller[]) => void;
+    imageChosen: (sellerId: string) => void;
+    reset: () => void;
+}

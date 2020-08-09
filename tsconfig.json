@@ -10,8 +10,8 @@
         "moduleResolution": "node",
         "baseUrl": "./src",
         "paths": {
-            "~": ["./*"],
-            "~app/*": ["./*"],
+            "~components/*": ["./components/*"],
+            "~utils/*": ["./utils/*"],
             "~static/*": ["./../static/*"],
             "~types/*": ["./types/*"],
             "~tailwind.config": ["./../tailwind.config.js"]
