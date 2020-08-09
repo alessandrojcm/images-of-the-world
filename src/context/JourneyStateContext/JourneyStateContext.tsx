@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useReducer } from 'react';
 import { QueryOptions, useQuery } from 'react-query';
 import { useId } from '@react-aria/utils';
+import { useRouteMatch } from 'react-router-dom';
 
 import { IImageSeller, IJourneyDispatchers, IJourneyState } from '~types/models';
 import reducer, { initialState } from './journeyStateReducer';
@@ -12,6 +13,8 @@ const commonQueryOptions: QueryOptions<any> = {
     refetchInterval: false,
     refetchIntervalInBackground: false,
     cacheTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
 };
 
 const JourneyState = createContext<IJourneyState>(initialState);
@@ -21,7 +24,9 @@ const JourneyDispatchers = createContext<IJourneyDispatchers | null>(null);
 const JourneyContext: React.FC = (props) => {
     const { children } = props;
     const id = useId();
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, { ...initialState, searchTerm: 'cat' });
+    // TODO: change this
+    const matches = useRouteMatch('/test');
 
     const dispatchers: IJourneyDispatchers = {
         loadSellers: useCallback((sellers) => dispatch({ type: 'ADD_SELLERS', payload: sellers }), [dispatch]),
@@ -30,7 +35,7 @@ const JourneyContext: React.FC = (props) => {
     };
 
     // TODO: Journey key should be get from server side
-    useQuery(id, () => getSellers.toPromise(), { ...commonQueryOptions, onSuccess: (res: IImageSeller[]) => dispatchers.loadSellers(res) });
+    useQuery(id, () => getSellers.toPromise(), { ...commonQueryOptions, enabled: Boolean(matches), onSuccess: (res: IImageSeller[]) => dispatchers.loadSellers(res), onError: () => {} });
 
     return (
         <JourneyState.Provider value={state}>
