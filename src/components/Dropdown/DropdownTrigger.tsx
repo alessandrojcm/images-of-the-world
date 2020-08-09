@@ -10,7 +10,7 @@ import tw from 'twin.macro';
 import { IDropdownTriggerProps } from 'types/props/dropdown';
 import DropdownItem from './DropdownItem';
 
-const StyledMenu = tw.ul`transition-opacity animation-slide-down animation-2s animation-ease border-0 right-0 absolute pr-3`;
+const StyledMenu = tw.ul`transition-opacity border-0 right-0 absolute pr-3`;
 
 const DropdownTrigger: React.FC<IDropdownTriggerProps> = (props) => {
     const { onClose = () => {}, onSelect, domProps, ...rest } = props;

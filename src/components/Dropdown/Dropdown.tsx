@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useMenuTrigger } from '@react-aria/menu';
 import { useMenuTriggerState } from '@react-stately/menu';
 import { useButton } from '@react-aria/button';
+// TODO: Remove this for one of the icons in react-icons
 import UseAnimations from 'react-useanimations';
 
 import { IDropdownProps } from '~types/props';
