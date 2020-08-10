@@ -9,7 +9,7 @@
     "main": "./src/index.html",
     "scripts": {
         "lint-staged": "lint-staged",
-        "develop": "yarn start",
+        "develop": "yarn vercel dev",
         "start": "concurrently 'yarn serve:app' 'yarn serve:locales'",
         "build": "parcel build ./src/index.html --public-url '/'",
         "serve:app": "parcel serve ./src/index.html --public-url '/'",
@@ -85,7 +85,8 @@
         "react-query-devtools": "^2.3.2",
         "react-test-renderer": "^16.13.1",
         "ts-jest": "^26.1.1",
-        "typescript": "^3.9.6"
+        "typescript": "^3.9.6",
+        "vercel": "^19.2.0"
     },
     "dependencies": {
         "@emotion/core": "^10.0.28",
