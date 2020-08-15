@@ -7,12 +7,12 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "~3.6"
-fastapi = "^0.60.2"
 faker = "^4.1.1"
 requests = "^2.24.0"
-pytest = "^6.0.1"
+fastapi = "^0.61.0"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.0.1"
 black = "^19.10b0"
 
 [build-system]

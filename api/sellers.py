@@ -6,7 +6,7 @@ app = FastAPI()
 faker = Faker()
 
 
-@app.get('/sellers')
+@app.get('/api/{tag}')
 async def sellers(count: int = Query(3)):
     generated_sellers = []
     for i in range(count):
@@ -16,4 +16,4 @@ async def sellers(count: int = Query(3)):
             'points': 0,
             'collectedImages': []
         })
-    return JSONResponse(generated_sellers)
+    return JSONResponse({'sellers': generated_sellers})
