@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useId } from '@react-aria/utils';
 import { QueryOptions, useQuery } from 'react-query';
+import ky from 'ky-universal';
 
 import { getHighQualityImageAsBase64, getPlaceHolderImageAsBase64, getRawUrl } from './imageFetchingUtils';
 import { IuseProgressiveImage } from '~types/hooks';
@@ -49,14 +50,14 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setPlaceholderImage(url),
-        onError: () => setPlaceholderImage(null),
+        onError: (err: ky.HTTPError) => setPlaceholderImage(`https://http.cat/${err.response.status}`),
     });
 
     useQuery([`image-${queryKey}`, { photoUrl: data?.photoUrl ?? null, width }], getHighQualityImageAsBase64, {
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setImage(url),
-        onError: () => setImage(null),
+        onError: (err: ky.HTTPError) => setImage(`https://http.cat/${err.response.status}`),
     });
 
     return {

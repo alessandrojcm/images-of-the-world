@@ -83,8 +83,7 @@ const getRawUrl = (_: string, { photoId }: { photoId: string | null }) =>
                 alt: photo.alt_description,
                 author: photo.user.name,
                 authorProfileUrl: photo.user.links.html,
-            })),
-            catchError(() => from(Promise.reject()))
+            }))
         )
         .toPromise();
 
