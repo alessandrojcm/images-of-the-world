@@ -1,24 +1,36 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import MainLayout from '../components/Layout';
 import Home from './Home';
 import Registration from './Registration';
+import Journey from './Journey';
 
 import CurrentUserContext from '../context/CurrentUserContext/CurrentUserContext';
+import JourneyContext from '../context/JourneyStateContext';
 
 const Router: React.FC = () => {
     return (
         <BrowserRouter>
             <MainLayout>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route exact path="/journey">
+                <Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
                     <CurrentUserContext>
-                        <Registration />
+                        <Route exact path="/journey">
+                            <Registration />
+                        </Route>
+                        {/* TODO: lazy loading to this */}
+                        <JourneyContext>
+                            <Switch>
+                                <Route path="/journey/start">
+                                    <Journey />
+                                </Route>
+                            </Switch>
+                        </JourneyContext>
                     </CurrentUserContext>
-                </Route>
+                </Switch>
             </MainLayout>
         </BrowserRouter>
     );
