@@ -13,4 +13,6 @@
     "startMessage": "Great, lets get started",
     "startMessageSub": "Please enter your details.",
     "photoCaption": "Photo by {{val}} on Unsplash.",
+    "sellerImage": "Image from {{val}}.",
+    "pointsToWin": "{{v1}} of {{v2}} points to win."
 }
