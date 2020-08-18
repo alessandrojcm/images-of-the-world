@@ -58,7 +58,7 @@ const useCurrentUser = () => {
         throw new Error('useCurrentUser must be used within a UserContext');
     }
 
-    return context;
+    return context as ICurrentUserContext;
 };
 
 const useCurrentUserDispatchers = () => {
