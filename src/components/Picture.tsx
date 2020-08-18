@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import tw, { styled, css } from 'twin.macro';
+import tw, { css, styled } from 'twin.macro';
 
 import { useTranslation } from 'react-i18next';
 import useProgressiveImage from '../utils/hooks/useProgressiveImage';
@@ -12,6 +12,11 @@ const imageSrc = (src: string | undefined) => css`
 
 const Image = styled.img`
     ${tw`
+      cursor-pointer
+      block
+      object-cover
+      h-full
+      w-full
       rounded-t`}
     ${(props) => imageSrc(props.src)}
 `;
@@ -20,8 +25,8 @@ const Figure = styled.figure`
     ${tw`
       relative
       bg-orange-100
-      w-auto
       border-orange-100
+      rounded-t
       border-4
       h-auto`};
 `;
@@ -65,7 +70,7 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
     }, [desc]);
 
     return (
-        <Figure>
+        <Figure className={className}>
             <Image className={className} src={src || undefined} alt={alt} />
             {authorProfileUrl && author && (
                 <Figcaption>
