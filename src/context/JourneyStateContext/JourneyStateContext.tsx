@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useCallback, useContext, useReducer } from 'react';
 
 import { QueryOptions, useQuery } from 'react-query';
 import { useId } from '@react-aria/utils';
@@ -11,11 +11,6 @@ import { getSellers } from '../../core/apis/iotwApi';
 const commonQueryOptions: QueryOptions<any> = {
     retry: 5,
     retryDelay: (retryAttempt) => retryAttempt * 5,
-    refetchInterval: false,
-    refetchIntervalInBackground: false,
-    cacheTime: Infinity,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
 };
 
 const JourneyState = createContext<IJourneyState>(initialState);
@@ -32,23 +27,16 @@ const JourneyContext: React.FC = (props) => {
     const dispatchers: IJourneyDispatchers = {
         loadSellers: useCallback((sellers) => dispatch({ type: 'ADD_SELLERS', payload: sellers }), [dispatch]),
         reset: useCallback(() => dispatch({ type: 'RESET' }), []),
-        imageChosen: useCallback((sellerId) => dispatch({ type: 'IMAGE_CHOSEN', payload: sellerId }), [dispatch]),
+        imageChosen: useCallback((sellerId, imageId: string) => dispatch({ type: 'IMAGE_CHOSEN', payload: { sellerId, imageId } }), [dispatch]),
     };
     // TODO: Error handling for sellers fetch
     // TODO: Journey key should be get from server side
-    const { refetch } = useQuery(id, () => getSellers.toPromise(), {
+    useQuery(id, () => getSellers.toPromise(), {
         ...commonQueryOptions,
         enabled: Boolean(matches),
         onSuccess: (res: IImageSeller[]) => dispatchers.loadSellers(res),
         onError: () => {},
     });
-
-    useEffect(() => {
-        if (!matches) {
-            return;
-        }
-        refetch();
-    }, [matches]);
 
     return (
         <JourneyState.Provider value={state}>
@@ -58,11 +46,23 @@ const JourneyContext: React.FC = (props) => {
 };
 
 const useJourneyState = () => {
-    return useContext(JourneyState) as IJourneyState;
+    const context = useContext(JourneyState);
+
+    if (context === undefined) {
+        throw new Error('useJourneyState must be used within a JourneyStateContext');
+    }
+
+    return context as IJourneyState;
 };
 
 const useJourneyDispatchers = () => {
-    return useContext(JourneyDispatchers);
+    const context = useContext(JourneyDispatchers);
+
+    if (context === undefined) {
+        throw new Error('useJourneyState must be used within a JourneyStateContext');
+    }
+
+    return context as IJourneyDispatchers;
 };
 
 export default JourneyContext;

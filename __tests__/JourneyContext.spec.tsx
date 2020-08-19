@@ -1,10 +1,10 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 
-import JourneyContext, { useJourneyState } from '../src/context/JourneyStateContext';
+import { useJourneyState } from '../src/context/JourneyStateContext';
+import { TestJourneyContextWrapper } from './utils/TestWrapper';
 
-// @ts-ignore
-const wrapper = ({ children }) => <JourneyContext>{children}</JourneyContext>;
+const wrapper: React.FC = ({ children }) => <TestJourneyContextWrapper>{children}</TestJourneyContextWrapper>;
 
 describe('JourneyContext test suite', () => {
     it('Should render', () => {
