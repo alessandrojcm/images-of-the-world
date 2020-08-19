@@ -14,11 +14,9 @@ describe('JourneyContext test suite', () => {
     // Only testing this since involves async, other tests cases
     // would be really testing useReducer
     it('Should get sellers', async () => {
-        const { result, waitForValueToChange } = renderHook(() => useJourneyState(), { wrapper });
+        const { result, waitForNextUpdate } = renderHook(() => useJourneyState(), { wrapper });
 
-        await waitForValueToChange(() => {
-            return result.current && result.current.sellers;
-        });
+        await waitForNextUpdate({ timeout: 1250 });
 
         expect(Object.keys(result.current.sellers).length).toBeGreaterThanOrEqual(3);
     });

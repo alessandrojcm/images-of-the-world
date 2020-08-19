@@ -12,7 +12,7 @@ const sellers: IImageSeller[] = Array.from({ length: 3 }).map((_, i) => ({
     id: i.toString(),
     sellerName: `${i}`,
     points: 0,
-    collectedPhotos: [],
+    collectedImages: [],
 }));
 
 const returnImage = () => {
@@ -37,7 +37,7 @@ export default [
         return res(ctx.json(locale));
     }),
     rest.get('*/sellers', (req, res, ctx) => {
-        return res(ctx.json(sellers));
+        return res(ctx.json({ sellers }));
     }),
     rest.get(`${unsplashApi}/photos/:id`, (req, res, ctx) => {
         authorize(req, res, ctx);
