@@ -10,7 +10,7 @@ export const initialState: IJourneyState = {
 };
 
 function imageChosen(state: IJourneyState, action: { type: string; payload?: any }) {
-    const chosenSeller = state.sellers[action.payload.id];
+    const chosenSeller = state.sellers[action.payload.sellerId];
     if (!chosenSeller) {
         return state;
     }
@@ -20,7 +20,7 @@ function imageChosen(state: IJourneyState, action: { type: string; payload?: any
             ...state,
             sellers: {
                 ...state.sellers,
-                [chosenSeller.id]: { ...chosenSeller, points: chosenSeller.points + POINTS_PER_IMAGE },
+                [chosenSeller.id]: { ...chosenSeller, points: chosenSeller.points + POINTS_PER_IMAGE, collectedImages: [...chosenSeller.collectedImages, action.payload.imageId] },
             },
             winner: chosenSeller,
         };
@@ -29,7 +29,7 @@ function imageChosen(state: IJourneyState, action: { type: string; payload?: any
         ...state,
         sellers: {
             ...state.sellers,
-            [chosenSeller.id]: { ...chosenSeller, points: chosenSeller.points + POINTS_PER_IMAGE },
+            [chosenSeller.id]: { ...chosenSeller, points: chosenSeller.points + POINTS_PER_IMAGE, collectedImages: [...chosenSeller.collectedImages, action.payload.imageId] },
         },
     };
 }

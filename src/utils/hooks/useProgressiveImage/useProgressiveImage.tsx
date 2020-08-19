@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { useId } from '@react-aria/utils';
 import { QueryOptions, useQuery } from 'react-query';
-import ky from 'ky-universal';
 
 import { getHighQualityImageAsBase64, getPlaceHolderImageAsBase64, getRawUrl } from './imageFetchingUtils';
 import { IuseProgressiveImage } from '~types/hooks';
@@ -33,31 +32,30 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
 
     const queryKey = useId();
 
-    const { data } = useQuery([`image-url-${queryKey}`, { photoId }], getRawUrl, {
+    const { data } = useQuery([`image-url-${queryKey}`, { photoId: initialPhoto?.id ?? photoId }], getRawUrl, {
         ...commonQueryOptions,
         enabled: photoId,
-        ...(initialPhoto && {
-            initialData: {
-                photoUrl: initialPhoto.urls.raw,
-                alt: initialPhoto.alt_description,
-                author: initialPhoto.user.name,
-                authorProfileUrl: initialPhoto.user.links.html,
-            },
-        }),
+        ...(initialPhoto &&
+            !photoId && {
+                initialData: {
+                    photoUrl: initialPhoto.urls.raw,
+                    alt: initialPhoto.alt_description,
+                    author: initialPhoto.user.name,
+                    authorProfileUrl: initialPhoto.user.links.html,
+                },
+            }),
     });
 
     useQuery([`placeholder-image-${queryKey}`, { photoUrl: data?.photoUrl ?? null }], getPlaceHolderImageAsBase64, {
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setPlaceholderImage(url),
-        onError: (err: ky.HTTPError) => setPlaceholderImage(`https://http.cat/${err.response.status}`),
     });
 
     useQuery([`image-${queryKey}`, { photoUrl: data?.photoUrl ?? null, width }], getHighQualityImageAsBase64, {
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setImage(url),
-        onError: (err: ky.HTTPError) => setImage(`https://http.cat/${err.response.status}`),
     });
 
     return {

@@ -44,9 +44,9 @@ const Figcaption = tw.figcaption`
     text-lg
 `;
 
-const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: string }> = (props) => {
+const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: string; onClick: (photoId: string) => void }> = (props) => {
     const { t } = useTranslation();
-    const { photo, width, className = '' } = props;
+    const { photo, width, className = '', onClick } = props;
 
     const { id: photoId } = photo ?? { id: null };
 
@@ -71,7 +71,7 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
 
     return (
         <Figure className={className}>
-            <Image className={className} src={src || undefined} alt={alt} />
+            <Image className={className} src={src || undefined} alt={alt} onClick={() => photoId && onClick(photoId)} />
             {authorProfileUrl && author && (
                 <Figcaption>
                     <a href={authorProfileUrl} target="_blank" rel="noreferrer">

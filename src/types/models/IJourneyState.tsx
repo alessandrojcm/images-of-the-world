@@ -8,6 +8,6 @@ export interface IJourneyState {
 
 export interface IJourneyDispatchers {
     loadSellers: (sellers: IImageSeller[]) => void;
-    imageChosen: (sellerId: string) => void;
+    imageChosen: (sellerId: string, imageId: string) => void;
     reset: () => void;
 }

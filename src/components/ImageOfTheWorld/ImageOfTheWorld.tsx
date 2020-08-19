@@ -5,7 +5,7 @@ import { css } from 'twin.macro';
 import { IImageOfTheWorld } from '~types/models';
 
 import { Details, Section, Loader } from './StyledComponents';
-import { useJourneyState } from '../../context/JourneyStateContext';
+import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
 import useRandomImage from '../../utils/hooks/useRandomImage';
 import Picture from '../Picture';
 
@@ -14,6 +14,7 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
 
     const { t } = useTranslation();
     const { searchTerm } = useJourneyState();
+    const { imageChosen } = useJourneyDispatchers();
     const { isLoading, photo } = useRandomImage(searchTerm, seller.id);
 
     if (isLoading) {
@@ -36,6 +37,7 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
                 css={css`
                     min-height: 256px;
                 `}
+                onClick={(photoId) => imageChosen(seller.id, photoId)}
             />
             <Details>
                 <summary>{t('sellerImage', { val: seller.sellerName })}</summary>
