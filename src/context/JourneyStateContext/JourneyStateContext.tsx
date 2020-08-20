@@ -28,6 +28,7 @@ const JourneyContext: React.FC = (props) => {
         loadSellers: useCallback((sellers) => dispatch({ type: 'ADD_SELLERS', payload: sellers }), [dispatch]),
         reset: useCallback(() => dispatch({ type: 'RESET' }), []),
         imageChosen: useCallback((sellerId, imageId: string) => dispatch({ type: 'IMAGE_CHOSEN', payload: { sellerId, imageId } }), [dispatch]),
+        searchTerm: useCallback((term: string) => dispatch({ type: 'SEARCH', payload: term }), [dispatch]),
     };
     // TODO: Error handling for sellers fetch
     // TODO: Journey key should be get from server side
@@ -35,7 +36,6 @@ const JourneyContext: React.FC = (props) => {
         ...commonQueryOptions,
         enabled: Boolean(matches),
         onSuccess: (res: IImageSeller[]) => dispatchers.loadSellers(res),
-        onError: () => {},
     });
 
     return (

@@ -8,14 +8,16 @@ export const Loader = styled(FullPageLoader)`
 
 export const Section = tw.section`
     row-start-2
-    row-end-3
-    shadow
+    row-end-6
+    col-span-2
     transition-all
     duration-200
     ease-in-out
     translate-y-0
     transform
     hover:-translate-y-4
+    min-w-0
+    overflow-hidden
 `;
 
 export const Details = styled.details`

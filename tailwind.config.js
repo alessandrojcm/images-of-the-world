@@ -59,7 +59,7 @@ module.exports = {
             },
         },
     },
-    variants: { borderColor: ['responsive', 'hover', 'focus', 'active'] },
+    variants: { borderColor: ['responsive', 'hover', 'focus', 'active', 'disabled'] },
     // eslint-disable-next-line
     plugins: [require('tailwindcss-typography')],
 };

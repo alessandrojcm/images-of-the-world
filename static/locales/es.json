@@ -14,5 +14,6 @@
     "startMessageSub": "Por favor, ingresa tus detalles.",
     "photoCaption": "Foto por {{val}} en Unsplash.",
     "sellerImage": "Imagen de {{val}}.",
-    "pointsToWin": "{{v1}} de {{v2}} puntos para ganar."
+    "pointsToWin": "{{v1}} de {{v2}} puntos para ganar.",
+    "searchImage": "Busca una imagen."
 }

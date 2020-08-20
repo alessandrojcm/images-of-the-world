@@ -5,28 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import tw, { styled } from 'twin.macro';
 import { IInputProps } from '~types/props/IInputProps';
-
-const InputStyle = styled.input`
-    ${tw`
-        w-full
-        bg-opacity-75
-        bg-gold
-        text-black
-        rounded
-        placeholder-black
-        placeholder-opacity-50
-        p-1
-        border-2
-        border-transparent
-        disabled:bg-opacity-50 disabled:cursor-not-allowed
-        hover:border-green
-        focus:border-green
-        active:border-green
-    `};
-    :invalid {
-        ${tw`border-2 border-primary`}
-    }
-`;
+import { InputStyle } from '../common-styles';
 
 const Label = styled.label`
     ${tw`text-shadow

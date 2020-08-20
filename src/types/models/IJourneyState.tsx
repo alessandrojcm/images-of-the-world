@@ -7,6 +7,7 @@ export interface IJourneyState {
 }
 
 export interface IJourneyDispatchers {
+    searchTerm: (term: string) => void;
     loadSellers: (sellers: IImageSeller[]) => void;
     imageChosen: (sellerId: string, imageId: string) => void;
     reset: () => void;

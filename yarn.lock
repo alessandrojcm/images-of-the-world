@@ -2402,6 +2402,17 @@
     "@react-types/shared" "^3.1.0"
     classnames "^2.2.5"
 
+"@react-aria/focus@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/focus/-/focus-3.2.0.tgz#d855c6a176ae9bb22af77b71a4eed197421d6d57"
+  integrity sha512-3x3DCRTtQc1oz8QThqqzsou9PtPYQNrt31Pu3BA2T5Eq+uax6ku5lZL95ihzMmTvAX3V/bsJhaessndW/0NZSQ==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.2.0"
+    "@react-aria/utils" "^3.2.0"
+    "@react-types/shared" "^3.2.0"
+    clsx "^1.1.1"
+
 "@react-aria/i18n@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-aria/i18n/-/i18n-3.1.0.tgz#1b0cc60ed5c253fbb5065b0e0b31e69d39cad253"
@@ -2419,6 +2430,15 @@
     "@babel/runtime" "^7.6.2"
     "@react-aria/utils" "^3.1.0"
     "@react-types/shared" "^3.1.0"
+
+"@react-aria/interactions@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.2.0.tgz#43d28489f8e1ec333127221ed1a2a7c92783dd01"
+  integrity sha512-NhXnEOimpp+3K5XUbiM4DxhZ2LykT1Vy7iGaRk1alm7S//y+dxzNm7VzvjAI2+YeMbv6TbdtiPVfXB/+Xi+D9w==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/utils" "^3.2.0"
+    "@react-types/shared" "^3.2.0"
 
 "@react-aria/label@^3.1.0":
   version "3.1.0"
@@ -2462,6 +2482,21 @@
     "@react-types/overlays" "^3.1.0"
     dom-helpers "^3.3.1"
 
+"@react-aria/searchfield@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/searchfield/-/searchfield-3.1.0.tgz#069c68aaae1c8f23ebf69c513c12a19e55cf2c9d"
+  integrity sha512-vdcbwM2zvGdAcPXNresc6MkEA//BahWtILbORSkXP4MG5SSa5FtNkL+4Qn4VIsiF0gLtlJbB0a1lBFarhq6LcA==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.1.0"
+    "@react-aria/interactions" "^3.1.0"
+    "@react-aria/textfield" "^3.1.0"
+    "@react-aria/utils" "^3.1.0"
+    "@react-stately/searchfield" "^3.1.0"
+    "@react-types/button" "^3.1.0"
+    "@react-types/searchfield" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
+
 "@react-aria/selection@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-aria/selection/-/selection-3.1.0.tgz#aa5f03cf4aba04b9ad786415167f555c08bb0915"
@@ -2476,6 +2511,18 @@
     "@react-stately/selection" "^3.1.0"
     "@react-types/shared" "^3.1.0"
 
+"@react-aria/textfield@^3.1.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/textfield/-/textfield-3.2.0.tgz#b4e1ec8593526c598376d6a864008aa48c1e50f0"
+  integrity sha512-+fcvGXJ//FYKfQP5GLfL1qnBX0+uDNigklTD9KgR21w11ddROLJxWCZ9AMmYmkGbx1mtfM8tb69y/T4BnsgbdA==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.2.0"
+    "@react-aria/label" "^3.1.0"
+    "@react-aria/utils" "^3.2.0"
+    "@react-types/shared" "^3.2.0"
+    "@react-types/textfield" "^3.2.0"
+
 "@react-aria/utils@^3.0.2", "@react-aria/utils@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.1.0.tgz#157864d4c9123061cf7c55848340a318ff461d0d"
@@ -2484,6 +2531,15 @@
     "@babel/runtime" "^7.6.2"
     "@react-types/shared" "^3.1.0"
     classnames "^2.2.5"
+
+"@react-aria/utils@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.2.0.tgz#67d39dbba9d96612b4f9b3fe5c3243db4196b6f2"
+  integrity sha512-o2Far+gAnp78QksjlQTqo4Qq3A2f6ll931C7Q0RU2OIG/ImRHlSczqyMOPBlHRnEGyD+1ctWkmcHkdP4CvuD7g==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-types/shared" "^3.2.0"
+    clsx "^1.1.1"
 
 "@react-aria/visually-hidden@^3.1.0":
   version "3.1.0"
@@ -2520,6 +2576,16 @@
     "@babel/runtime" "^7.6.2"
     "@react-stately/utils" "^3.1.0"
     "@react-types/overlays" "^3.1.0"
+
+"@react-stately/searchfield@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-stately/searchfield/-/searchfield-3.1.0.tgz#c98e000e72bf5edef7d6721c9c5c3349ae21b24e"
+  integrity sha512-EK/+eDcjUj0X5003eaqYgxmv3/4ep0NAR4bejdv8YExg2+AbST80p7lBp+IxT1C5ThWqTGvgoniJ8JdK1gc7Cw==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.1.0"
+    "@react-types/searchfield" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
 
 "@react-stately/selection@^3.1.0":
   version "3.1.0"
@@ -2578,10 +2644,29 @@
   dependencies:
     "@react-types/shared" "^3.1.0"
 
+"@react-types/searchfield@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-types/searchfield/-/searchfield-3.1.0.tgz#88506ac424cc86191a0bc71c265e2a91a711c4d9"
+  integrity sha512-vDCbdJt8ysJIELM/SeRpFweZZm51XXUcHVTq+yTaUySnypfCt8D1t9fSP/Sxk8LgU7CQrnUOnp+o+U8xbcLHcg==
+  dependencies:
+    "@react-types/textfield" "^3.1.0"
+
 "@react-types/shared@^3.0.2", "@react-types/shared@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.1.0.tgz#92b4b5e727d4595247a25f946a98bbcfde71a67e"
   integrity sha512-UwQBG3QLMx6i/gnQj19BjCvoEtZwsW9QB6lfLpaQb4K1jiEZouYjm+50SvgaJKXb2l0WsibHj9cEj9SABjw5Dg==
+
+"@react-types/shared@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.2.0.tgz#531c320e6b8f01f614336c14cee50ecf9fca4a4d"
+  integrity sha512-0oVULza+qc8+j7I9OB74FVjbrH6JzUAYDAkTYXbsaPt/w4quAlgd4ADy9yxIVYyN1GCXp/z0AUuocaYDHA8O6Q==
+
+"@react-types/textfield@^3.1.0", "@react-types/textfield@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-types/textfield/-/textfield-3.2.0.tgz#da609c90bf093f554ae4721c51458ca350ad00e6"
+  integrity sha512-XRa3TqNbdXUdZdLxK+vpPmxXlY1Fd2q5vOtmcEtFcO1n7LKX7tOKg1Evd5uOu+VQcEdUU9bh/rYFJP1bgNrJUA==
+  dependencies:
+    "@react-types/shared" "^3.2.0"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.1"
@@ -4194,6 +4279,11 @@ clones@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/clones/-/clones-1.2.0.tgz#b34c872045446a9f264ccceb7731bca05c529b71"
   integrity sha512-FXDYw4TjR8wgPZYui2LeTqWh1BLpfQ8lB6upMtlpDF6WlOOxghmTTxWyngdKTgozqBgKnHbTVwTE+hOHqAykuQ==
+
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
 
 co@^4.6.0:
   version "4.6.0"
@@ -9795,9 +9885,9 @@ react-i18next@^11.7.0:
     html-parse-stringify2 "2.0.1"
 
 react-icons@^3.10.0:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.10.0.tgz#6c217a2dde2e8fa8d293210023914b123f317297"
-  integrity sha512-WsQ5n1JToG9VixWilSo1bHv842Cj5aZqTGiS3Ud47myF6aK7S/IUY2+dHcBdmkQcCFRuHsJ9OMUI0kTDfjyZXQ==
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.11.0.tgz#2ca2903dfab8268ca18ebd8cc2e879921ec3b254"
+  integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
   dependencies:
     camelcase "^5.0.0"
 
