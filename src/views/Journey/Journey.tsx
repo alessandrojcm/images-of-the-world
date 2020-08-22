@@ -7,6 +7,7 @@ import { useCurrentUser } from '../../context/CurrentUserContext';
 import Container from './styledComponents';
 import ImageOfTheWorld from '../../components/ImageOfTheWorld';
 import SearchBar from '../../components/SearchBar';
+import JourneyDisplay from '../../components/JourneyMeter';
 
 const Journey = () => {
     const { sellers } = useJourneyState();
@@ -23,6 +24,7 @@ const Journey = () => {
             {Object.values(sellers).map((seller) => (
                 <ImageOfTheWorld seller={seller} key={seller.id} />
             ))}
+            <JourneyDisplay />
         </Container>
     );
 };

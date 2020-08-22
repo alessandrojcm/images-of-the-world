@@ -8,7 +8,9 @@ export default styled.div`
     grid
     grid-cols-6
     grid-rows-6
-    p-8
+    pt-8
+    pr-8
+    pl-8
     gap-20`};
     width: 100% !important;
 `;

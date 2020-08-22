@@ -57,6 +57,9 @@ module.exports = {
             transitionDuration: {
                 2000: '2000ms',
             },
+            gridRowEnd: {
+                finish: '-1',
+            },
         },
     },
     variants: { borderColor: ['responsive', 'hover', 'focus', 'active', 'disabled'] },

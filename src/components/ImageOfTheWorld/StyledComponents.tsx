@@ -8,7 +8,7 @@ export const Loader = styled(FullPageLoader)`
 
 export const Section = tw.section`
     row-start-2
-    row-end-6
+    row-end-5
     col-span-2
     transition-all
     duration-200

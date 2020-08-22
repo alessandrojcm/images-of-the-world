@@ -2467,6 +2467,16 @@
     "@react-types/menu" "^3.1.0"
     "@react-types/shared" "^3.1.0"
 
+"@react-aria/meter@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/meter/-/meter-3.1.0.tgz#4f9e1c4b01deb9618bb1fa889c465dfbd92c7225"
+  integrity sha512-Q2jyNe59xXlCcDntZL5zWR4CQZhbMmgkH9EiF8FPl/7kLZsGAZCVB9EwcmT7YLuf9wrL+Vf81rjI3z1hLYHzEA==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/progress" "^3.1.0"
+    "@react-types/meter" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
+
 "@react-aria/overlays@^3.0.2", "@react-aria/overlays@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-aria/overlays/-/overlays-3.1.0.tgz#0f435b6232028f6d52cd0f872798c8b783bedd6a"
@@ -2481,6 +2491,18 @@
     "@react-types/button" "^3.1.0"
     "@react-types/overlays" "^3.1.0"
     dom-helpers "^3.3.1"
+
+"@react-aria/progress@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/progress/-/progress-3.1.0.tgz#0e5f2c67998ad4185ee4524710f0927b79aa8502"
+  integrity sha512-WK77NG26nvdBbNugkNmCIAJ5QdO+gcDE5ajS+7Pwttbp9rv+CmZoSgaFBl565qc1dP1GsX7e5eRkal8c2j4t+g==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.1.0"
+    "@react-aria/label" "^3.1.0"
+    "@react-aria/utils" "^3.1.0"
+    "@react-types/progress" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
 
 "@react-aria/searchfield@^3.1.0":
   version "3.1.0"
@@ -2637,10 +2659,25 @@
     "@react-types/overlays" "^3.1.0"
     "@react-types/shared" "^3.1.0"
 
+"@react-types/meter@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-types/meter/-/meter-3.1.0.tgz#7fc8c8727f0741765b4b76cdcf34ceb5655c9c10"
+  integrity sha512-W0bm5NGA7aM2a1q/+DBSxpIjPCjJeoZN07vCClwJwN3NOv0C72DP8dFQiO5hKar9T0QsCMwYZg4dLEBWIQYoiw==
+  dependencies:
+    "@react-types/progress" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
+
 "@react-types/overlays@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-types/overlays/-/overlays-3.1.0.tgz#98b89fa3bf683b83bf2fa27a44562f9dd3116d53"
   integrity sha512-XGEvKJclbk6zZy+E2n0RIsPy+8/OEnhProTX5FCvsXgdVZEXwRwavC040BAo0+F6ZXM3bvxbaLWt2w7GjMrjxw==
+  dependencies:
+    "@react-types/shared" "^3.1.0"
+
+"@react-types/progress@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-types/progress/-/progress-3.1.0.tgz#f7a0f447217dd9120360fdf266ccb7b888401cd0"
+  integrity sha512-RueSJ+UfVKTYsr11ZY+54s9jXjBj/l6qCU/i8EIAQAAmn/ESB4vQJHmBgjehiDVXF+ABd40R8E3xydMM1/fO5w==
   dependencies:
     "@react-types/shared" "^3.1.0"
 
