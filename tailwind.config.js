@@ -9,6 +9,7 @@ module.exports = {
     theme: {
         textShadow: {
             default: '0 2px 5px rgba(0, 0, 0, 0.5)',
+            white: '0 2px 5px rgba(220, 211, 182, 0.5)',
         },
         colors: {
             primary: red,

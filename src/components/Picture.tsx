@@ -34,7 +34,7 @@ const Figure = styled.figure`
 const Figcaption = tw.figcaption`
     absolute
     text-black
-    text-shadow
+    text-shadow-white
     text-right
     pr-4
     bottom-0

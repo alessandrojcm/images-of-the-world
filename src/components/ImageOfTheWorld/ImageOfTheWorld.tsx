@@ -40,8 +40,7 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
                 onClick={(photoId) => imageChosen(seller.id, photoId)}
             />
             <Details>
-                <summary>{t('sellerImage', { val: seller.sellerName })}</summary>
-                <p>{t('pointsToWin', { v1: seller.points, v2: 20 })}</p>
+                <p>{t('sellerImage', { val: seller.sellerName })}</p>
             </Details>
         </Section>
     );

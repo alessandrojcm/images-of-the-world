@@ -20,13 +20,13 @@ export const Section = tw.section`
     overflow-hidden
 `;
 
-export const Details = styled.details`
-    ${tw`bg-orange-100 cursor-pointer
+export const Details = styled.span`
+    ${tw`bg-orange-100 cursor-pointer block
     rounded-b`};
     & > * {
         ${tw`font-subtitle text-black text-shadow`}
     }
     & > p {
-        ${tw`font-body ml-4`}
+        ${tw`font-body ml-4 text-black`}
     }
 `;
