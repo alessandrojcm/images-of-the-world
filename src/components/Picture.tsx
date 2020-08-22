@@ -51,8 +51,7 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
     const { id: photoId } = photo ?? { id: null };
 
     const [src, setSrc] = useState<string | null>(null);
-    const [alt, setAlt] = useState<string | undefined>(undefined);
-    const { placeholderImage, image, alt: desc, authorProfileUrl, author } = useProgressiveImage(photoId, width, photo);
+    const { placeholderImage, image, alt, authorProfileUrl, author } = useProgressiveImage(photoId, width, photo);
 
     useEffect(() => {
         if (!image) {
@@ -61,13 +60,6 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
             setSrc(image);
         }
     }, [placeholderImage, image]);
-
-    useEffect(() => {
-        if (!desc) {
-            return;
-        }
-        setAlt(desc);
-    }, [desc]);
 
     return (
         <Figure className={className}>

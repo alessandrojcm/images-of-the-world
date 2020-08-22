@@ -55,4 +55,10 @@ describe('Journey reducer test suite', () => {
 
         expect(state.searchTerm).toEqual('cat');
     });
+
+    it('Should reset search term', () => {
+        const state = reducer(initialState, { type: 'RESET_SEARCH' });
+
+        expect(state.searchTerm).toBeNull();
+    });
 });

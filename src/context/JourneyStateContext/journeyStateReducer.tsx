@@ -56,6 +56,11 @@ export default (state: IJourneyState, action: { type: string; payload?: any }) =
                 ...state,
                 searchTerm: action.payload,
             };
+        case 'RESET_SEARCH':
+            return {
+                ...state,
+                searchTerm: null,
+            };
         default:
             return state;
     }

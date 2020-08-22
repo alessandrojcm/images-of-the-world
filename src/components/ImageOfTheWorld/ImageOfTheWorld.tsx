@@ -9,6 +9,7 @@ import { useJourneyDispatchers, useJourneyState } from '../../context/JourneySta
 import useRandomImage from '../../utils/hooks/useRandomImage';
 import Picture from '../Picture';
 
+// TODO: figure placeholder for when searchTerm is null
 const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (props) => {
     const { seller, className = '' } = props;
 

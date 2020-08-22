@@ -20,14 +20,20 @@ const JourneyDispatchers = createContext<IJourneyDispatchers | null>(null);
 const JourneyContext: React.FC = (props) => {
     const { children } = props;
     const id = useId();
-    const [state, dispatch] = useReducer(reducer, { ...initialState, searchTerm: 'cat' });
+    const [state, dispatch] = useReducer(reducer, { ...initialState });
     // TODO: change this
     const matches = useRouteMatch('/journey/start');
 
     const dispatchers: IJourneyDispatchers = {
         loadSellers: useCallback((sellers) => dispatch({ type: 'ADD_SELLERS', payload: sellers }), [dispatch]),
         reset: useCallback(() => dispatch({ type: 'RESET' }), []),
-        imageChosen: useCallback((sellerId, imageId: string) => dispatch({ type: 'IMAGE_CHOSEN', payload: { sellerId, imageId } }), [dispatch]),
+        imageChosen: useCallback(
+            (sellerId, imageId: string) => {
+                dispatch({ type: 'IMAGE_CHOSEN', payload: { sellerId, imageId } });
+                dispatch({ type: 'RESET_SEARCH' });
+            },
+            [dispatch]
+        ),
         searchTerm: useCallback((term: string) => dispatch({ type: 'SEARCH', payload: term }), [dispatch]),
     };
     // TODO: Error handling for sellers fetch

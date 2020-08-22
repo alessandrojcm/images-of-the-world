@@ -10,7 +10,7 @@ import SearchBar from '../../components/SearchBar';
 import JourneyDisplay from '../../components/JourneyMeter';
 
 const Journey = () => {
-    const { sellers } = useJourneyState();
+    const { sellers, searchTerm: term } = useJourneyState();
     const { userLoggedIn } = useCurrentUser();
     const { searchTerm } = useJourneyDispatchers();
 
@@ -20,7 +20,7 @@ const Journey = () => {
 
     return (
         <Container>
-            <SearchBar disabled={Object.keys(sellers).length === 0} onSubmit={searchTerm} />
+            <SearchBar disabled={Object.keys(sellers).length === 0 || Boolean(term)} onSubmit={searchTerm} />
             {Object.values(sellers).map((seller) => (
                 <ImageOfTheWorld seller={seller} key={seller.id} />
             ))}
