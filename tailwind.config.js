@@ -9,6 +9,7 @@ module.exports = {
     theme: {
         textShadow: {
             default: '0 2px 5px rgba(0, 0, 0, 0.5)',
+            white: '0 2px 5px rgba(220, 211, 182, 0.5)',
         },
         colors: {
             primary: red,
@@ -57,8 +58,12 @@ module.exports = {
             transitionDuration: {
                 2000: '2000ms',
             },
+            gridRowEnd: {
+                finish: '-1',
+            },
         },
     },
-    variants: { borderColor: ['responsive', 'hover', 'focus', 'active'] },
-    plugins: [require('tailwindcss-animations'), require('tailwindcss-typography')],
+    variants: { borderColor: ['responsive', 'hover', 'focus', 'active', 'disabled'] },
+    // eslint-disable-next-line
+    plugins: [require('tailwindcss-typography')],
 };

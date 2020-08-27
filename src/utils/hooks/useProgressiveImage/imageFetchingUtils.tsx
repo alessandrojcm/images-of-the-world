@@ -60,7 +60,7 @@ const getHighQualityImageAsBase64 = (_: string, { photoUrl, width }: { photoUrl:
 const getPlaceHolderImageAsBase64 = (_: string, { photoUrl }: { photoUrl: string }) => {
     const params = new URLSearchParams(photoUrl.split('?')[1]);
     params.append('q', '0');
-    params.append('w', '512');
+    params.append('w', '128');
 
     return from(
         ky.get(photoUrl, {
@@ -74,12 +74,16 @@ const getPlaceHolderImageAsBase64 = (_: string, { photoUrl }: { photoUrl: string
         .toPromise();
 };
 
-const getRawUrl = (_: string, { photoId }: { photoId: string }) =>
+const getRawUrl = (_: string, { photoId }: { photoId: string | null }) =>
     unsplash
-        .getPhoto(photoId)
+        .getPhoto(photoId as string)
         .pipe(
-            map((photo) => photo.urls.raw),
-            catchError(() => from(Promise.reject()))
+            map((photo) => ({
+                photoUrl: photo.urls.raw,
+                alt: photo.alt_description,
+                author: photo.user.name,
+                authorProfileUrl: photo.user.links.html,
+            }))
         )
         .toPromise();
 

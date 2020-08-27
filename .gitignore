@@ -220,3 +220,6 @@ src/**/*.js
 !.env.example
 
 # End of https://www.toptal.com/developers/gitignore/api/react,intellij+all,node
+
+.vercel
+**/*/__pycache__

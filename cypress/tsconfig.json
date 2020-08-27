@@ -4,7 +4,6 @@
         "module": "esnext",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "types": ["node", "@types/jest", "cypress", "@types/testing-library__cypress"],
-        "sourceMap": true,
         "strict": true,
         "moduleResolution": "node",
         "baseUrl": "./**/*",

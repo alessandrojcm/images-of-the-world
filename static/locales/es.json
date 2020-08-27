@@ -10,6 +10,13 @@
     "tooShort": "{{val}} muy corto.",
     "invalid": "{{val}} es inválido.",
     "required": "{{val}} es requerido.",
-    "startMessage": "Genial, empecemos",
-    "startMessageSub": "Por favor, ingresa tus detalles"
+    "startMessage": "Genial, empecemos.",
+    "startMessageSub": "Por favor, ingresa tus detalles.",
+    "photoCaption": "Foto por {{val}} en Unsplash.",
+    "sellerImage": "Imagen de {{val}}.",
+    "pointsToWin": "{{v1}} de {{v2}} puntos para ganar.",
+    "searchImage": "Busca una imagen.",
+    "finishTitle": "¡Felicitaciones!",
+    "journeyWinner": "{{sellerName}} ha culminado el viaje, con un total de {{points}} puntos.",
+    "returnToHome": "Vuelve al inicio."
 }

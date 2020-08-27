@@ -15,7 +15,8 @@ const NavbarStyle = tw.nav`
     flex-no-wrap
     justify-between
     items-center
-    p-4
+    px-4
+    pt-2
     w-screen
     text-orange-200
     font-subtitle
