@@ -15,5 +15,8 @@
     "photoCaption": "Photo by {{val}} on Unsplash.",
     "sellerImage": "Image from {{val}}.",
     "pointsToWin": "{{v1}} of {{v2}} points to win.",
-    "searchImage": "Search for an image."
+    "searchImage": "Search for an image.",
+    "finishTitle": "Congratulations!",
+    "journeyWinner": "{{sellerName}} has finished the journey, with a total of {{points}} points.",
+    "returnToHome": "Return to home."
 }
