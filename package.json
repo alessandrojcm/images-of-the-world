@@ -59,7 +59,7 @@
         "babel-plugin-macros": "^2.8.0",
         "babel-plugin-transform-react-jsx": "^6.24.1",
         "concurrently": "^5.2.0",
-        "cypress": "^4.11.0",
+        "cypress": "^5.0.0",
         "eslint": "^7.4.0",
         "eslint-config-airbnb": "^18.2.0",
         "eslint-config-prettier": "^6.11.0",
@@ -86,7 +86,7 @@
         "react-test-renderer": "^16.13.1",
         "ts-jest": "^26.1.1",
         "typescript": "^3.9.6",
-        "vercel": "^19.2.0"
+        "vercel": "^20.0.0"
     },
     "dependencies": {
         "@emotion/core": "^10.0.28",
