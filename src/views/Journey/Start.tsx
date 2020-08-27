@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
+
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
-
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import Container from './styledComponents';
 import ImageOfTheWorld from '../../components/ImageOfTheWorld';
 import SearchBar from '../../components/SearchBar';
 import JourneyDisplay from '../../components/JourneyMeter';
 
-const Journey = () => {
-    const { sellers, searchTerm: term } = useJourneyState();
+const Start = () => {
+    const { sellers, searchTerm: term, winner } = useJourneyState();
+    const { push } = useHistory();
     const { userLoggedIn } = useCurrentUser();
     const { searchTerm } = useJourneyDispatchers();
+
+    useEffect(() => {
+        if (!winner) {
+            return;
+        }
+        push('/journey/finish');
+    }, [winner]);
 
     if (!userLoggedIn) {
         return <Redirect to="/journey" />;
     }
 
+    // TODO: ImageOfTheWorld should fetch its seller by id
     return (
         <Container>
             <SearchBar disabled={Object.keys(sellers).length === 0 || Boolean(term)} onSubmit={searchTerm} />
@@ -29,4 +38,4 @@ const Journey = () => {
     );
 };
 
-export default Journey;
+export default Start;

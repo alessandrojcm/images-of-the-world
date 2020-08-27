@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 
 import tw, { styled, css } from 'twin.macro';
 import * as yup from 'yup';
@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { ValidationState } from '@react-types/shared';
 import { CgClose, CgSearch } from 'react-icons/cg/index';
 import { InputStyle } from './common-styles';
+import { useJourneyState } from '../context/JourneyStateContext';
 
 const queryTerm = yup.string().trim().lowercase().min(3, 'tooShort');
 
@@ -43,6 +44,7 @@ const SearchBarStyle = styled(InputStyle)`
 
 const SearchBar: React.FC<{ onSubmit: (query: string) => void; disabled?: boolean }> = (props) => {
     const { onSubmit, disabled = false } = props;
+    const { searchTerm } = useJourneyState();
 
     const [queryValid, setQueryValid] = useState<ValidationState>('valid');
     const { t } = useTranslation();
@@ -71,6 +73,13 @@ const SearchBar: React.FC<{ onSubmit: (query: string) => void; disabled?: boolea
     const searchRef = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
     const searchState = useSearchFieldState(commonProps);
     const { clearButtonProps, inputProps } = useSearchField({ ...commonProps, 'aria-autocomplete': 'none', 'aria-label': commonProps.label }, searchState, searchRef);
+
+    useEffect(() => {
+        if (searchTerm !== null) {
+            return;
+        }
+        searchState.setValue('');
+    }, [searchState.setValue, searchTerm]);
 
     return (
         <SearchContainer>

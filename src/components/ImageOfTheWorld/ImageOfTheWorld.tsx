@@ -24,7 +24,6 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
                 <Loader />
                 <Details>
                     <summary>{t('sellerImage', { val: seller.sellerName })}</summary>
-                    <p>{t('pointsToWin', { v1: seller.points, v2: 20 })}</p>
                 </Details>
             </Section>
         );

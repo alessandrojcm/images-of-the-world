@@ -38,9 +38,14 @@ const JourneyContext: React.FC = (props) => {
     };
     // TODO: Error handling for sellers fetch
     // TODO: Journey key should be get from server side
+    // TODO: Handle refetch, currently there is none because it will overwrite the client-side
     useQuery(id, () => getSellers.toPromise(), {
         ...commonQueryOptions,
-        enabled: Boolean(matches),
+        refetchInterval: Infinity,
+        refetchIntervalInBackground: false,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        enabled: Boolean(matches) || Object.keys(state.sellers).length > 0,
         onSuccess: (res: IImageSeller[]) => dispatchers.loadSellers(res),
     });
 
