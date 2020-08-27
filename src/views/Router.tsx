@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import { Start, Finish } from './Journey';
 import MainLayout from '../components/Layout';
 import Home from './Home';
 import Registration from './Registration';
-import Journey from './Journey';
 
 import CurrentUserContext from '../context/CurrentUserContext/CurrentUserContext';
 import JourneyContext from '../context/JourneyStateContext';
@@ -25,7 +25,10 @@ const Router: React.FC = () => {
                         <JourneyContext>
                             <Switch>
                                 <Route path="/journey/start">
-                                    <Journey />
+                                    <Start />
+                                </Route>
+                                <Route path="/journey/finish">
+                                    <Finish />
                                 </Route>
                             </Switch>
                         </JourneyContext>

@@ -34,4 +34,13 @@ const Button: React.FC<IButtonProps> = (props) => {
     );
 };
 
+export const PrimaryButton = styled(Button)`
+    ${tw`
+        border-primary
+        bg-primary
+        p-1
+    `}
+    ${(props) => (props.disabled ? 'bg-opacity-25 border-opacity-25' : tw`hover:text-orange-100 hover:text-shadow`)};
+`;
+
 export default Button;

@@ -1,6 +1,6 @@
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
-export default tw.div`
+const Container = tw.div`
     container
     flex
     flex-no-wrap
@@ -11,3 +11,9 @@ export default tw.div`
     w-1/2
     p-5
 `;
+
+export const ColumnContainer = styled(Container)`
+    ${tw`w-auto items-start rounded-lg`};
+`;
+
+export default Container;

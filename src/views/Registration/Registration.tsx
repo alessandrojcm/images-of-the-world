@@ -6,9 +6,11 @@ import { yupResolver } from '@hookform/resolvers';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { Button, ButtonsContainer, Container, Subtitle } from './StyledComponents';
 import { useCurrentUser, useCurrentUserDispatchers } from '../../context';
 import { startFormSchema, StartFormSchema } from '../../types/form-schemas/startForm';
+import { ButtonsContainer, Subtitle } from './StyledComponents';
+import { ColumnContainer as Container } from '../../components/Container';
+import { PrimaryButton as Button } from '../../components/Button';
 import { Control, Form, Input } from '../../components/Form';
 import { Title } from '../../components/Typography';
 

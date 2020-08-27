@@ -22,7 +22,11 @@ function imageChosen(state: IJourneyState, action: { type: string; payload?: any
                 ...state.sellers,
                 [chosenSeller.id]: { ...chosenSeller, points: chosenSeller.points + POINTS_PER_IMAGE, collectedImages: [...chosenSeller.collectedImages, action.payload.imageId] },
             },
-            winner: chosenSeller,
+            winner: {
+                ...chosenSeller,
+                points: chosenSeller.points + POINTS_PER_IMAGE,
+                collectedImages: Object.values(state.sellers).reduce<string[]>((prv, { collectedImages }) => [...prv, ...collectedImages], []),
+            },
         };
     }
     return {

@@ -1,3 +1,5 @@
+const IMAGE_SELECTION_THRESHOLD = 7;
+
 describe('Registration e2e test', () => {
     beforeEach(() => {
         cy.visit('/journey');
@@ -24,5 +26,20 @@ describe('Registration e2e test', () => {
             cy.findByText(/3 points out of \d+/, { exact: false }).should('exist');
             cy.findByRole('searchbox').should('not.be.disabled');
         });
+    });
+
+    it('Should finish the journey', () => {
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < IMAGE_SELECTION_THRESHOLD; i++) {
+            cy.findByRole('searchbox')
+                .type('cats{enter}')
+                .then(() =>
+                    cy.findByRole('img').then((res) => {
+                        res[0].click();
+                    })
+                );
+        }
+
+        cy.url().should('contain', '/finish');
     });
 });

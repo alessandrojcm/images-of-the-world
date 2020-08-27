@@ -166,6 +166,9 @@ const DevTools = () => {
                 bottom: 1.5rem;
                 left: 1.5rem;
                 right: 1.5rem;
+                max-height: 50%;
+                max-width: 95vw;
+                overflow: auto;
             `}>
             <div ref={rootRef}>
                 <Tooltip label="Toggle Persist DevTools">
