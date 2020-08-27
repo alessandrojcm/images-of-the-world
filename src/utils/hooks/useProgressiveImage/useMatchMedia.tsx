@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import dequal from 'dequal';
+import { dequal } from 'dequal';
 
 const checkForQueryMatches = (queries: string[]) => {
     const result = queries.map(window.matchMedia);
