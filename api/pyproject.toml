@@ -11,6 +11,7 @@ faker = "^4.1.1"
 requests = "^2.24.0"
 fastapi = "^0.61.0"
 pydantic = "^1.6.1"
+faunadb = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.1"
