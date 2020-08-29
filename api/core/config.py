@@ -2,7 +2,7 @@ import os
 
 from models import Config
 
-config: Config = None
+config = None
 
 if os.getenv('DEBUG', False):
     config = Config(_env_file='../.env')
