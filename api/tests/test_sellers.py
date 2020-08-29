@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 
 
 def test_sellers():
-    from sellers import app
+    from functions.sellers import app
     sellers = TestClient(app)
     response = sellers.get('/api/sellers')
     assert response.status_code == 200
