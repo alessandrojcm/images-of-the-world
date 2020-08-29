@@ -22,7 +22,7 @@ class TestSellerModel:
 
     def test_deserialization_camel_case(self):
         seller = ImageSeller(id=uuid4(), sellerName='A seller')
-        seller_dict = seller.dict(by_alias=True)
+        seller_dict = seller.dict()
 
         assert seller_dict['sellerName']
         assert seller_dict['collectedImages'] == []

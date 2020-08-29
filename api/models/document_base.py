@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Any, Optional
+from typing import Any, Optional, Union
 from uuid import uuid4
 
 from core.engine import session
@@ -53,3 +53,9 @@ class DocumentBase(BaseModel):
         updated_vals = self.dict(exclude={"ref", "ts"})
 
         session().query(q.update(self.ref, {"data": {**updated_vals}}))
+
+    def dict(self, **kwargs) -> 'DictStrAny':
+        properties = super().dict(by_alias=True, exclude={'ref', 'ts'}, **kwargs)
+        properties.update({'id': str(properties['id'])})
+
+        return properties
