@@ -16,7 +16,7 @@ class ImageSeller(BaseModel):
         allow_population_by_field_name = True
 
     def dict(self, **kwargs):
-        properties = super().dict(by_alias=True, exclude={'ref', 'ts'}, **kwargs)
+        properties = super().dict(by_alias=True)
         properties.update({'id': str(properties['id'])})
 
         return properties

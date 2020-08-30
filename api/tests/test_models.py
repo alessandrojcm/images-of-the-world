@@ -29,3 +29,21 @@ class TestJourneyModel:
         for seller in jounery.sellers.values():
             assert seller.id
             assert seller.seller_name
+
+    def test_journey_save(self):
+        journey = Journey.create()
+
+        journey = journey.save()
+
+        assert journey.id
+
+        journey.delete()
+
+    def test_get_journey_by_id(self):
+        journey = Journey.create().save()
+        fetch_journey = Journey.get_by_id(journey.id)
+
+        assert journey.id == fetch_journey.id
+        assert journey.sellers.keys() == fetch_journey.sellers.keys()
+
+        journey.delete()
