@@ -2,11 +2,7 @@ from uuid import uuid4
 import pytest
 
 from models.image_seller import ImageSeller
-
-
-@pytest.fixture(scope='module')
-def create_user():
-    return ImageSeller(sellerName='A seller')
+from models.journey import Journey
 
 
 class TestSellerModel:
@@ -25,15 +21,7 @@ class TestSellerModel:
         seller_dict = seller.dict()
 
         assert seller_dict['sellerName']
-        assert seller_dict['collectedImages'] == []
 
-    def test_create_seller(self, create_user):
-        new_user = create_user.save()
-        assert new_user.id
-        new_user.delete()
-
-    def test_user_not_found(self):
-        user = ImageSeller.get_seller_by_id('hello')
 
         assert user is None
 
