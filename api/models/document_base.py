@@ -1,12 +1,12 @@
 from abc import abstractmethod
-from typing import Any, Optional, Union
+from typing import Any, Optional
 from uuid import uuid4
 
-from core.engine import session
 from faunadb import query as q
 from faunadb.objects import Ref
 from pydantic import BaseModel, UUID4
 
+from core.engine import session
 from .utils import to_camel
 
 
@@ -54,7 +54,7 @@ class DocumentBase(BaseModel):
 
         session().query(q.update(self.ref, {"data": {**updated_vals}}))
 
-    def dict(self, **kwargs) -> 'DictStrAny':
+    def dict(self, **kwargs):
         properties = super().dict(by_alias=True, exclude={'ref', 'ts'}, **kwargs)
         properties.update({'id': str(properties['id'])})
 

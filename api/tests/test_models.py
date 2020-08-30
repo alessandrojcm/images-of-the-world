@@ -1,5 +1,4 @@
 from uuid import uuid4
-import pytest
 
 from models.image_seller import ImageSeller
 from models.journey import Journey
@@ -23,13 +22,10 @@ class TestSellerModel:
         assert seller_dict['sellerName']
 
 
-        assert user is None
+class TestJourneyModel:
+    def test_journey_creation(self):
+        jounery = Journey.create()
 
-    def test_user_found(self, create_user):
-        new_user = create_user.save()
-        user = ImageSeller.get_seller_by_id(new_user.id)
-
-        assert user.id == new_user.id
-        assert new_user.id == user.id
-
-        user.delete()
+        for seller in jounery.sellers.values():
+            assert seller.id
+            assert seller.seller_name
