@@ -38,3 +38,17 @@ class TestJourney:
         assert 'ref' not in journey.json().keys()
         assert 'ts' not in journey.json().keys()
         assert journey.status_code == 404
+
+    def test_journey_get_seller(self, app):
+        journey = app.post('/api/journey/create', json={
+            'name': 'auser',
+            'lastName': 'auser',
+            'email': 'user@auser.com'
+        })
+        seller = list(journey.json().get('sellers').values())[0]
+
+        seller = app.get(
+            '/api/journey/{j_id}/sellers/{s_id}'.format(j_id=journey.json().get('id'), s_id=seller.get('id'))
+        )
+
+        assert seller is not None
