@@ -27,7 +27,8 @@ class Journey(DocumentBase):
         sellers = {}
 
         for _ in range(config.SELLER_MAX_COUNT):
-            sellers.setdefault(str(uuid4()), ImageSeller(id=str(uuid4()), sellerName=person.full_name()))
+            seller_id = uuid4()
+            sellers.setdefault(str(seller_id), ImageSeller(id=str(seller_id), sellerName=person.full_name()))
 
         return Journey(sellers=sellers, winner=None)
 
