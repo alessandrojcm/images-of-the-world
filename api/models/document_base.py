@@ -50,7 +50,7 @@ class DocumentBase(BaseModel):
         pass
 
     def update(self):
-        updated_vals = self.dict(exclude={"ref", "ts"})
+        updated_vals = self.dict()
 
         session().query(q.update(self.ref, {"data": {**updated_vals}}))
 
