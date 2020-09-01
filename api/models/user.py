@@ -13,4 +13,4 @@ class User(BaseModel):
         allow_population_by_field_name = True
 
     def dict(self, **kwargs):
-        return super().dict(by_alias=True, **kwargs)
+        return super().dict(by_alias=True, **{k: v for k, v in kwargs.items() if k != 'by_alias'})

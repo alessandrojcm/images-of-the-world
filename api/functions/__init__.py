@@ -1,1 +1,1 @@
-from .sellers import app
+from .journey import app
