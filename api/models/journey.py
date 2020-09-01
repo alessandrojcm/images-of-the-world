@@ -49,10 +49,43 @@ class Journey(DocumentBase):
         journey = result['data'][0]
         sellers = {k: ImageSeller(**v) for k, v in journey['data']['sellers'].items()}
         winner = ImageSeller(**journey['data']['winner']) if journey['data'].get('winner', None) else None
+        user = User(**journey['data'].get('user')) if journey['data'].get('user') else None
 
         return Journey(
             id=id,
             ref=journey['ref'],
             sellers=sellers,
-            winner=winner
+            winner=winner,
+            user=user
         )
+
+    @classmethod
+    def get_active_journeys_by_email(cls, email: str):
+        result = session().query(
+            q.map_(
+                q.lambda_('journey', q.get(q.var('journey'))),
+                q.paginate(
+                    q.match(q.index('get-active-journeys'), str(email))
+                )
+            )
+        )
+
+        if len(result["data"]) == 0:
+            return []
+
+        active_journeys = []
+
+        for journey in result.get('data'):
+            sellers = {k: ImageSeller(**v) for k, v in journey['data']['sellers'].items()}
+            winner = ImageSeller(**journey['data']['winner']) if journey['data'].get('winner', None) else None
+            user = User(**journey['data'].get('user')) if journey['data'].get('user') else None
+
+            active_journeys.append(Journey(
+                id=id,
+                ref=journey['ref'],
+                sellers=sellers,
+                winner=winner,
+                user=user
+            ))
+
+        return active_journeys

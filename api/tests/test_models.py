@@ -47,3 +47,9 @@ class TestJourneyModel:
         assert journey.sellers.keys() == fetch_journey.sellers.keys()
 
         journey.delete()
+
+    def test_get_active_journeys(self):
+        pass
+        journeys = Journey.get_active_journeys_by_email('user@auser.com')
+
+        assert len(journeys) > 0
