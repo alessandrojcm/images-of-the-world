@@ -7,6 +7,7 @@ from pydantic import UUID4
 from core import session, config
 from .document_base import DocumentBase, q
 from .image_seller import ImageSeller
+from .user import User
 
 person = Person('en')
 
@@ -16,6 +17,7 @@ class Journey(DocumentBase):
     _collection_name = 'journeys'
     winner: Optional[ImageSeller]
     sellers: Dict[str, ImageSeller] = {}
+    user: Optional[User]
 
     def delete(self):
         session().query(q.delete(self.ref))
