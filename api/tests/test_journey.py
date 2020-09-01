@@ -11,7 +11,7 @@ class TestJourney:
         return app
 
     def test_journey_creation(self, app):
-        response = app.post('/api/journey/create', json={
+        response = app.post('/api/journey', json={
             'name': 'auser',
             'lastName': 'auser',
             'email': 'user@auser.com'
@@ -27,7 +27,7 @@ class TestJourney:
         assert response.json().get('user').get('name') == 'auser'
 
     def test_journey_by_id(self, app):
-        new_journey = app.post('/api/journey/create')
+        new_journey = app.post('/api/journey')
         fetched_journey = app.get('/api/journey/{id}'.format(id=new_journey.json()))
 
         assert new_journey.json().get('id') == fetched_journey.json().get('id')
@@ -40,7 +40,7 @@ class TestJourney:
         assert journey.status_code == 404
 
     def test_journey_get_seller(self, app):
-        journey = app.post('/api/journey/create', json={
+        journey = app.post('/api/journey', json={
             'name': 'auser',
             'lastName': 'auser',
             'email': 'user@auser.com'
@@ -54,7 +54,7 @@ class TestJourney:
         assert seller.status_code == 200
 
     def test_post_winner(self, app):
-        journey = app.post('/api/journey/create', json={
+        journey = app.post('/api/journey', json={
             'name': 'auser',
             'lastName': 'auser',
             'email': 'user@auser.com'
@@ -67,7 +67,7 @@ class TestJourney:
         assert winner.status_code == 201
 
     def test_patch_seller(self, app):
-        journey = app.post('/api/journey/create', json={
+        journey = app.post('/api/journey', json={
             'name': 'auser',
             'lastName': 'auser',
             'email': 'user@auser.com'

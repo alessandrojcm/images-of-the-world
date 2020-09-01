@@ -1,5 +1,3 @@
-from functools import reduce
-
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 
@@ -8,9 +6,7 @@ from models import Journey, User, ImageSellerPatch
 app = FastAPI()
 
 
-# TODO: remove the create
-# TODO: patch for sellers
-@app.post('/api/{tag}/create')
+@app.post('/api/{tag}')
 def create_journey(user: User):
     journey = Journey.create()
     journey.user = user
