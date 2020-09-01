@@ -3,7 +3,7 @@ from functools import reduce
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 
-from models import Journey, User
+from models import Journey, User, ImageSellerPatch
 
 app = FastAPI()
 
@@ -20,6 +20,23 @@ def create_journey(user: User):
         raise HTTPException(status_code=500)
 
     return JSONResponse(new_journey.dict(), status_code=201)
+
+
+@app.patch('/api/{tag}/{id}')
+def patch_journey(id: str, seller: ImageSellerPatch):
+    journey = Journey.get_by_id(id=id)
+
+    if journey is None:
+        raise HTTPException(status_code=404, detail='Journey not found.')
+
+    if str(seller.id) not in journey.sellers.keys():
+        raise HTTPException(status_code=404, detail='That seller does not belong to this journey.')
+
+    journey.sellers.get(str(seller.id)).points = seller.points
+    journey.sellers.get(str(seller.id)).collected_images = seller.collected_images
+    journey.update()
+
+    return JSONResponse(journey.dict())
 
 
 @app.get('/api/{tag}/{id}')

@@ -1,14 +1,14 @@
-from typing import List, Union
+from typing import List
 
-from pydantic import BaseModel, UUID4
+from pydantic import BaseModel, UUID4, Field
 
 from .utils import to_camel
 
 
-class ImageSeller(BaseModel):
+# For the PATCH HTTP Verb
+class ImageSellerPatch(BaseModel):
     id: UUID4
-    seller_name: str
-    points: int = 0
+    points: int = Field(default=0, ge=0)
     collected_images: List[str] = []
 
     class Config:
@@ -17,6 +17,10 @@ class ImageSeller(BaseModel):
 
     def dict(self, **kwargs):
         properties = super().dict(by_alias=True, **{k: v for k, v in kwargs.items() if k != 'by_alias'})
-        properties.update({'id': str(properties['id'])})
+        properties.update({'id': str(properties.get('id'))})
 
         return properties
+
+
+class ImageSeller(ImageSellerPatch):
+    seller_name: str

@@ -65,3 +65,23 @@ class TestJourney:
             '/api/journey/{j_id}/winner/{s_id}'.format(j_id=journey.json().get('id'), s_id=seller.get('id'))
         )
         assert winner.status_code == 201
+
+    def test_patch_seller(self, app):
+        journey = app.post('/api/journey/create', json={
+            'name': 'auser',
+            'lastName': 'auser',
+            'email': 'user@auser.com'
+        })
+        seller = list(journey.json().get('sellers').values())[0]
+
+        patched_journey = app.patch('/api/journey/{id}'.format(id=journey.json().get('id')), json={
+            'id': seller.get('id'),
+            'points': 1,
+            'collectedImages': ['hi']
+        })
+
+        assert patched_journey.status_code == 200
+
+        patched_seller = list(patched_journey.json().get('sellers').values())[0]
+        assert patched_seller.get('points') == 1
+        assert patched_seller.get('collectedImages') == ['hi']
