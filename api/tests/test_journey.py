@@ -18,7 +18,7 @@ class TestJourney:
         })
 
         assert response.status_code == 201
-        assert response.json().get('id')
+        assert response.json().get('id') is not None
         assert 'ref' not in response.json().keys()
         assert 'ts' not in response.json().keys()
 
@@ -51,4 +51,17 @@ class TestJourney:
             '/api/journey/{j_id}/sellers/{s_id}'.format(j_id=journey.json().get('id'), s_id=seller.get('id'))
         )
 
-        assert seller is not None
+        assert seller.status_code == 200
+
+    def test_post_winner(self, app):
+        journey = app.post('/api/journey/create', json={
+            'name': 'auser',
+            'lastName': 'auser',
+            'email': 'user@auser.com'
+        })
+        seller = list(journey.json().get('sellers').values())[0]
+
+        winner = app.post(
+            '/api/journey/{j_id}/winner/{s_id}'.format(j_id=journey.json().get('id'), s_id=seller.get('id'))
+        )
+        assert winner.status_code == 201
