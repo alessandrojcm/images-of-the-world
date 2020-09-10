@@ -11,6 +11,8 @@ from .user import User
 
 person = Person('en')
 
+POINTS_TO_WIN = 20
+
 
 # TODO: List journeys for leaderboard
 class Journey(DocumentBase):
@@ -21,6 +23,25 @@ class Journey(DocumentBase):
 
     def delete(self):
         session().query(q.delete(self.ref))
+
+    def update(self):
+        has_winner = any(map(lambda s: s.points >= POINTS_TO_WIN, self.sellers.values()))
+        # No winner, just update
+        if not has_winner:
+            return super().update()
+
+        # There's a winner, set it
+        for seller in self.sellers.values():
+            if seller.points >= POINTS_TO_WIN:
+                self.winner = seller
+                break
+            continue
+        for seller in self.sellers.values():
+            if seller.id == self.winner.id:
+                continue
+            self.winner.collected_images.extend(seller.collected_images)
+        self.winner.points = sum([s.points for s in list(self.sellers.values())])
+        super().update()
 
     @classmethod
     def create(cls):

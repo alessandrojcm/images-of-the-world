@@ -45,27 +45,16 @@ def get_journey(id: str):
     return JSONResponse(journey.dict())
 
 
-@app.post('/api/{tag}/{journey_id}/winner/{seller_id}')
-def post_winner(journey_id: str, seller_id: str):
-    journey = Journey.get_by_id(journey_id)
+@app.get('/api/{tag}/{id}/winner')
+def get_journey_winner(id: str):
+    journey = Journey.get_by_id(id=id)
 
     if journey is None:
         raise HTTPException(status_code=404, detail='Journey not found.')
-    if journey.winner is not None:
-        raise HTTPException(status_code=400, detail='That journey has already ended.')
-    if seller_id not in journey.sellers.keys():
-        raise HTTPException(status_code=404, detail='That seller does not belong to this journey.')
+    if journey.winner is None:
+        raise HTTPException(status_code=404, detail='Journey has no winner.')
 
-    journey.winner = journey.sellers.get(seller_id)
-    journey.winner.points = sum([s.points for s in list(journey.sellers.values())])
-
-    for seller in journey.sellers.values():
-        if seller.id == journey.winner.id:
-            continue
-        journey.winner.collected_images.extend(seller.collected_images)
-
-    journey.update()
-    return JSONResponse(journey.dict(), status_code=201)
+    return JSONResponse(journey.winner.dict())
 
 
 @app.get('/api/{tag}/{journey_id}/sellers/{seller_id}')

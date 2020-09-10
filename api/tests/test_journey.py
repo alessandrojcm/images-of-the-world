@@ -1,5 +1,7 @@
 import pytest
 
+from models import Journey
+
 
 class TestJourney:
     @pytest.fixture(scope='module')
@@ -10,12 +12,16 @@ class TestJourney:
 
         return app
 
-    def test_journey_creation(self, app):
-        response = app.post('/api/journey', json={
+    @pytest.fixture(scope='module')
+    def create_journey(self, app):
+        return app.post('/api/journey', json={
             'name': 'auser',
             'lastName': 'auser',
             'email': 'user@auser.com'
         })
+
+    def test_journey_creation(self, create_journey):
+        response = create_journey
 
         assert response.status_code == 201
         assert response.json().get('id') is not None
@@ -39,12 +45,8 @@ class TestJourney:
         assert 'ts' not in journey.json().keys()
         assert journey.status_code == 404
 
-    def test_journey_get_seller(self, app):
-        journey = app.post('/api/journey', json={
-            'name': 'auser',
-            'lastName': 'auser',
-            'email': 'user@auser.com'
-        })
+    def test_journey_get_seller(self, app, create_journey):
+        journey = create_journey
         seller = list(journey.json().get('sellers').values())[0]
 
         seller = app.get(
@@ -53,25 +55,8 @@ class TestJourney:
 
         assert seller.status_code == 200
 
-    def test_post_winner(self, app):
-        journey = app.post('/api/journey', json={
-            'name': 'auser',
-            'lastName': 'auser',
-            'email': 'user@auser.com'
-        })
-        seller = list(journey.json().get('sellers').values())[0]
-
-        winner = app.post(
-            '/api/journey/{j_id}/winner/{s_id}'.format(j_id=journey.json().get('id'), s_id=seller.get('id'))
-        )
-        assert winner.status_code == 201
-
-    def test_patch_seller(self, app):
-        journey = app.post('/api/journey', json={
-            'name': 'auser',
-            'lastName': 'auser',
-            'email': 'user@auser.com'
-        })
+    def test_patch_seller(self, app, create_journey):
+        journey = create_journey
         seller = list(journey.json().get('sellers').values())[0]
 
         patched_journey = app.patch('/api/journey/{id}'.format(id=journey.json().get('id')), json={
@@ -85,3 +70,44 @@ class TestJourney:
         patched_seller = list(patched_journey.json().get('sellers').values())[0]
         assert patched_seller.get('points') == 1
         assert patched_seller.get('collectedImages') == ['hi']
+
+    def test_winner_set(self, app, create_journey):
+        journey = create_journey
+        seller = list(journey.json().get('sellers').values())[0]
+
+        patched_journey = app.patch('/api/journey/{id}'.format(id=journey.json().get('id')), json={
+            'id': seller.get('id'),
+            'points': 35,
+            'collectedImages': ['hi']
+        })
+
+        assert patched_journey.status_code == 200
+        assert patched_journey.json().get('winner') is not None
+        assert patched_journey.json().get('winner').get('id') == seller.get('id')
+        assert patched_journey.json().get('winner').get('points') == 35
+
+    def test_journey_winner(self, create_journey, app):
+        journey = create_journey
+        seller = list(journey.json().get('sellers').values())[0]
+
+        patched_journey = app.patch('/api/journey/{id}'.format(id=journey.json().get('id')), json={
+            'id': seller.get('id'),
+            'points': 35,
+            'collectedImages': ['hi']
+        })
+
+        winner = app.get('/api/journey/{id}/winner'.format(id=patched_journey.json().get('id')))
+
+        assert winner.json().get('id') == patched_journey.json().get('winner').get('id')
+
+    def test_not_allow_negative_points(self, create_journey, app):
+        journey = create_journey
+        seller = list(journey.json().get('sellers').values())[0]
+
+        patched_journey = app.patch('/api/journey/{id}'.format(id=journey.json().get('id')), json={
+            'id': seller.get('id'),
+            'points': -1,
+            'collectedImages': ['hi']
+        })
+
+        assert patched_journey.status_code != 200
