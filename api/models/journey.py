@@ -2,12 +2,13 @@ from typing import Optional, Dict
 from uuid import uuid4
 
 from mimesis import Person
-from pydantic import UUID4
+from pydantic import UUID4, BaseModel
 
 from core import session, config
 from .document_base import DocumentBase, q
 from .image_seller import ImageSeller
 from .user import User
+from .utils import to_camel
 
 person = Person('en')
 
@@ -110,3 +111,14 @@ class Journey(DocumentBase):
             ))
 
         return active_journeys
+
+
+class JourneyDTO(BaseModel):
+    id: Optional[UUID4]
+    winner: Optional[ImageSeller]
+    sellers: Dict[str, ImageSeller] = {}
+    user: Optional[User]
+
+    class Config:
+        alias_generator = to_camel
+        allow_population_by_field_name = True
