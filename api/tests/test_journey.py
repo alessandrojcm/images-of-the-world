@@ -12,7 +12,7 @@ class TestJourney:
 
         return app
 
-    @pytest.fixture(scope='module')
+    @pytest.fixture(scope='function')
     def create_journey(self, app):
         return app.post('/api/journey', json={
             'name': 'auser',
@@ -70,6 +70,24 @@ class TestJourney:
         patched_seller = list(patched_journey.json().get('sellers').values())[0]
         assert patched_seller.get('points') == 1
         assert patched_seller.get('collectedImages') == ['hi']
+
+    def test_dont_allow_patch_if_journey_ended(self, create_journey, app):
+        journey = create_journey
+        seller = list(journey.json().get('sellers').values())[0]
+
+        app.patch('/api/journey/{id}'.format(id=journey.json().get('id')), json={
+            'id': seller.get('id'),
+            'points': 35,
+            'collectedImages': ['hi']
+        })
+
+        patched_journey = app.patch('/api/journey/{id}'.format(id=journey.json().get('id')), json={
+            'id': seller.get('id'),
+            'points': 35,
+            'collectedImages': ['hi']
+        })
+
+        assert patched_journey.status_code == 401
 
     def test_winner_set(self, app, create_journey):
         journey = create_journey

@@ -25,6 +25,9 @@ def patch_journey(id: str, seller: ImageSellerPatch):
     if journey is None:
         raise HTTPException(status_code=404, detail='Journey not found.')
 
+    if journey.winner is not None:
+        raise HTTPException(status_code=401, detail='This journey has already ended.')
+
     if str(seller.id) not in journey.sellers.keys():
         raise HTTPException(status_code=404, detail='That seller does not belong to this journey.')
 
