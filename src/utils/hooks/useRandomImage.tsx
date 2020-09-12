@@ -19,9 +19,9 @@ const useRandomImage = (searchTerm: string | null, id?: string, onError?: Callab
     const { data, isLoading } = useQuery<IPhoto, [string, { query: string | null }]>([key, { query: searchTerm }], (_: string, { query }) => unplash.searchRandomPhoto(query as string).toPromise(), {
         ...commonQueryOptions,
         enabled: searchTerm,
-        onError: () => {
+        onError: (err) => {
             if (onError) {
-                onError();
+                onError(err);
             }
         },
     });

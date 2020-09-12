@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 
 import { Redirect, useHistory } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+import ErrorComponent from '../../components/ErrorComponent';
 import Container from './styledComponents';
 import ImageOfTheWorld from '../../components/ImageOfTheWorld';
 import SearchBar from '../../components/SearchBar';
@@ -29,9 +31,11 @@ const Start = () => {
     return (
         <Container>
             <SearchBar disabled={Object.keys(sellers ?? {}).length === 0 || Boolean(term)} onSubmit={setSearchTerm} />
-            {Object.values(sellers ?? {}).map((seller) => (
-                <ImageOfTheWorld seller={seller} key={seller.id} />
-            ))}
+            <ErrorBoundary FallbackComponent={ErrorComponent} onReset={() => setSearchTerm(null)}>
+                {Object.values(sellers ?? {}).map((seller) => (
+                    <ImageOfTheWorld seller={seller} key={seller.id} />
+                ))}
+            </ErrorBoundary>
             <JourneyDisplay />
         </Container>
     );

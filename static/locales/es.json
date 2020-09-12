@@ -20,5 +20,7 @@
     "journeyWinner": "{{sellerName}} ha culminado el viaje, con un total de {{points}} puntos.",
     "returnToHome": "Vuelve al inicio.",
     "loadingImage": "Cargando imagen.",
-    "selectImage": "Selectiona una imagen."
+    "selectImage": "Selectiona una imagen.",
+    "error": "Uuups, eso fue inesperado.",
+    "tryAgain":"Intenta de nuevo."
 }

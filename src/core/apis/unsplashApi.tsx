@@ -1,6 +1,5 @@
 import ky from 'ky-universal';
 import { from, Observable } from 'rxjs';
-
 import { IPhoto } from '~types/models';
 import { IUnplashResponsiveParameters } from '~types/models/IUnplashResponsiveParameters';
 

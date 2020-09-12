@@ -1,10 +1,12 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import { QueryConfig, useQuery, useMutation, queryCache } from 'react-query';
+import { ErrorBoundary } from 'react-error-boundary';
+import { queryCache, QueryConfig, useMutation, useQuery } from 'react-query';
 import { useRouteMatch } from 'react-router-dom';
 
 import { IImageSeller, IJourneyDispatchers, IJourneyState } from '~types/models';
 import { addPointsToSeller, getJourneyState } from '../../core/apis/iotwApi';
+import ErrorComponent from '../../components/ErrorComponent';
 
 export const POINTS_PER_IMAGE = 3;
 export const POINTS_TO_WIN = 20;
@@ -33,7 +35,7 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
     });
 
     // TODO: Error handling for sellers fetch
-    const { refetch, data: journeyState } = useQuery(journeyId, (id: string) => getJourneyState(id).toPromise(), {
+    const { refetch, data: journeyState, error } = useQuery(journeyId, (id: string) => getJourneyState(id).toPromise(), {
         ...commonQueryOptions,
         refetchInterval: Infinity,
         refetchIntervalInBackground: false,
@@ -77,9 +79,11 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
     );
 
     return (
-        <JourneyState.Provider value={state}>
-            <JourneyDispatchers.Provider value={dispatchers}>{children}</JourneyDispatchers.Provider>
-        </JourneyState.Provider>
+        <ErrorBoundary FallbackComponent={ErrorComponent} onReset={dispatchers.reset} resetKeys={[error]}>
+            <JourneyState.Provider value={state}>
+                <JourneyDispatchers.Provider value={dispatchers}>{children}</JourneyDispatchers.Provider>
+            </JourneyState.Provider>
+        </ErrorBoundary>
     );
 };
 

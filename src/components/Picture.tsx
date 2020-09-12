@@ -64,12 +64,12 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
         }
     }, [placeholderImage, image]);
 
-    if (isLoading || src === null) {
+    if (isLoading && src === null) {
         return (
             <Figure className={className}>
                 <ContentLoader
                     animate={isLoading}
-                    height="40vh"
+                    height="39vh"
                     width="100%"
                     foregroundColor={tailwind.theme.colors.black}
                     backgroundColor={tailwind.theme.colors.black}
