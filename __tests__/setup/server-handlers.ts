@@ -15,7 +15,7 @@ const sellers: IImageSeller[] = Array.from({ length: 3 }).map((_, i) => ({
     collectedImages: [],
 }));
 
-const getSellersDict = (s: IImageSeller[]) =>
+const getSellersDict = (s: IImageSeller[]): Record<string, any> =>
     // @ts-ignore
     s.reduce(
         (prv: Pick<IJourneyState, 'sellers'>, curr: IImageSeller) => ({

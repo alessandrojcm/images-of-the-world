@@ -29,8 +29,8 @@ const Start = () => {
     // TODO: ImageOfTheWorld should fetch its seller by id
     return (
         <Container>
-            <SearchBar disabled={Object.keys(sellers).length === 0 || Boolean(term)} onSubmit={searchTerm} />
-            {Object.values(sellers).map((seller) => (
+            <SearchBar disabled={Object.keys(sellers ?? {}).length === 0 || Boolean(term)} onSubmit={searchTerm} />
+            {Object.values(sellers ?? {}).map((seller) => (
                 <ImageOfTheWorld seller={seller} key={seller.id} />
             ))}
             <JourneyDisplay />
