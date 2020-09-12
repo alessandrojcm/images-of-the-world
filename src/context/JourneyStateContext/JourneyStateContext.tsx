@@ -61,9 +61,10 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
                 }).then((res) => {
                     queryCache.setQueryData([journeyId], res);
                     queryCache.invalidateQueries(sellerId);
+                    setSearchTerm(null);
                 });
             },
-            [journeyState?.sellers]
+            [journeyState?.sellers, setSearchTerm]
         ),
         searchTerm: useCallback((term: string) => setSearchTerm(term), [setSearchTerm]),
     };
@@ -73,7 +74,7 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
             ...journeyState,
             searchTerm,
         }),
-        [journeyState]
+        [journeyState, searchTerm]
     );
 
     return (
