@@ -6,8 +6,24 @@ import MainLayout from '../components/Layout';
 import Home from './Home';
 import Registration from './Registration';
 
-import CurrentUserContext from '../context/CurrentUserContext/CurrentUserContext';
+import CurrentUserContext, { useCurrentUser } from '../context/CurrentUserContext/CurrentUserContext';
 import JourneyContext from '../context/JourneyStateContext';
+
+const Journey = () => {
+    const { journeyId } = useCurrentUser();
+    return (
+        <JourneyContext journeyId={journeyId}>
+            <Switch>
+                <Route path="/journey/start">
+                    <Start />
+                </Route>
+                <Route path="/journey/finish">
+                    <Finish />
+                </Route>
+            </Switch>
+        </JourneyContext>
+    );
+};
 
 const Router: React.FC = () => {
     return (
@@ -22,16 +38,7 @@ const Router: React.FC = () => {
                             <Registration />
                         </Route>
                         {/* TODO: lazy loading to this */}
-                        <JourneyContext>
-                            <Switch>
-                                <Route path="/journey/start">
-                                    <Start />
-                                </Route>
-                                <Route path="/journey/finish">
-                                    <Finish />
-                                </Route>
-                            </Switch>
-                        </JourneyContext>
+                        <Journey />
                     </CurrentUserContext>
                 </Switch>
             </MainLayout>

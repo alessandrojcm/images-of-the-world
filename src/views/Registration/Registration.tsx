@@ -16,7 +16,7 @@ import { Title } from '../../components/Typography';
 
 const Registration = () => {
     const { t } = useTranslation();
-    const { userLoggedIn } = useCurrentUser();
+    const { userLoggedIn, loading } = useCurrentUser();
     const { setUser } = useCurrentUserDispatchers();
     const { push } = useHistory();
 
@@ -64,7 +64,7 @@ const Registration = () => {
                         <Input type="email" ref={register} inputName="email" placeholder="john@doe.com" label={t('email')} error={errors.email} required />
                     </Control>
                     <ButtonsContainer>
-                        <Button disabled={isSubmitting || !isValid} type="submit">
+                        <Button disabled={isSubmitting || !isValid || loading} type="submit">
                             {t('start')}
                         </Button>
                     </ButtonsContainer>
