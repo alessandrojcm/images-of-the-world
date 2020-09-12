@@ -3,7 +3,7 @@ import React from 'react';
 import tw, { css, styled } from 'twin.macro';
 
 import { useTranslation } from 'react-i18next';
-import Home from '../../../static/icons/home.svg';
+import { GoHome } from 'react-icons/go';
 import TranslationSelector from './TranslationSelector';
 
 const NavbarStyle = tw.nav`
@@ -22,8 +22,8 @@ const NavbarStyle = tw.nav`
     font-subtitle
 `;
 
-const HomeIcon = styled(Home)`
-    ${tw`mr-4 cursor-pointer`}
+const HomeIcon = styled(GoHome)`
+    ${tw`mr-4 cursor-pointer self-center`}
 `;
 
 const Navbar = () => {

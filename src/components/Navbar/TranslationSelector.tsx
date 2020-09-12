@@ -1,7 +1,6 @@
 import React, { Key, useCallback, useMemo } from 'react';
 
 import tw, { styled } from 'twin.macro';
-import settings from 'react-useanimations/lib/settings2';
 
 import { Dropdown, Item } from '../Dropdown';
 
@@ -27,7 +26,7 @@ const TranslationSelector = () => {
     );
 
     return (
-        <Dropdown button={settings} strokeColor={tailwind.theme.colors.orange['200']} onSelect={changeSelectedLanguage} label="languages">
+        <Dropdown strokeColor={tailwind.theme.colors.orange['200']} onSelect={changeSelectedLanguage} label="languages">
             <Item key="en" textValue="English">
                 <Language selectedLanguage={currentLanguage} language="en">
                     English
