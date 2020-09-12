@@ -1,5 +1,6 @@
 import ky from 'ky-universal';
-import { from } from 'rxjs';
+import { from, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { IImageSeller, IJourneyCreation } from '~types/models';
 import { ICurrentUserContext } from '~types/props';
 
@@ -27,5 +28,16 @@ const addPointsToSeller = (journeyId: string, seller: Omit<IImageSeller, 'seller
 
 const getJourneyState = (journeyId: string) => from(api.get(`journey/${journeyId}`).json() as Promise<IJourneyCreation>);
 
-// eslint-disable-next-line
-export { getJourneyState, createJourney, addPointsToSeller };
+const getJourneyWinner = (journeyId: string) =>
+    from(api.get(`journey/${journeyId}/winner`).json() as Promise<IImageSeller>).pipe(
+        catchError((err: Response) => {
+            if (err.status === 400) {
+                return of(undefined);
+            }
+            return throwError(err);
+        })
+    );
+
+const getJourneySeller = (journeyId: string, sellerId: string) => from(api.get(`journey/${journeyId}/sellers/${sellerId}`).json() as Promise<IImageSeller>);
+
+export { getJourneyState, createJourney, addPointsToSeller, getJourneySeller, getJourneyWinner };

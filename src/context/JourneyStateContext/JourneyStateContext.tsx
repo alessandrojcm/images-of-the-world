@@ -28,18 +28,13 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
     // TODO: change this
     const matches = useRouteMatch('/journey/start');
 
-    const [mutate, { reset }] = useMutation(
-        (seller: Omit<IImageSeller, 'sellerName'>) => {
-            return addPointsToSeller(journeyId, seller).toPromise();
-        },
-        {
-            onSuccess: (newData) => queryCache.setQueryData([journeyId], newData),
-        }
-    );
+    const [mutate, { reset }] = useMutation((seller: Omit<IImageSeller, 'sellerName'>) => {
+        return addPointsToSeller(journeyId, seller).toPromise();
+    });
 
     // TODO: Error handling for sellers fetch
     // TODO: Handle refetch, currently there is none because it will overwrite the client-side
-    const { refetch, data } = useQuery(journeyId, (id: string) => getJourneyState(id).toPromise(), {
+    const { refetch, data: journeyState } = useQuery(journeyId, (id: string) => getJourneyState(id).toPromise(), {
         ...commonQueryOptions,
         refetchInterval: Infinity,
         refetchIntervalInBackground: false,
@@ -55,27 +50,30 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
         }, []),
         imageChosen: useCallback(
             (sellerId, imageId: string) => {
-                if (!data?.sellers) {
+                if (!journeyState?.sellers) {
                     return;
                 }
-                const { collectedImages, points } = data.sellers[sellerId] as IImageSeller;
+                const { collectedImages, points } = journeyState.sellers[sellerId] as IImageSeller;
                 mutate({
                     id: sellerId,
                     points: points + POINTS_PER_IMAGE,
                     collectedImages: [...collectedImages, imageId],
+                }).then((res) => {
+                    queryCache.setQueryData([journeyId], res);
+                    queryCache.invalidateQueries(sellerId);
                 });
             },
-            [data?.sellers]
+            [journeyState?.sellers]
         ),
         searchTerm: useCallback((term: string) => setSearchTerm(term), [setSearchTerm]),
     };
 
     const state: IJourneyState = useMemo(
         () => ({
-            ...data,
+            ...journeyState,
             searchTerm,
         }),
-        [data]
+        [journeyState]
     );
 
     return (
