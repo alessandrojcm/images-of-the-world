@@ -23,6 +23,9 @@ const searchRandomPhoto = (term: string): Observable<IPhoto> =>
                 // @ts-ignore
                 searchParams: {
                     query: term,
+                    // The browser caches the response since the 3 sellers
+                    // query the same URL, so we add a random param to avoid this
+                    sig: Math.random(),
                 },
             })
             .json() as Promise<IPhoto>
