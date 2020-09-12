@@ -17,7 +17,6 @@ const Finish: React.FC = () => {
     const { reset } = useJourneyDispatchers();
     const { push } = useHistory();
 
-    // TODO: save winner and reset state
     if (!userLoggedIn) {
         return <Redirect to="/journey" />;
     }

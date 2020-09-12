@@ -11,7 +11,6 @@ import { getJourneySeller } from '../../core/apis/iotwApi';
 import useRandomImage from '../../utils/hooks/useRandomImage';
 import Picture from '../Picture';
 
-// TODO: figure placeholder for when searchTerm is null
 const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (props) => {
     const { seller: initialCache, className = '' } = props;
 

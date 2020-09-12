@@ -7,6 +7,7 @@ import { IImageSeller, IJourneyDispatchers, IJourneyState } from '~types/models'
 import { addPointsToSeller, getJourneyState } from '../../core/apis/iotwApi';
 
 export const POINTS_PER_IMAGE = 3;
+export const POINTS_TO_WIN = 20;
 
 const commonQueryOptions: QueryConfig<any> = {
     retry: 5,
@@ -25,7 +26,6 @@ const JourneyDispatchers = createContext<IJourneyDispatchers | null>(null);
 const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
     const { children, journeyId } = props;
     const [searchTerm, setSearchTerm] = useState<string | null>(null);
-    // TODO: change this
     const matches = useRouteMatch('/journey/start');
 
     const [mutate, { reset }] = useMutation((seller: Omit<IImageSeller, 'sellerName'>) => {
@@ -33,7 +33,6 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
     });
 
     // TODO: Error handling for sellers fetch
-    // TODO: Handle refetch, currently there is none because it will overwrite the client-side
     const { refetch, data: journeyState } = useQuery(journeyId, (id: string) => getJourneyState(id).toPromise(), {
         ...commonQueryOptions,
         refetchInterval: Infinity,

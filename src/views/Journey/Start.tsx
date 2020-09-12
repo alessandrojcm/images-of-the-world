@@ -26,7 +26,6 @@ const Start = () => {
         return <Redirect to="/journey" />;
     }
 
-    // TODO: ImageOfTheWorld should fetch its seller by id
     return (
         <Container>
             <SearchBar disabled={Object.keys(sellers ?? {}).length === 0 || Boolean(term)} onSubmit={setSearchTerm} />

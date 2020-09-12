@@ -3,13 +3,13 @@ import { useMeter } from '@react-aria/meter';
 import tw, { css } from 'twin.macro';
 
 import { IImageSeller } from '~types/models';
+import { POINTS_TO_WIN } from '../../context/JourneyStateContext/JourneyStateContext';
 
 const Meter = tw.div`
     w-full
     px-4
 `;
 
-// TODO: delete magic constant
 const SellerMeter: React.FC<{ seller: IImageSeller }> = (props) => {
     const { seller } = props;
 
@@ -20,8 +20,8 @@ const SellerMeter: React.FC<{ seller: IImageSeller }> = (props) => {
         minValue: 0,
         maxValue: 20,
     });
-    const percentage = seller.points / 20;
-    const barWidth = seller.points >= 20 ? '100%' : `${Math.round(percentage * 100)}%`;
+    const percentage = seller.points / POINTS_TO_WIN;
+    const barWidth = seller.points >= POINTS_TO_WIN ? '100%' : `${Math.round(percentage * 100)}%`;
 
     return (
         <Meter {...meterProps}>
