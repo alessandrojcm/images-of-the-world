@@ -32,7 +32,7 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
 
     const queryKey = useId();
 
-    const { data } = useQuery([`image-url-${queryKey}`, { photoId: initialPhoto?.id ?? photoId }], getRawUrl, {
+    const { data, isLoading: rawLoading } = useQuery([`image-url-${queryKey}`, { photoId: initialPhoto?.id ?? photoId }], getRawUrl, {
         ...commonQueryOptions,
         enabled: photoId,
         ...(initialPhoto &&
@@ -46,13 +46,13 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
             }),
     });
 
-    useQuery([`placeholder-image-${queryKey}`, { photoUrl: data?.photoUrl ?? null }], getPlaceHolderImageAsBase64, {
+    const { isLoading: placeholderLoading } = useQuery([`placeholder-image-${queryKey}`, { photoUrl: data?.photoUrl ?? null }], getPlaceHolderImageAsBase64, {
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setPlaceholderImage(url),
     });
 
-    useQuery([`image-${queryKey}`, { photoUrl: data?.photoUrl ?? null, width }], getHighQualityImageAsBase64, {
+    const { isLoading: fullQualityLoading } = useQuery([`image-${queryKey}`, { photoUrl: data?.photoUrl ?? null, width }], getHighQualityImageAsBase64, {
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setImage(url),
@@ -61,6 +61,7 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
     return {
         placeholderImage,
         image,
+        isLoading: [rawLoading, placeholderLoading, fullQualityLoading].some(Boolean),
         ...(data?.alt && { alt: data.alt }),
         ...(data?.author && { author: data.author }),
         ...(data?.authorProfileUrl && { authorProfileUrl: data.authorProfileUrl }),

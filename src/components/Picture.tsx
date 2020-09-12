@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import tw, { css, styled } from 'twin.macro';
 
 import { useTranslation } from 'react-i18next';
+import ContentLoader from 'react-content-loader';
 import useProgressiveImage from '../utils/hooks/useProgressiveImage';
 import { IPhoto } from '~types/models';
+import tailwind from '../../tailwind.config.js';
 
 const imageSrc = (src: string | undefined) => css`
     filter: ${!src ? 'blur(20px);' : ''} ${tw`bg-no-repeat bg-cover`};
@@ -51,7 +53,7 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
     const { id: photoId } = photo ?? { id: null };
 
     const [src, setSrc] = useState<string | null>(null);
-    const { placeholderImage, image, alt, authorProfileUrl, author } = useProgressiveImage(photoId, width, photo);
+    const { placeholderImage, image, alt, authorProfileUrl, author, isLoading } = useProgressiveImage(photoId, width, photo);
 
     useEffect(() => {
         if (!image) {
@@ -60,6 +62,25 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
             setSrc(image);
         }
     }, [placeholderImage, image]);
+
+    if (isLoading || src === null) {
+        return (
+            <Figure className={className}>
+                <ContentLoader
+                    animate={isLoading}
+                    height="40vh"
+                    width="100%"
+                    foregroundColor={tailwind.theme.colors.black}
+                    backgroundColor={tailwind.theme.colors.black}
+                    backgroundOpacity={0.85}
+                    gradientRatio={1}
+                    speed={1.5}
+                    title={isLoading ? t('loadingImage') : t('selectImage')}>
+                    <rect height="50vh" width="100%" />
+                </ContentLoader>
+            </Figure>
+        );
+    }
 
     return (
         <Figure className={className}>

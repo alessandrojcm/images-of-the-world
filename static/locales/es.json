@@ -18,5 +18,7 @@
     "searchImage": "Busca una imagen.",
     "finishTitle": "¡Felicitaciones!",
     "journeyWinner": "{{sellerName}} ha culminado el viaje, con un total de {{points}} puntos.",
-    "returnToHome": "Vuelve al inicio."
+    "returnToHome": "Vuelve al inicio.",
+    "loadingImage": "Cargando imagen.",
+    "selectImage": "Selectiona una imagen."
 }

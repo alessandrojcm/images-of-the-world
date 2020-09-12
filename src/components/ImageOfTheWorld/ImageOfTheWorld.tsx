@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { css } from 'twin.macro';
 import { IImageOfTheWorld } from '~types/models';
 
-import { Details, Loader, Section } from './StyledComponents';
+import { Details, Section } from './StyledComponents';
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
+import { getJourneySeller } from '../../core/apis/iotwApi';
 import useRandomImage from '../../utils/hooks/useRandomImage';
 import Picture from '../Picture';
-import { getJourneySeller } from '../../core/apis/iotwApi';
 
 // TODO: figure placeholder for when searchTerm is null
 const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (props) => {
@@ -32,18 +32,7 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
     // Type inference complaints because seller can be undefined, it actually
     // will never be undefined since we are passing initialCache and the query
     // is not enabled until seller it's defined
-    const { isLoading, photo } = useRandomImage(searchTerm, (seller ?? { id: '' }).id);
-
-    if (isLoading || !photo) {
-        return (
-            <Section className={className}>
-                <Loader />
-                <Details>
-                    <summary>{t('sellerImage', { val: (seller ?? { id: '' }).sellerName })}</summary>
-                </Details>
-            </Section>
-        );
-    }
+    const { photo } = useRandomImage(searchTerm, (seller ?? { id: '' }).id);
 
     return (
         <Section className={className}>

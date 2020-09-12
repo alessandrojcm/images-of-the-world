@@ -4,4 +4,5 @@ export interface IuseProgressiveImage {
     author?: string;
     alt?: string;
     authorProfileUrl?: string;
+    isLoading: boolean;
 }

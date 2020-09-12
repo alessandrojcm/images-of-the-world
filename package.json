@@ -14,7 +14,7 @@
         "build": "parcel build ./src/index.html --public-url '/'",
         "serve:app": "parcel serve ./src/index.html --public-url '/'",
         "serve:locales": "live-server ./static --port=12345 --watch=./static/locales/* --no-browser",
-        "test": "jest --bail",
+        "test": "jest --bail --runInBand",
         "e2e:gui": "cypress open",
         "e2e:gui:serve": "concurrently 'yarn develop' 'yarn e2e:gui'",
         "e2e:cli": "cypress run"
@@ -113,6 +113,7 @@
         "ky-universal": "^0.8.1",
         "mws": "^0.0.1",
         "react": "^16.13.1",
+        "react-content-loader": "^5.1.1",
         "react-dom": "^16.13.1",
         "react-helmet": "^6.1.0",
         "react-hook-form": "^6.2.0",
