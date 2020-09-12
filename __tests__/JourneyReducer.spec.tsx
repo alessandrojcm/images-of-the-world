@@ -31,25 +31,6 @@ describe('Journey reducer test suite', () => {
         expect(state).toEqual(initialState);
     });
 
-    it('Should add points', () => {
-        const state = { ...initialState, sellers: getSellersDict(sellers) };
-
-        const newState = reducer(state, { type: 'IMAGE_CHOSEN', payload: { sellerId: '1', imageId: 'aid' } });
-
-        expect(newState.sellers['1'].points).toBe(3);
-        expect(newState.sellers['1'].collectedImages).toEqual(['aid']);
-    });
-
-    it('Should return winner when threshold is surpassed', () => {
-        const state = { ...initialState, sellers: getSellersDict(sellers) };
-        state.sellers['1'].points = 9999;
-
-        const newState = reducer(state, { type: 'IMAGE_CHOSEN', payload: { sellerId: '1', imageId: 'aid' } });
-
-        expect(newState.winner.id).toBe(newState.sellers['1'].id);
-        expect(newState.sellers['1'].collectedImages).toEqual(['aid']);
-    });
-
     it('Should render search term', () => {
         const state = reducer(initialState, { type: 'SEARCH', payload: 'cat' });
 

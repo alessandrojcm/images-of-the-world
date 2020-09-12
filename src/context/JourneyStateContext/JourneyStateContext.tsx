@@ -1,52 +1,70 @@
 import React, { createContext, useCallback, useContext, useReducer } from 'react';
 
-import { QueryOptions, useQuery } from 'react-query';
-import { useId } from '@react-aria/utils';
+import { QueryConfig, useQuery, useMutation } from 'react-query';
 import { useRouteMatch } from 'react-router-dom';
 
 import { IImageSeller, IJourneyDispatchers, IJourneyState } from '~types/models';
-import reducer, { initialState } from './journeyStateReducer';
-import { getSellers } from '../../core/apis/iotwApi';
+import reducer, { initialState, POINTS_PER_IMAGE } from './journeyStateReducer';
+import { addPointsToSeller, getSellers } from '../../core/apis/iotwApi';
 
-const commonQueryOptions: QueryOptions<any> = {
+const commonQueryOptions: QueryConfig<any> = {
     retry: 5,
-    retryDelay: (retryAttempt) => retryAttempt * 5,
+    retryDelay: (retryAttempt: number) => retryAttempt * 5,
 };
 
 const JourneyState = createContext<IJourneyState>(initialState);
 const JourneyDispatchers = createContext<IJourneyDispatchers | null>(null);
 
 // TODO: error boundary
-const JourneyContext: React.FC = (props) => {
-    const { children } = props;
-    const id = useId();
-    const [state, dispatch] = useReducer(reducer, { ...initialState });
+const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
+    const { children, journeyId } = props;
+    const [state, dispatch] = useReducer(reducer, { ...initialState, id: journeyId });
     // TODO: change this
     const matches = useRouteMatch('/journey/start');
+    const loadSellers = useCallback((sellers) => dispatch({ type: 'ADD_SELLERS', payload: sellers }), [dispatch]);
+
+    const [mutate, { reset }] = useMutation((seller: Omit<IImageSeller, 'sellerName'>) => {
+        return addPointsToSeller(journeyId, seller).toPromise();
+    });
 
     const dispatchers: IJourneyDispatchers = {
-        loadSellers: useCallback((sellers) => dispatch({ type: 'ADD_SELLERS', payload: sellers }), [dispatch]),
-        reset: useCallback(() => dispatch({ type: 'RESET' }), []),
+        loadSellers,
+        reset: useCallback(() => {
+            reset();
+            dispatch({ type: 'RESET' });
+        }, []),
         imageChosen: useCallback(
             (sellerId, imageId: string) => {
-                dispatch({ type: 'IMAGE_CHOSEN', payload: { sellerId, imageId } });
-                dispatch({ type: 'RESET_SEARCH' });
+                const { collectedImages, points } = state.sellers[sellerId] as IImageSeller;
+                mutate({
+                    id: sellerId,
+                    points: points + POINTS_PER_IMAGE,
+                    collectedImages: [...collectedImages, imageId],
+                }).then((res) => {
+                    if (!res) {
+                        return;
+                    }
+                    loadSellers(res.sellers);
+                    dispatch({ type: 'RESET_SEARCH' });
+                    if (res.winner) {
+                        dispatch({ type: 'ADD_WINNER', payload: res.winner });
+                    }
+                });
             },
-            [dispatch]
+            [dispatch, loadSellers, state.sellers]
         ),
         searchTerm: useCallback((term: string) => dispatch({ type: 'SEARCH', payload: term }), [dispatch]),
     };
     // TODO: Error handling for sellers fetch
-    // TODO: Journey key should be get from server side
     // TODO: Handle refetch, currently there is none because it will overwrite the client-side
-    useQuery(id, () => getSellers.toPromise(), {
+    useQuery(journeyId, (id: string) => getSellers(id).toPromise(), {
         ...commonQueryOptions,
         refetchInterval: Infinity,
         refetchIntervalInBackground: false,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
-        enabled: Boolean(matches) || Object.keys(state.sellers).length > 0,
-        onSuccess: (res: IImageSeller[]) => dispatchers.loadSellers(res),
+        enabled: (Boolean(matches) || Object.keys(state.sellers).length > 0) && Boolean(journeyId),
+        onSuccess: (res: Record<string, IImageSeller>) => dispatchers.loadSellers(res),
     });
 
     return (
