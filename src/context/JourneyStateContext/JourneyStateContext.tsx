@@ -66,7 +66,7 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
             },
             [journeyState?.sellers, setSearchTerm]
         ),
-        searchTerm: useCallback((term: string) => setSearchTerm(term), [setSearchTerm]),
+        setSearchTerm: useCallback((term: string | null) => setSearchTerm(term), [setSearchTerm]),
     };
 
     const state: IJourneyState = useMemo(

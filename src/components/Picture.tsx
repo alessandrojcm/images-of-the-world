@@ -25,6 +25,7 @@ const Image = styled.img`
 
 const Figure = styled.figure`
     ${tw`
+      max-h-40vh
       relative
       bg-orange-100
       border-orange-100

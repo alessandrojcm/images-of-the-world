@@ -9,7 +9,7 @@ export interface IJourneyState {
 }
 
 export interface IJourneyDispatchers {
-    searchTerm: (term: string) => void;
+    setSearchTerm: (term: string | null) => void;
     loadSellers: (sellers: Record<string, IImageSeller>) => void;
     imageChosen: (sellerId: string, imageId: string) => void;
     reset: () => void;

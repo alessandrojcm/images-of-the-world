@@ -17,7 +17,7 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
 
     const { t } = useTranslation();
     const { searchTerm, id: journeyId } = useJourneyState();
-    const { imageChosen } = useJourneyDispatchers();
+    const { imageChosen, setSearchTerm } = useJourneyDispatchers();
     const { data: seller } = useQuery(
         initialCache.id,
         (id: string) => {
@@ -32,7 +32,7 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
     // Type inference complaints because seller can be undefined, it actually
     // will never be undefined since we are passing initialCache and the query
     // is not enabled until seller it's defined
-    const { photo } = useRandomImage(searchTerm, (seller ?? { id: '' }).id);
+    const { photo } = useRandomImage(searchTerm, (seller ?? { id: '' }).id, () => setSearchTerm(null));
 
     return (
         <Section className={className}>

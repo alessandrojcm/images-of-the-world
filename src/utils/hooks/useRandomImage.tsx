@@ -13,12 +13,17 @@ const commonQueryOptions: QueryConfig<any> = {
     refetchOnWindowFocus: false,
 };
 
-const useRandomImage = (searchTerm: string | null, id?: string) => {
+const useRandomImage = (searchTerm: string | null, id?: string, onError?: CallableFunction) => {
     const key = useId(id);
 
     const { data, isLoading } = useQuery<IPhoto, [string, { query: string | null }]>([key, { query: searchTerm }], (_: string, { query }) => unplash.searchRandomPhoto(query as string).toPromise(), {
         ...commonQueryOptions,
         enabled: searchTerm,
+        onError: () => {
+            if (onError) {
+                onError();
+            }
+        },
     });
 
     return { photo: data, isLoading };

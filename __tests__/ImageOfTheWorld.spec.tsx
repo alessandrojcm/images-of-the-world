@@ -17,10 +17,10 @@ const seller: IImageSeller = {
 };
 
 const ImageWithSearchTerm = () => {
-    const { searchTerm } = useJourneyDispatchers();
+    const { setSearchTerm } = useJourneyDispatchers();
 
     useEffect(() => {
-        searchTerm('cats');
+        setSearchTerm('cats');
     }, []);
 
     return <ImageOfTheWorld seller={seller} />;
