@@ -66,7 +66,7 @@ def get_journey_winner(id: str):
     if journey is None:
         raise HTTPException(status_code=404, detail='JourneyDTO not found.')
     if journey.winner is None:
-        raise HTTPException(status_code=404, detail='JourneyDTO has no winner.')
+        raise HTTPException(status_code=400, detail='JourneyDTO has no winner.')
 
     return JSONResponse(journey.winner.dict())
 
