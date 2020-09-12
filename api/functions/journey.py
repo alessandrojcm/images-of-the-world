@@ -4,15 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from models import JourneyDTO, User, ImageSellerPatch, ImageSeller, Journey
 
-origins = [
-    'http://localhost:3000',
-    'http://localhost:8000'
-    'http://localhost:1234'
-]
+origins = []
 
 app = FastAPI()
 
-app.add_middleware(CORSMiddleware, allow_origins=origins, allow_headers=['*'], allow_methods=['*'], allow_credentials=True)
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_origin_regex='http://localhost:\d+', allow_headers=['*'], allow_methods=['*'], allow_credentials=True)
 
 
 @app.post('/api/{tag}', response_model=JourneyDTO, response_model_by_alias=True)
