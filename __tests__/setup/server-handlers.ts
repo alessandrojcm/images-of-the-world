@@ -81,16 +81,16 @@ export default [
     rest.get(`${unsplashApi}/photos/:id`, (req, res, ctx) => {
         authorize(req, res, ctx);
         const response = returnImage();
-        return res(ctx.json(response));
+        return res(ctx.delay(250), ctx.json(response));
     }),
     rest.get(`${unsplashApi}/photos/random`, (req, res, ctx) => {
         authorize(req, res, ctx);
         const response = returnImage();
-        return res(ctx.json(response));
+        return res(ctx.delay(250), ctx.json(response));
     }),
     rest.get(`${unplashImagesApi}/:id`, async (req, res, ctx) => {
         authorize(req, res, ctx);
 
-        return res(...getImageTransformer(ctx));
+        return res(ctx.delay(250), ...getImageTransformer(ctx));
     }),
 ];
