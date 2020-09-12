@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 import { useId } from '@react-aria/utils';
-import { QueryOptions, useQuery } from 'react-query';
+import { QueryConfig, useQuery } from 'react-query';
 
 import { getHighQualityImageAsBase64, getPlaceHolderImageAsBase64, getRawUrl } from './imageFetchingUtils';
 import { IuseProgressiveImage } from '~types/hooks';
 import { IPhoto } from '~types/models';
 
-const commonQueryOptions: QueryOptions<any> = {
+const commonQueryOptions: QueryConfig<any> = {
     retry: 5,
     retryDelay: (retryAttempt) => retryAttempt * 5,
     refetchInterval: false,

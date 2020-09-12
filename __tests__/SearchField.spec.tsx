@@ -1,10 +1,8 @@
 import React from 'react';
-import { render, act, screen, waitForElementToBeRemoved, waitFor, fireEvent } from '@testing-library/react';
+import { act, render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
-
-import { skip } from 'rxjs/operators';
 import TestWrapper from './utils/TestWrapper';
 import SearchField from '../src/components/SearchBar';
 
@@ -23,7 +21,7 @@ describe('SearchField test suite', () => {
                 <SearchField onSubmit={jest.fn} disabled />
             </TestWrapper>
         );
-        await waitFor(() => {});
+        await waitForElementToBeRemoved(() => screen.queryByText('Loading...'));
         expect(screen.getByPlaceholderText('Search for an image.')).toBeDisabled();
     });
 
@@ -34,7 +32,7 @@ describe('SearchField test suite', () => {
                 <SearchField onSubmit={submit} />
             </TestWrapper>
         );
-        await waitFor(() => screen.queryByText('Loading...'));
+        await waitFor(() => {});
 
         await act(async () => {
             await userEvent.type(screen.getByPlaceholderText('Search for an image.'), 'a{enter}');

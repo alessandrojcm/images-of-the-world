@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { act, render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 
 import '@testing-library/jest-dom/extend-expect';
@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 import { IImageSeller } from '../src/types/models';
 import { TestJourneyContextWrapper } from './utils/TestWrapper';
+import { useJourneyDispatchers } from '../src/context/JourneyStateContext';
 import ImageOfTheWorld from '../src/components/ImageOfTheWorld';
 
 const seller: IImageSeller = {
@@ -15,7 +16,16 @@ const seller: IImageSeller = {
     sellerName: 'aname',
 };
 
-jest.setTimeout(15000);
+const ImageWithSearchTerm = () => {
+    const { searchTerm } = useJourneyDispatchers();
+
+    useEffect(() => {
+        searchTerm('cats');
+    }, []);
+
+    return <ImageOfTheWorld seller={seller} />;
+};
+
 describe('ImageOfTheWorld test suite', () => {
     it('should render', async () => {
         render(
@@ -28,11 +38,11 @@ describe('ImageOfTheWorld test suite', () => {
     it('should select image on click', async () => {
         const { container } = render(
             <TestJourneyContextWrapper>
-                <ImageOfTheWorld seller={seller} />
+                <ImageWithSearchTerm />
             </TestJourneyContextWrapper>
         );
 
-        await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+        await waitFor(() => {});
 
         await waitForElementToBeRemoved(() => container.querySelector('[aria-busy]'));
 
@@ -43,7 +53,7 @@ describe('ImageOfTheWorld test suite', () => {
             { timeout: 1250 }
         );
 
-        await act(() => {
+        act(() => {
             userEvent.click(screen.getByAltText('a photo'));
         });
     });

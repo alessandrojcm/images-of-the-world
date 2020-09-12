@@ -23,7 +23,7 @@ const JourneyDisplay: React.FC = () => {
 
     return (
         <Output>
-            {Object.values(sellers).map((s) => (
+            {Object.values(sellers ?? {}).map((s) => (
                 <SellerMeter key={s.id} seller={s} />
             ))}
         </Output>

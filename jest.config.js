@@ -1,7 +1,7 @@
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
 const { compilerOptions } = require('./tsconfig');
 
-process.env = Object.assign(process.env, { UNSPLASH_API_KEY: 'akey', UNSPLASH_API_URL: 'https://api.unsplash.com', IOTW_API: 'https://localhost' });
+process.env = Object.assign(process.env, { UNSPLASH_API_KEY: 'akey', UNSPLASH_API_URL: 'https://api.unsplash.com', IOTW_API: 'https://localhost:3000/api' });
 
 module.exports = {
     roots: ['<rootDir>/__tests__', '<rootDir>/src'],
