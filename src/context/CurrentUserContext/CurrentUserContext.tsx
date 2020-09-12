@@ -1,12 +1,16 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { startFormSchema } from '../../types/form-schemas';
+import { useMutation } from 'react-query';
+
 import { ICurrentUserContext, ICurrentUserContextUpdaters } from '../../types/props';
+import { createJourney } from '../../core/apis/iotwApi';
 
 const UserContext = createContext<ICurrentUserContext>({
+    journeyId: '',
     name: '',
     lastName: '',
     email: '',
     userLoggedIn: false,
+    loading: false,
 });
 
 const DispatchUserContext = createContext<ICurrentUserContextUpdaters>({
@@ -16,37 +20,39 @@ const DispatchUserContext = createContext<ICurrentUserContextUpdaters>({
 
 const CurrentUserContext: React.FC = (props) => {
     const { children } = props;
-    const [name, setName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [userLoggedIn, setUserLoggedIn] = useState(false);
+    const [mutate, { data, isLoading: loading, reset }] = useMutation((user: Omit<ICurrentUserContext, 'loading' | 'userLoggedIn' | 'journeyId'>) => {
+        return createJourney(user).toPromise();
+    });
+    const [journeyId, setJourneyId] = useState('');
+    const [context, setContext] = useState<Omit<ICurrentUserContext, 'journeyId'>>({
+        ...data?.user,
+        userLoggedIn: false,
+        loading,
+    });
 
-    const userContextValue: ICurrentUserContext = {
-        name,
-        lastName,
-        email,
-        userLoggedIn,
-    };
     const userContextUpdater: ICurrentUserContextUpdaters = {
         setUser: useCallback(
             (user) => {
-                setName(user.name);
-                setLastName(user.lastName);
-                setEmail(user.email);
-                startFormSchema.isValid(user).then((res) => setUserLoggedIn(res));
+                mutate(user).then((res) => {
+                    if (!res) {
+                        return;
+                    }
+                    const { id, user: savedUser } = res;
+                    setJourneyId(id as string);
+                    setContext({ ...savedUser, userLoggedIn: true, loading: false });
+                });
             },
-            [setName, setLastName, setEmail, setUserLoggedIn]
+            [mutate, loading, setContext, setJourneyId]
         ),
         resetUser: useCallback(() => {
-            setName('');
-            setLastName('');
-            setEmail('');
-            setUserLoggedIn(false);
-        }, [setName, setLastName, setEmail, setUserLoggedIn]),
+            reset();
+            setContext({ userLoggedIn: false, loading: false });
+            setJourneyId('');
+        }, [reset, setContext, setJourneyId]),
     };
 
     return (
-        <UserContext.Provider value={userContextValue}>
+        <UserContext.Provider value={{ ...context, journeyId }}>
             <DispatchUserContext.Provider value={userContextUpdater}>{children}</DispatchUserContext.Provider>
         </UserContext.Provider>
     );
