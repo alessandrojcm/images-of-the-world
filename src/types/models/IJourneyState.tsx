@@ -2,10 +2,10 @@ import { IImageSeller } from '~types/models/IImageSeller';
 import { ICurrentUserContext } from '~types/props';
 
 export interface IJourneyState {
-    id: undefined | string;
-    sellers: Record<string, IImageSeller>;
+    id?: undefined | string;
+    sellers?: Record<string, IImageSeller>;
     searchTerm: string | null;
-    winner: IImageSeller | null;
+    winner?: IImageSeller | null;
 }
 
 export interface IJourneyDispatchers {

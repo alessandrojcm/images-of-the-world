@@ -1,71 +1,82 @@
-import React, { createContext, useCallback, useContext, useReducer } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import { QueryConfig, useQuery, useMutation } from 'react-query';
+import { QueryConfig, useQuery, useMutation, queryCache } from 'react-query';
 import { useRouteMatch } from 'react-router-dom';
 
 import { IImageSeller, IJourneyDispatchers, IJourneyState } from '~types/models';
-import reducer, { initialState, POINTS_PER_IMAGE } from './journeyStateReducer';
-import { addPointsToSeller, getSellers } from '../../core/apis/iotwApi';
+import { addPointsToSeller, getJourneyState } from '../../core/apis/iotwApi';
+
+export const POINTS_PER_IMAGE = 3;
 
 const commonQueryOptions: QueryConfig<any> = {
     retry: 5,
     retryDelay: (retryAttempt: number) => retryAttempt * 5,
 };
 
-const JourneyState = createContext<IJourneyState>(initialState);
+const JourneyState = createContext<IJourneyState | null>({
+    searchTerm: null,
+    sellers: {},
+    id: undefined,
+    winner: null,
+});
 const JourneyDispatchers = createContext<IJourneyDispatchers | null>(null);
 
 // TODO: error boundary
 const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
     const { children, journeyId } = props;
-    const [state, dispatch] = useReducer(reducer, { ...initialState, id: journeyId });
+    const [searchTerm, setSearchTerm] = useState<string | null>(null);
     // TODO: change this
     const matches = useRouteMatch('/journey/start');
-    const loadSellers = useCallback((sellers) => dispatch({ type: 'ADD_SELLERS', payload: sellers }), [dispatch]);
 
-    const [mutate, { reset }] = useMutation((seller: Omit<IImageSeller, 'sellerName'>) => {
-        return addPointsToSeller(journeyId, seller).toPromise();
-    });
+    const [mutate, { reset }] = useMutation(
+        (seller: Omit<IImageSeller, 'sellerName'>) => {
+            return addPointsToSeller(journeyId, seller).toPromise();
+        },
+        {
+            onSuccess: (newData) => queryCache.setQueryData([journeyId], newData),
+        }
+    );
 
-    const dispatchers: IJourneyDispatchers = {
-        loadSellers,
-        reset: useCallback(() => {
-            reset();
-            dispatch({ type: 'RESET' });
-        }, []),
-        imageChosen: useCallback(
-            (sellerId, imageId: string) => {
-                const { collectedImages, points } = state.sellers[sellerId] as IImageSeller;
-                mutate({
-                    id: sellerId,
-                    points: points + POINTS_PER_IMAGE,
-                    collectedImages: [...collectedImages, imageId],
-                }).then((res) => {
-                    if (!res) {
-                        return;
-                    }
-                    loadSellers(res.sellers);
-                    dispatch({ type: 'RESET_SEARCH' });
-                    if (res.winner) {
-                        dispatch({ type: 'ADD_WINNER', payload: res.winner });
-                    }
-                });
-            },
-            [dispatch, loadSellers, state.sellers]
-        ),
-        searchTerm: useCallback((term: string) => dispatch({ type: 'SEARCH', payload: term }), [dispatch]),
-    };
     // TODO: Error handling for sellers fetch
     // TODO: Handle refetch, currently there is none because it will overwrite the client-side
-    useQuery(journeyId, (id: string) => getSellers(id).toPromise(), {
+    const { refetch, data } = useQuery(journeyId, (id: string) => getJourneyState(id).toPromise(), {
         ...commonQueryOptions,
         refetchInterval: Infinity,
         refetchIntervalInBackground: false,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
-        enabled: (Boolean(matches) || Object.keys(state.sellers).length > 0) && Boolean(journeyId),
-        onSuccess: (res: Record<string, IImageSeller>) => dispatchers.loadSellers(res),
+        enabled: Boolean(matches) && Boolean(journeyId),
     });
+
+    const dispatchers: IJourneyDispatchers = {
+        loadSellers: refetch,
+        reset: useCallback(() => {
+            reset();
+        }, []),
+        imageChosen: useCallback(
+            (sellerId, imageId: string) => {
+                if (!data?.sellers) {
+                    return;
+                }
+                const { collectedImages, points } = data.sellers[sellerId] as IImageSeller;
+                mutate({
+                    id: sellerId,
+                    points: points + POINTS_PER_IMAGE,
+                    collectedImages: [...collectedImages, imageId],
+                });
+            },
+            [data?.sellers]
+        ),
+        searchTerm: useCallback((term: string) => setSearchTerm(term), [setSearchTerm]),
+    };
+
+    const state: IJourneyState = useMemo(
+        () => ({
+            ...data,
+            searchTerm,
+        }),
+        [data]
+    );
 
     return (
         <JourneyState.Provider value={state}>

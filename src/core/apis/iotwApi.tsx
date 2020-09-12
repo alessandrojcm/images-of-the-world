@@ -1,7 +1,5 @@
 import ky from 'ky-universal';
 import { from } from 'rxjs';
-
-import { pluck } from 'rxjs/operators';
 import { IImageSeller, IJourneyCreation } from '~types/models';
 import { ICurrentUserContext } from '~types/props';
 
@@ -27,7 +25,7 @@ const addPointsToSeller = (journeyId: string, seller: Omit<IImageSeller, 'seller
             .json() as Promise<IJourneyCreation>
     );
 
-const getSellers = (journeyId: string) => from(api.get(`journey/${journeyId}`).json() as Promise<IJourneyCreation>).pipe(pluck('sellers'));
+const getJourneyState = (journeyId: string) => from(api.get(`journey/${journeyId}`).json() as Promise<IJourneyCreation>);
 
 // eslint-disable-next-line
-export { getSellers, createJourney, addPointsToSeller };
+export { getJourneyState, createJourney, addPointsToSeller };
