@@ -1,10 +1,10 @@
 import { useId } from '@react-aria/utils';
-import { QueryOptions, useQuery } from 'react-query';
+import { QueryConfig, useQuery } from 'react-query';
 
 import unplash from '../../core/apis/unsplashApi';
 import { IPhoto } from '~types/models';
 
-const commonQueryOptions: QueryOptions<any> = {
+const commonQueryOptions: QueryConfig<any> = {
     retry: 5,
     retryDelay: (retryAttempt) => retryAttempt * 5,
     refetchInterval: false,
