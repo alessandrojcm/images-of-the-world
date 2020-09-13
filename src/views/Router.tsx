@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ToastProvider } from 'react-toast-notifications';
 
 import { Start, Finish } from './Journey';
 import MainLayout from '../components/Layout';
@@ -8,6 +9,7 @@ import Registration from './Registration';
 
 import CurrentUserContext, { useCurrentUser } from '../context/CurrentUserContext/CurrentUserContext';
 import JourneyContext from '../context/JourneyStateContext';
+import Toast from '../components/Toast';
 
 const Journey = () => {
     const { journeyId } = useCurrentUser();
@@ -27,22 +29,24 @@ const Journey = () => {
 
 const Router: React.FC = () => {
     return (
-        <BrowserRouter>
-            <MainLayout>
-                <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    <CurrentUserContext>
-                        <Route exact path="/journey">
-                            <Registration />
+        <ToastProvider components={{ Toast }} placement="bottom-right">
+            <BrowserRouter>
+                <MainLayout>
+                    <Switch>
+                        <Route exact path="/">
+                            <Home />
                         </Route>
-                        {/* TODO: lazy loading to this */}
-                        <Journey />
-                    </CurrentUserContext>
-                </Switch>
-            </MainLayout>
-        </BrowserRouter>
+                        <CurrentUserContext>
+                            <Route exact path="/journey">
+                                <Registration />
+                            </Route>
+                            {/* TODO: lazy loading to this */}
+                            <Journey />
+                        </CurrentUserContext>
+                    </Switch>
+                </MainLayout>
+            </BrowserRouter>
+        </ToastProvider>
     );
 };
 
