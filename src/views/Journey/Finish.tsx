@@ -5,6 +5,7 @@ import tw, { css } from 'twin.macro';
 
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
+import Carousel from '../../components/Carousel';
 
 import { Subtitle, Title } from '../../components/Typography';
 import { ColumnContainer as Container } from '../../components/Container';
@@ -25,7 +26,6 @@ const Finish: React.FC = () => {
         return <Redirect to="/journey/start" />;
     }
 
-    // TODO: add a gallery for the collected images.
     return (
         <Container
             css={css`
@@ -41,6 +41,7 @@ const Finish: React.FC = () => {
                     points: winner.points,
                 })}
             </Subtitle>
+            <Carousel imageIds={winner.collectedImages} />
             <Button
                 onClick={() => {
                     reset();
