@@ -25,7 +25,6 @@ const Image = styled.img`
 
 const Figure = styled.figure`
     ${tw`
-      max-h-40vh
       relative
       bg-orange-100
       border-orange-100
@@ -40,16 +39,16 @@ const Figcaption = tw.figcaption`
     text-shadow-white
     text-right
     pr-4
-    bottom-0
+    top-0
     right-0
     select-none
     font-display
     text-lg
 `;
 
-const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: string; onClick: (photoId: string) => void }> = (props) => {
+const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: string; onClick?: (photoId: string) => void }> = (props) => {
     const { t } = useTranslation();
-    const { photo, width, className = '', onClick } = props;
+    const { photo, width, className = '', onClick = () => {} } = props;
 
     const { id: photoId } = photo ?? { id: null };
 
@@ -89,8 +88,8 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
                 animate={isLoading}
                 height="39vh"
                 width="100%"
-                foregroundColor={tailwind.theme.colors.black}
-                backgroundColor={tailwind.theme.colors.black}
+                foregroundColor={tailwind.theme.colors.orange['100']}
+                backgroundColor={tailwind.theme.colors.orange['200']}
                 backgroundOpacity={0.85}
                 gradientRatio={1}
                 speed={1.5}

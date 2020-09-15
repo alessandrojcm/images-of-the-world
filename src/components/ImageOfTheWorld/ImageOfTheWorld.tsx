@@ -10,11 +10,13 @@ import { Details, Section } from './StyledComponents';
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
 import { getJourneySeller } from '../../core/apis/iotwApi';
 import useRandomImage from '../../utils/hooks/useRandomImage';
+import useMatchMedia from '../../utils/hooks/useProgressiveImage/useMatchMedia';
 import Picture from '../Picture';
 
 const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (props) => {
     const { seller: initialCache, className = '' } = props;
 
+    const [first] = useMatchMedia('(min-width: 640px)', '(min-width: 768px)', '(min-width: 1024px)', '(min-width: 1280px)');
     const { t } = useTranslation();
     const handleError = useErrorHandler();
     const { searchTerm, id: journeyId } = useJourneyState();
@@ -39,7 +41,7 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
         <Section className={className}>
             <Picture
                 photo={photo}
-                width={512}
+                width={first}
                 css={css`
                     min-height: 256px;
                 `}
