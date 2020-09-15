@@ -11,9 +11,6 @@ module.exports = {
             default: '0 2px 5px rgba(0, 0, 0, 0.5)',
             white: '0 2px 5px rgba(220, 211, 182, 0.5)',
         },
-        maxHeight: {
-            '40vh': '40vh',
-        },
         colors: {
             primary: red,
             secondary: yellow,
@@ -63,6 +60,15 @@ module.exports = {
             },
             gridRowEnd: {
                 finish: '-1',
+            },
+            maxHeight: {
+                '40vh': '40vh',
+            },
+            minHeight: {
+                '40vh': '40vh',
+            },
+            width: {
+                '1/2-screen': '50vw',
             },
         },
     },

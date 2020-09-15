@@ -4,6 +4,9 @@
         "*.svg": [
             "@parcel/transformer-svg-react"
         ],
+        "*.css": [
+            "@parcel/transformer-css"
+        ]
     },
     "validators": {
         "*.ts,*.tsx": [
