@@ -1,7 +1,5 @@
 import pytest
 
-from models import Journey
-
 
 class TestJourney:
     @pytest.fixture(scope='module')

@@ -1,4 +1,5 @@
-from typing import Optional, Dict
+from collections import namedtuple
+from typing import Optional, Dict, Union
 from uuid import uuid4
 
 from mimesis import Person
@@ -104,6 +105,34 @@ class Journey(DocumentBase):
             active_journeys.append(fauna_to_object(journey))
 
         return active_journeys
+
+    @classmethod
+    def get_journeys(cls, size=10, after: Union[int, None] = 0):
+        result: dict = session().query(
+            q.map_(
+                q.lambda_('journey', q.get(q.var('journey'))),
+                q.paginate(
+                    q.match(q.index('all_journeys')),
+                    size=size,
+                    after=q.ref(q.collection('journeys'), str(after))
+                )
+            )
+        )
+
+        data = result.get('data')
+        after_cursor = result.get('after', None).pop().id if result.get('after', None) is not None else None
+        before_cursor = result.get('before', None).pop().id if result.get('before', None) is not None else None
+        journeys = []
+        for journey in data:
+            journeys.append(fauna_to_object(journey))
+
+        journeys = list(filter(lambda x: x.winner is not None, journeys))
+
+        return {
+            'journeys': journeys,
+            'before': before_cursor,
+            'after': after_cursor
+        }
 
 
 class JourneyDTO(BaseModel):
