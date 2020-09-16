@@ -1,14 +1,17 @@
+from typing import Optional
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from models import JourneyDTO, User, ImageSellerPatch, ImageSeller, Journey
+from models import JourneyDTO, User, ImageSellerPatch, ImageSeller, Journey, JourneyListDTO
 
 origins = []
 
 app = FastAPI()
 
-app.add_middleware(CORSMiddleware, allow_origins=origins, allow_origin_regex='http://localhost:\d+', allow_headers=['*'], allow_methods=['*'], allow_credentials=True)
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_origin_regex='http://localhost:\d+',
+                   allow_headers=['*'], allow_methods=['*'], allow_credentials=True)
 
 
 @app.post('/api/{tag}', response_model=JourneyDTO, response_model_by_alias=True)
@@ -42,6 +45,13 @@ def patch_journey(id: str, seller: ImageSellerPatch):
     journey.update()
 
     return JSONResponse(journey.dict())
+
+
+@app.get('/api/{tag}', response_model=JourneyListDTO)
+def get_journeys(size: int = 10, after: Optional[str] = None):
+    journeys = Journey.get_journeys(size, after=after)
+
+    return JSONResponse(journeys)
 
 
 @app.get('/api/{tag}/{id}', response_model=JourneyDTO, response_model_by_alias=True)

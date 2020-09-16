@@ -1,5 +1,5 @@
 from collections import namedtuple
-from typing import Optional, Dict, Union
+from typing import Optional, Dict, Union, List
 from uuid import uuid4
 
 from mimesis import Person
@@ -107,21 +107,26 @@ class Journey(DocumentBase):
         return active_journeys
 
     @classmethod
-    def get_journeys(cls, size=10, after: Union[int, None] = 0):
+    def get_journeys(cls, size=10, after: Union[str, None] = None):
+        pagination_args = {
+            'size': size,
+        }
+        if after is not None:
+            pagination_args.setdefault('after', q.ref(q.collection('journeys'), after))
+
         result: dict = session().query(
             q.map_(
                 q.lambda_('journey', q.get(q.var('journey'))),
                 q.paginate(
                     q.match(q.index('all_journeys')),
-                    size=size,
-                    after=q.ref(q.collection('journeys'), str(after))
+                    **pagination_args
                 )
             )
         )
 
         data = result.get('data')
-        after_cursor = result.get('after', None).pop().id if result.get('after', None) is not None else None
-        before_cursor = result.get('before', None).pop().id if result.get('before', None) is not None else None
+        after_cursor = result.get('after', None).pop().id() if result.get('after', None) is not None else None
+        before_cursor = result.get('before', None).pop().id() if result.get('before', None) is not None else None
         journeys = []
         for journey in data:
             journeys.append(fauna_to_object(journey))
@@ -144,3 +149,8 @@ class JourneyDTO(BaseModel):
     class Config:
         alias_generator = to_camel
         allow_population_by_field_name = True
+
+
+class JourneyListDTO(BaseModel):
+    journeys: List[JourneyDTO]
+    after: Optional[str]

@@ -127,3 +127,8 @@ class TestJourney:
         })
 
         assert patched_journey.status_code != 200
+
+    def test_get_journeys(self, app):
+        journeys = app.get('/api/journey')
+
+        assert journeys.json().get('journeys') is not None
