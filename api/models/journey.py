@@ -15,6 +15,20 @@ person = Person('en')
 POINTS_TO_WIN = 20
 
 
+def fauna_to_object(document: dict):
+    data: dict = document.get('data')
+    sellers = {k: ImageSeller(**v) for k, v in data.get('sellers').items()}
+    winner = ImageSeller(**document['data']['winner']) if data.get('winner', None) else None
+    user = User(**document['data'].get('user')) if data.get('user') else None
+    return Journey(
+        id=data.get('id'),
+        ref=document.get('ref'),
+        sellers=sellers,
+        winner=winner,
+        user=user
+    )
+
+
 # TODO: List journeys for leaderboard
 class Journey(DocumentBase):
     _collection_name = 'journeys'
@@ -68,18 +82,7 @@ class Journey(DocumentBase):
         if len(result["data"]) == 0:
             return None
 
-        journey = result['data'][0]
-        sellers = {k: ImageSeller(**v) for k, v in journey['data']['sellers'].items()}
-        winner = ImageSeller(**journey['data']['winner']) if journey['data'].get('winner', None) else None
-        user = User(**journey['data'].get('user')) if journey['data'].get('user') else None
-
-        return Journey(
-            id=id,
-            ref=journey['ref'],
-            sellers=sellers,
-            winner=winner,
-            user=user
-        )
+        return fauna_to_object(result.get('data')[0])
 
     @classmethod
     def get_active_journeys_by_email(cls, email: str):
@@ -98,17 +101,7 @@ class Journey(DocumentBase):
         active_journeys = []
 
         for journey in result.get('data'):
-            sellers = {k: ImageSeller(**v) for k, v in journey['data']['sellers'].items()}
-            winner = ImageSeller(**journey['data']['winner']) if journey['data'].get('winner', None) else None
-            user = User(**journey['data'].get('user')) if journey['data'].get('user') else None
-
-            active_journeys.append(Journey(
-                id=id,
-                ref=journey['ref'],
-                sellers=sellers,
-                winner=winner,
-                user=user
-            ))
+            active_journeys.append(fauna_to_object(journey))
 
         return active_journeys
 
