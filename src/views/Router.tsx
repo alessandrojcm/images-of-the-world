@@ -6,6 +6,7 @@ import { Start, Finish } from './Journey';
 import MainLayout from '../components/Layout';
 import Home from './Home';
 import Registration from './Registration';
+import LeaderBoard from './Leaderboard/Leaderboard';
 
 import CurrentUserContext, { useCurrentUser } from '../context/CurrentUserContext/CurrentUserContext';
 import JourneyContext from '../context/JourneyStateContext';
@@ -44,6 +45,9 @@ const Router: React.FC = () => {
                             <Journey />
                         </CurrentUserContext>
                     </Switch>
+                    <Route exact path="/leaderboard">
+                        <LeaderBoard />
+                    </Route>
                 </MainLayout>
             </BrowserRouter>
         </ToastProvider>

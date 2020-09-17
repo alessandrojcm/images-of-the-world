@@ -1,4 +1,5 @@
-from typing import Optional, Dict
+from collections import namedtuple
+from typing import Optional, Dict, Union, List
 from uuid import uuid4
 
 from mimesis import Person
@@ -13,6 +14,20 @@ from .utils import to_camel
 person = Person('en')
 
 POINTS_TO_WIN = 20
+
+
+def fauna_to_object(document: dict):
+    data: dict = document.get('data')
+    sellers = {k: ImageSeller(**v) for k, v in data.get('sellers').items()}
+    winner = ImageSeller(**document['data']['winner']) if data.get('winner', None) else None
+    user = User(**document['data'].get('user')) if data.get('user') else None
+    return Journey(
+        id=data.get('id'),
+        ref=document.get('ref'),
+        sellers=sellers,
+        winner=winner,
+        user=user
+    )
 
 
 # TODO: List journeys for leaderboard
@@ -68,18 +83,7 @@ class Journey(DocumentBase):
         if len(result["data"]) == 0:
             return None
 
-        journey = result['data'][0]
-        sellers = {k: ImageSeller(**v) for k, v in journey['data']['sellers'].items()}
-        winner = ImageSeller(**journey['data']['winner']) if journey['data'].get('winner', None) else None
-        user = User(**journey['data'].get('user')) if journey['data'].get('user') else None
-
-        return Journey(
-            id=id,
-            ref=journey['ref'],
-            sellers=sellers,
-            winner=winner,
-            user=user
-        )
+        return fauna_to_object(result.get('data')[0])
 
     @classmethod
     def get_active_journeys_by_email(cls, email: str):
@@ -98,19 +102,49 @@ class Journey(DocumentBase):
         active_journeys = []
 
         for journey in result.get('data'):
-            sellers = {k: ImageSeller(**v) for k, v in journey['data']['sellers'].items()}
-            winner = ImageSeller(**journey['data']['winner']) if journey['data'].get('winner', None) else None
-            user = User(**journey['data'].get('user')) if journey['data'].get('user') else None
-
-            active_journeys.append(Journey(
-                id=id,
-                ref=journey['ref'],
-                sellers=sellers,
-                winner=winner,
-                user=user
-            ))
+            active_journeys.append(fauna_to_object(journey))
 
         return active_journeys
+
+    @classmethod
+    def get_journeys(cls, size=10, finished=True, after: Union[str, None] = None, before: Union[str, None] = None):
+        pagination_args = {
+            'size': size,
+        }
+        if after is not None:
+            pagination_args.setdefault('after', q.ref(q.collection('journeys'), after))
+        if before is not None:
+            pagination_args.setdefault('before', q.ref(q.collection('journeys'), before))
+
+        result: dict = session().query(
+            q.map_(
+                q.lambda_('journey', q.get(q.var('journey'))),
+                q.paginate(
+                    q.match(q.index('all_journeys'), 'finished' if finished else 'non_finished'),
+                    **pagination_args
+                )
+            )
+        )
+
+        items: dict = session().query(
+            q.count(q.paginate(
+                q.match(q.index('all_journeys'), 'finished' if finished else 'non_finished'),
+            ))
+        )
+
+        data = result.get('data')
+        after_cursor = result.get('after', None).pop().id() if result.get('after', None) is not None else None
+        before_cursor = result.get('before', None).pop().id() if result.get('before', None) is not None else None
+        journeys = []
+        for journey in data:
+            journeys.append(fauna_to_object(journey).dict())
+
+        return {
+            'journeys': journeys,
+            'items': items.get('data')[0],
+            'before': before_cursor,
+            'after': after_cursor
+        }
 
 
 class JourneyDTO(BaseModel):
@@ -122,3 +156,8 @@ class JourneyDTO(BaseModel):
     class Config:
         alias_generator = to_camel
         allow_population_by_field_name = True
+
+
+class JourneyListDTO(BaseModel):
+    journeys: List[JourneyDTO]
+    after: Optional[str]

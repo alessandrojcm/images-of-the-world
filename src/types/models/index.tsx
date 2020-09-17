@@ -4,3 +4,4 @@ export * from './IUnplashResponsiveParameters';
 export * from './IImageSeller';
 export * from './IImageOfTheWorld';
 export * from './IJourneyState';
+export * from './IJourneyPagination';

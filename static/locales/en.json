@@ -22,5 +22,8 @@
     "loadingImage":  "Loading image.",
     "selectImage": "Select an image.",
     "error": "Ooops, that was unexpected.",
-    "tryAgain":"Try again."
+    "tryAgain":"Try again.",
+    "winner": "Winner",
+    "winnerPoints":"Winner's points",
+    "user": "User"
 }
