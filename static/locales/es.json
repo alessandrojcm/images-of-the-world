@@ -22,5 +22,8 @@
     "loadingImage": "Cargando imagen.",
     "selectImage": "Selectiona una imagen.",
     "error": "Uuups, eso fue inesperado.",
-    "tryAgain":"Intenta de nuevo."
+    "tryAgain":"Intenta de nuevo.",
+    "winner": "Ganador",
+    "winnerPoints": "Puntos del ganador",
+    "user": "Usuario"
 }

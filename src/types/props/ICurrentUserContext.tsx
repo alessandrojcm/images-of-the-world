@@ -1,10 +1,13 @@
 import { StartFormSchema } from '../form-schemas';
 
-export interface ICurrentUserContext {
-    journeyId: string;
+export interface IJourneyUser {
     name?: string;
     lastName?: string;
     email?: string;
+}
+
+export interface ICurrentUserContext extends IJourneyUser {
+    journeyId: string;
     userLoggedIn: boolean;
     loading: boolean;
 }
