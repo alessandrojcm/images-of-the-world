@@ -71,6 +71,9 @@ export default [
     rest.get('*/journey/:id', (req, res, ctx) => {
         return res(ctx.json({ sellers: getSellersDict(sellers()) }));
     }),
+    rest.get('*/journey/:id/sellers', (req, res, ctx) => {
+        return res(ctx.json(getSellersDict(sellers())));
+    }),
     rest.post('*/journey', (req, res, ctx) => {
         return res(ctx.json(journey));
     }),

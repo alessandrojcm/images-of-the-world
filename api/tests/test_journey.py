@@ -43,6 +43,14 @@ class TestJourney:
         assert 'ts' not in journey.json().keys()
         assert journey.status_code == 404
 
+    def test_journey_get_sellers(self, app, create_journey):
+        journey = create_journey.json().get('id')
+
+        sellers = app.get('/api/journey/{id}/sellers'.format(id=journey))
+
+        assert sellers.status_code == 200
+        assert len(sellers.json()) == 3
+
     def test_journey_get_seller(self, app, create_journey):
         journey = create_journey
         seller = list(journey.json().get('sellers').values())[0]

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
@@ -77,8 +77,17 @@ def get_journey_winner(id: str):
     return JSONResponse(journey.winner.dict())
 
 
-@app.get('/api/{tag}/{journey_id}/sellers/{seller_id}', response_model=ImageSeller,
+@app.get('/api/{tag}/{journey_id}/sellers', response_model=List[ImageSeller], response_model_by_alias=True)
+def get_journey_sellers(journey_id: str):
+    journey = Journey.get_by_id(journey_id)
 
+    if journey is None:
+        raise HTTPException(status_code=404, detail='JourneyDTO not found.')
+
+    return JSONResponse([seller.dict() for seller in journey.sellers.values()])
+
+
+@app.get('/api/{tag}/{journey_id}/sellers/{seller_id}', response_model=ImageSeller,
          response_model_by_alias=True)
 def get_journey_seller(journey_id: str, seller_id: str):
     journey = Journey.get_by_id(journey_id)
