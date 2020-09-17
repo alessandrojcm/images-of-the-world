@@ -107,12 +107,14 @@ class Journey(DocumentBase):
         return active_journeys
 
     @classmethod
-    def get_journeys(cls, size=10, finished=True, after: Union[str, None] = None):
+    def get_journeys(cls, size=10, finished=True, after: Union[str, None] = None, before: Union[str, None] = None):
         pagination_args = {
             'size': size,
         }
         if after is not None:
             pagination_args.setdefault('after', q.ref(q.collection('journeys'), after))
+        if before is not None:
+            pagination_args.setdefault('before', q.ref(q.collection('journeys'), before))
 
         result: dict = session().query(
             q.map_(
@@ -139,7 +141,7 @@ class Journey(DocumentBase):
 
         return {
             'journeys': journeys,
-            'items': items.get('data'),
+            'items': items.get('data')[0],
             'before': before_cursor,
             'after': after_cursor
         }

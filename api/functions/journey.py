@@ -48,8 +48,8 @@ def patch_journey(id: str, seller: ImageSellerPatch):
 
 
 @app.get('/api/{tag}', response_model=JourneyListDTO)
-def get_journeys(size: int = 10, after: Optional[str] = None):
-    journeys = Journey.get_journeys(size, True, after=after)
+def get_journeys(size: int = 10, after: Optional[str] = None, before: Optional[str] = None):
+    journeys = Journey.get_journeys(size, True, after=after, before=before)
 
     return JSONResponse(journeys)
 
