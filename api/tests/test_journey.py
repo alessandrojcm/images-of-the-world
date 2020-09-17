@@ -132,3 +132,4 @@ class TestJourney:
         journeys = app.get('/api/journey')
 
         assert journeys.json().get('journeys') is not None
+        assert journeys.json().get('items') is not None

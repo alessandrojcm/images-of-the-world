@@ -107,7 +107,7 @@ class Journey(DocumentBase):
         return active_journeys
 
     @classmethod
-    def get_journeys(cls, size=10, after: Union[str, None] = None):
+    def get_journeys(cls, size=10, finished=True, after: Union[str, None] = None):
         pagination_args = {
             'size': size,
         }
@@ -118,10 +118,16 @@ class Journey(DocumentBase):
             q.map_(
                 q.lambda_('journey', q.get(q.var('journey'))),
                 q.paginate(
-                    q.match(q.index('all_journeys')),
+                    q.match(q.index('all_journeys'), 'finished' if finished else 'non_finished'),
                     **pagination_args
                 )
             )
+        )
+
+        items: dict = session().query(
+            q.count(q.paginate(
+                q.match(q.index('all_journeys'), 'finished' if finished else 'non_finished'),
+            ))
         )
 
         data = result.get('data')
@@ -129,12 +135,11 @@ class Journey(DocumentBase):
         before_cursor = result.get('before', None).pop().id() if result.get('before', None) is not None else None
         journeys = []
         for journey in data:
-            journeys.append(fauna_to_object(journey))
-
-        journeys = list(filter(lambda x: x.winner is not None, journeys))
+            journeys.append(fauna_to_object(journey).dict())
 
         return {
             'journeys': journeys,
+            'items': items.get('data'),
             'before': before_cursor,
             'after': after_cursor
         }

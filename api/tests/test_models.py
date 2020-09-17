@@ -60,3 +60,4 @@ class TestJourneyModel:
 
         assert journeys.get('journeys') is not None
         assert journeys.get('after') is not None
+        assert journeys.get('items') is not None
