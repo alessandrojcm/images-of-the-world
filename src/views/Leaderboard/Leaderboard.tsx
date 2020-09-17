@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { FinishedJourney, IJourneyPagination } from '~types/models';
 import { getJourneys } from '../../core/apis/iotwApi';
 import { ArrowLeft, ArrowRight, Table, TableBody, TableButton, TableFooter, TableHeader, TableRow } from './StyledComponents';
+import { Title } from '../../components/Typography';
 import Container from '../../components/Container';
 
 type FetchInfo = { size: number; after?: string; before?: string };
@@ -87,6 +88,7 @@ const LeaderBoard: React.FC = () => {
 
     return (
         <Container>
+            <Title>{t('leaderboard')}</Title>
             <Table {...getTableProps()}>
                 <TableHeader>
                     {headerGroups.map((headerGroup) => (
