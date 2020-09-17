@@ -8,12 +8,13 @@ import { IImageSeller, IJourneyCreation, IJourneyState } from '../../src/types/m
 const unsplashApi = process.env.UNSPLASH_API_URL;
 export const unplashImagesApi = 'https://images.unplash.com';
 
-const sellers: IImageSeller[] = Array.from({ length: 3 }).map((_, i) => ({
-    id: i.toString(),
-    sellerName: `${i}`,
-    points: 0,
-    collectedImages: [],
-}));
+const sellers = (length = 3): IImageSeller[] =>
+    Array.from({ length }).map((_, i) => ({
+        id: i.toString(),
+        sellerName: `${i}`,
+        points: 0,
+        collectedImages: [],
+    }));
 
 const getSellersDict = (s: IImageSeller[]): Record<string, any> =>
     // @ts-ignore
@@ -26,7 +27,7 @@ const getSellersDict = (s: IImageSeller[]): Record<string, any> =>
     );
 
 const journey: IJourneyCreation = {
-    sellers: getSellersDict(sellers),
+    sellers: getSellersDict(sellers()),
     user: {
         name: 'aname',
         lastName: 'alastname',
@@ -57,8 +58,18 @@ export default [
 
         return res(ctx.json(locale));
     }),
+    rest.get('*/journey', (req, res, ctx) => {
+        const { size, after = '' } = req.params;
+
+        return res(
+            ctx.json({
+                journeys: sellers(size),
+                after,
+            })
+        );
+    }),
     rest.get('*/journey/:id', (req, res, ctx) => {
-        return res(ctx.json({ sellers: getSellersDict(sellers) }));
+        return res(ctx.json({ sellers: getSellersDict(sellers()) }));
     }),
     rest.post('*/journey', (req, res, ctx) => {
         return res(ctx.json(journey));
@@ -69,7 +80,7 @@ export default [
             ctx.json({
                 ...journey,
                 sellers: {
-                    ...getSellersDict(sellers),
+                    ...getSellersDict(sellers()),
                     [body.id]: {
                         ...body,
                         sellerName: 'aname',

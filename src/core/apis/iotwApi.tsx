@@ -1,7 +1,8 @@
 import ky from 'ky-universal';
 import { from, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { IImageSeller, IJourneyCreation } from '~types/models';
+
+import { IImageSeller, IJourneyCreation, IJourneyPagination } from '~types/models';
 import { ICurrentUserContext } from '~types/props';
 
 const api = ky.create({
@@ -40,4 +41,6 @@ const getJourneyWinner = (journeyId: string) =>
 
 const getJourneySeller = (journeyId: string, sellerId: string) => from(api.get(`journey/${journeyId}/sellers/${sellerId}`).json() as Promise<IImageSeller>);
 
-export { getJourneyState, createJourney, addPointsToSeller, getJourneySeller, getJourneyWinner };
+const getJourneys = (size = 10, after?: string) => from(api.get('/journey', { searchParams: { size, ...(after && { after }) } }).json() as Promise<IJourneyPagination>);
+
+export { getJourneyState, createJourney, addPointsToSeller, getJourneySeller, getJourneyWinner, getJourneys };
