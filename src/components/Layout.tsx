@@ -23,9 +23,8 @@ const MainLayout = styled.main`
     ${(props: { match: boolean }) => (props.match ? '' : `bg-primary`)}
 `;
 
-// eslint-disable-next-line react/prop-types
 const Layout: React.FC = ({ children }) => {
-    const match = useRouteMatch(['', 'start']);
+    const match = useRouteMatch(['', 'start', 'leaderboard']);
 
     return (
         <>

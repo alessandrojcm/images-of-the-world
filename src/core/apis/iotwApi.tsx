@@ -41,6 +41,6 @@ const getJourneyWinner = (journeyId: string) =>
 
 const getJourneySeller = (journeyId: string, sellerId: string) => from(api.get(`journey/${journeyId}/sellers/${sellerId}`).json() as Promise<IImageSeller>);
 
-const getJourneys = (size = 10, after?: string) => from(api.get('/journey', { searchParams: { size, ...(after && { after }) } }).json() as Promise<IJourneyPagination>);
+const getJourneys = (size = 10, after?: number) => from(api.get('/journey', { searchParams: { size, ...(after && { after }) } }).json() as Promise<IJourneyPagination>);
 
 export { getJourneyState, createJourney, addPointsToSeller, getJourneySeller, getJourneyWinner, getJourneys };
