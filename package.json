@@ -124,7 +124,7 @@
         "react-hook-form": "^6.2.0",
         "react-i18next": "^11.7.0",
         "react-icons": "^3.10.0",
-        "react-query": "^2.4.15",
+        "react-query": "^2.22.0",
         "react-router-dom": "^5.2.0",
         "react-slick": "^0.27.11",
         "react-table": "^7.5.0",
