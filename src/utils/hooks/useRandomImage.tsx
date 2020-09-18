@@ -17,7 +17,7 @@ const commonQueryOptions: QueryConfig<any> = {
 const useRandomImage = (searchTerm: string | null, id?: string, onError?: CallableFunction) => {
     const key = useId(id);
 
-    const { data, isLoading, clear } = useQuery<IPhoto, [string, { query: string | null }]>(
+    const { data, isLoading, remove } = useQuery<IPhoto, [string, { query: string | null }]>(
         [key, { query: searchTerm }],
         (_: string, { query }) => unplash.searchRandomPhoto(query as string).toPromise(),
         {
@@ -33,9 +33,9 @@ const useRandomImage = (searchTerm: string | null, id?: string, onError?: Callab
 
     useEffect(() => {
         if (!searchTerm) {
-            clear();
+            remove();
         }
-    }, [searchTerm, clear]);
+    }, [searchTerm, remove]);
 
     return { photo: data, isLoading };
 };
