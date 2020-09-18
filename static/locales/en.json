@@ -20,11 +20,12 @@
     "finishTitle": "Congratulations!",
     "journeyWinner": "{{sellerName}} has finished the journey, with a total of {{points}} points.",
     "returnToHome": "Return to home.",
-    "loadingImage":  "Loading image.",
+    "loadingImage": "Loading image.",
     "selectImage": "Select an image.",
     "error": "Ooops, that was unexpected.",
-    "tryAgain":"Try again.",
+    "tryAgain": "Try again.",
     "winner": "Winner",
-    "winnerPoints":"Winner's points",
-    "user": "User"
+    "winnerPoints": "Winner's points",
+    "user": "User",
+    "seeMore": "Details"
 }

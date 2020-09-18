@@ -7,6 +7,7 @@ import MainLayout from '../components/Layout';
 import Home from './Home';
 import Registration from './Registration';
 import LeaderBoard from './Leaderboard/Leaderboard';
+import JourneyDetails from './JourneyDetails';
 
 import CurrentUserContext, { useCurrentUser } from '../context/CurrentUserContext/CurrentUserContext';
 import JourneyContext from '../context/JourneyStateContext';
@@ -47,6 +48,9 @@ const Router: React.FC = () => {
                     </Switch>
                     <Route exact path="/leaderboard">
                         <LeaderBoard />
+                    </Route>
+                    <Route exact path="/leaderboard/:id">
+                        <JourneyDetails />
                     </Route>
                 </MainLayout>
             </BrowserRouter>

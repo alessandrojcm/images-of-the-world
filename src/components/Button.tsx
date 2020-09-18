@@ -43,4 +43,8 @@ export const PrimaryButton = styled(Button)`
     ${(props) => (props.disabled ? 'bg-opacity-25 border-opacity-25' : tw`hover:text-orange-100 hover:text-shadow`)};
 `;
 
+export const IconButton = styled(Button)`
+    ${tw`border-none`}
+`;
+
 export default Button;
