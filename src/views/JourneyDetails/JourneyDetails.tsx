@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 
+import { Aside, Container } from './StyledComponents';
 import JourneyWinner from '../../components/JourneyWinner';
 import SellersList from '../../components/SellersList';
 import UserCard from '../../components/UserCard';
@@ -16,11 +17,13 @@ const JourneyDetails = () => {
     }
 
     return (
-        <div>
+        <Container>
             <JourneyWinner journeyId={id} />
-            <SellersList journeyId={id} />
-            <UserCard journeyId={id} />
-        </div>
+            <Aside>
+                <UserCard journeyId={id} />
+                <SellersList journeyId={id} />
+            </Aside>
+        </Container>
     );
 };
 
