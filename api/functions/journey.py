@@ -41,7 +41,7 @@ def patch_journey(id: str, seller: ImageSellerPatch):
         raise HTTPException(status_code=404, detail='That seller does not belong to this journey.')
 
     journey.sellers.get(str(seller.id)).points = seller.points
-    journey.sellers.get(str(seller.id)).collected_images = seller.collected_images
+    journey.sellers.get(str(seller.id)).collected_images.extend(seller.collected_images)
     journey.update()
 
     return JSONResponse(journey.dict())
