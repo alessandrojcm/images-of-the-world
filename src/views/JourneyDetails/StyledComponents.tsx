@@ -10,8 +10,9 @@ const Container = tw.div`
 const Aside = tw.aside`
     flex
     flex-col
-    justify-between
+    justify-evenly
     items-center
+    h-full
 `;
 
 export { Container, Aside };

@@ -28,5 +28,7 @@
     "winnerPoints": "Puntos del ganador",
     "user": "Usuario",
     "seeMore": "Detalles",
-    "journeyUser": "Usuario de la aventura"
+    "journeyUser": "Usuario de la aventura",
+    "journeySellers": "Vendedores de la aventura",
+    "journeySeller": "{{sellerName}}, {{p}} puntos."
 }

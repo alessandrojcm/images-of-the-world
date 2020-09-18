@@ -28,5 +28,7 @@
     "winnerPoints": "Winner's points",
     "user": "User",
     "seeMore": "Details",
-    "journeyUser": "Journey user"
+    "journeyUser": "Journey user",
+    "journeySellers": "Journey sellers",
+    "journeySeller": "{{sellerName}}, {{p}} points."
 }

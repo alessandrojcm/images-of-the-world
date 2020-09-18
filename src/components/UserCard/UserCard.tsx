@@ -59,24 +59,7 @@ const UserCard: React.FC<{ journeyId: string }> = (props) => {
                     text-shadow
                     `}
                 `}>
-                <p>
-                    <strong
-                        css={css`
-                            ${tw`font-bold`}
-                        `}>
-                        {t('name')}:{' '}
-                    </strong>
-                    {data?.name}
-                </p>
-                <p>
-                    <strong
-                        css={css`
-                            ${tw`font-bold`}
-                        `}>
-                        {t('lastName')}:{' '}
-                    </strong>
-                    {data?.lastName}
-                </p>
+                <p>{`${data?.name} ${data?.lastName}`}</p>
             </summary>
         </section>
     );
