@@ -1,22 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+// @ts-ignore
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { loadPerEnv } from 'perenv.macro';
+
 import App from './App';
 
 import './core/i18n';
 import 'tailwindcss/dist/base.min.css';
 
-async function renderApp() {
-    if (process.env.NODE_ENV === 'development' || process.env.DEBUG) {
-        // eslint-disable-next-line no-console
-        console.warn('Running in dev mode, activating error overlay for React.');
-        await import('panic-overlay');
+loadPerEnv('panic-overlay', 'NODE_ENV', 'development');
+loadPerEnv('./dev-tools', 'NODE_ENV', 'development');
 
-        await import('./dev-tools').then((r) => r.default());
-        render(<App />, document.getElementById('root'));
-    } else {
-        render(<App />, document.getElementById('root'));
-    }
-}
-
-renderApp();
+render(<App />, document.getElementById('root'));

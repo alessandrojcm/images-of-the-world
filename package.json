@@ -85,6 +85,7 @@
         "node-fetch": "^2.6.0",
         "panic-overlay": "^1.0.42",
         "parcel": "^2.0.0-nightly.354",
+        "perenv.macro": "^0.0.2",
         "prettier": "^2.0.5",
         "react-query-devtools": "^2.3.2",
         "react-test-renderer": "^16.13.1",
