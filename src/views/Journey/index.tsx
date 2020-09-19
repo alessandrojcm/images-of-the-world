@@ -1,4 +1,3 @@
-import Start from './Start';
-import Finish from './Finish';
+import JourneyRouter from './JourneyRouter';
 
-export { Start, Finish };
+export default JourneyRouter;

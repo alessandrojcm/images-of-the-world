@@ -1,33 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
-
-import { Start, Finish } from './Journey';
+import loadable from '@loadable/component';
 import MainLayout from '../components/Layout';
 import Home from './Home';
-import Registration from './Registration';
-import LeaderBoard from './Leaderboard/Leaderboard';
-import JourneyDetails from './JourneyDetails';
 
-import CurrentUserContext, { useCurrentUser } from '../context/CurrentUserContext/CurrentUserContext';
-import JourneyContext from '../context/JourneyStateContext';
+import CurrentUserContext from '../context/CurrentUserContext/CurrentUserContext';
 import Toast from '../components/Toast';
 
-const Journey = () => {
-    const { journeyId } = useCurrentUser();
-    return (
-        <JourneyContext journeyId={journeyId}>
-            <Switch>
-                <Route path="/journey/start">
-                    <Start />
-                </Route>
-                <Route path="/journey/finish">
-                    <Finish />
-                </Route>
-            </Switch>
-        </JourneyContext>
-    );
-};
+const LazyDetails = loadable(() => import('./JourneyDetails'));
+const LazyLeaderBoard = loadable(() => import('./Leaderboard'));
+const LazyRegistration = loadable(() => import('./Registration'));
+const LazyJourney = loadable(() => import('./Journey'));
 
 const Router: React.FC = () => {
     return (
@@ -40,17 +24,16 @@ const Router: React.FC = () => {
                         </Route>
                         <CurrentUserContext>
                             <Route exact path="/journey">
-                                <Registration />
+                                <LazyRegistration />
                             </Route>
-                            {/* TODO: lazy loading to this */}
-                            <Journey />
+                            <LazyJourney />
                         </CurrentUserContext>
                     </Switch>
                     <Route exact path="/leaderboard">
-                        <LeaderBoard />
+                        <LazyLeaderBoard />
                     </Route>
                     <Route exact path="/leaderboard/:id">
-                        <JourneyDetails />
+                        <LazyDetails />
                     </Route>
                 </MainLayout>
             </BrowserRouter>
