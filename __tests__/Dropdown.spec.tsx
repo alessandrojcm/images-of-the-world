@@ -18,7 +18,7 @@ describe('Dropdown component test suite', () => {
             </Dropdown>
         );
         act(() => {
-            userEvent.click(screen.getByText('Menu'));
+            userEvent.click(screen.getByTitle('Menu'));
         });
         expect(screen.getByText('Item 1')).toBeInTheDocument();
     });
@@ -31,7 +31,7 @@ describe('Dropdown component test suite', () => {
             </Dropdown>
         );
         act(() => {
-            userEvent.click(screen.getByText('Menu'));
+            userEvent.click(screen.getByTitle('Menu'));
         });
 
         waitFor(() => expect(screen.getByText('Item 1')).toBeInTheDocument());

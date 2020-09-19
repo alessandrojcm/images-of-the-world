@@ -24,7 +24,6 @@ const JourneyState = createContext<IJourneyState | null>({
 });
 const JourneyDispatchers = createContext<IJourneyDispatchers | null>(null);
 
-// TODO: error boundary
 const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
     const { children, journeyId } = props;
     const [searchTerm, setSearchTerm] = useState<string | null>(null);
@@ -34,7 +33,6 @@ const JourneyContext: React.FC<{ journeyId: string }> = (props) => {
         return addPointsToSeller(journeyId, seller).toPromise();
     });
 
-    // TODO: Error handling for sellers fetch
     const { refetch, data: journeyState, error } = useQuery(journeyId, (id: string) => getJourneyState(id).toPromise(), {
         ...commonQueryOptions,
         refetchInterval: Infinity,

@@ -28,7 +28,6 @@ describe('CurrentUserContext test suite', () => {
             result.current.dispatchers.setUser({
                 name: 'aname',
                 lastName: 'lastanme',
-                email: 'email@email.com',
             })
         );
 
@@ -53,7 +52,6 @@ describe('CurrentUserContext test suite', () => {
             result.current.dispatchers.setUser({
                 name: 'aname',
                 lastName: 'lastanme',
-                email: 'email@email.com',
             })
         );
 

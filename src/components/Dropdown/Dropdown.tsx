@@ -17,7 +17,7 @@ const Dropdown: React.FC<IDropdownProps> = (props) => {
     const { buttonProps } = useButton(menuTriggerProps, ref);
     return (
         <div>
-            <button type="button" {...buttonProps} ref={ref}>
+            <button type="button" {...buttonProps} ref={ref} title="Menu">
                 <GoSettings color={strokeColor} />
             </button>
             {state.isOpen && (

@@ -10,7 +10,6 @@ import tailwind from '../../../tailwind.config.js';
 import { getJourneyState } from '../../core/apis/iotwApi';
 import ErrorComponent from '../ErrorComponent';
 
-// TODO: Error boundary
 const UserCard: React.FC<{ journeyId: string; queryKey: string }> = (props) => {
     const { journeyId, queryKey } = props;
     const { t } = useTranslation();
@@ -59,15 +58,15 @@ const UserCard: React.FC<{ journeyId: string; queryKey: string }> = (props) => {
                 <summary
                     css={css`
                         ${tw`
-                    list-none
-                    flex
-                    flex-col
-                    items-start
-                    justify-around
-                    font-body
-                    text-xl
-                    text-shadow
-                    `}
+                        list-none
+                        flex
+                        flex-col
+                        items-start
+                        justify-around
+                        font-body
+                        text-xl
+                        text-shadow
+                        `}
                     `}>
                     <p>{`${data?.name} ${data?.lastName}`}</p>
                 </summary>
@@ -85,15 +84,15 @@ const UserCardWithErrorBoundary: React.FC<{ journeyId: string }> = (props) => {
             <section
                 css={css`
                     ${tw`
-                text-left
-                bg-orange-100
-                bg-opacity-75
-                rounded
-                text-black
-                p-4
-                `}
+                    text-left
+                    bg-orange-100
+                    bg-opacity-75
+                    rounded
+                    text-black
+                    p-4
+                    `}
                 `}>
-                <UserCard journeyId={journeyId} queryKey={queryKey} />
+                <UserCard {...{ queryKey, journeyId }} />
             </section>
         </ErrorBoundary>
     );

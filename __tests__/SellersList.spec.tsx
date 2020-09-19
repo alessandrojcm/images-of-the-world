@@ -15,6 +15,6 @@ describe('SellersList test suite', () => {
 
         await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
 
-        expect(await screen.findAllByText(new RegExp(/\d+/)).then((r) => r.length)).toBeGreaterThanOrEqual(3);
+        expect(await screen.findAllByText('journeySeller').then((r) => r.length)).toBeGreaterThanOrEqual(3);
     });
 });

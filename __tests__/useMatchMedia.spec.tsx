@@ -15,22 +15,6 @@ const resizeWindow = (x: number, y: number, omitEvent = false) => {
     window.dispatchEvent(new Event('resize'));
 };
 
-Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: jest.fn().mockImplementation((query) => ({
-        // Super ad hoc and naive way to mock max-width queries
-        // @ts-ignore
-        matches: Number(new RegExp('\\d+').exec(query)[0]) <= window.innerWidth,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // deprecated
-        removeListener: jest.fn(), // deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-    })),
-});
-
 describe('useMatchMediaTestSuite', () => {
     afterEach(() => {
         resizeWindow(1024, 768, true);

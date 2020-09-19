@@ -10,7 +10,6 @@ export type FillableFixture<T extends Record<string, any> = {}> = T & {
 const userFixture: FillableFixture<Record<string, any>> = {
     Name: 'John',
     'Last name': 'Doe',
-    Email: 'john@doe.com',
     action: {
         element: 'text',
         name: 'Go ahead!',

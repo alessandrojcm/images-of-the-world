@@ -1,7 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { useMutation } from 'react-query';
 
-import { useToasts } from 'react-toast-notifications';
 import { ICurrentUserContext, ICurrentUserContextUpdaters } from '../../types/props';
 import { createJourney } from '../../core/apis/iotwApi';
 
@@ -9,7 +8,6 @@ const UserContext = createContext<ICurrentUserContext>({
     journeyId: '',
     name: '',
     lastName: '',
-    email: '',
     userLoggedIn: false,
     loading: false,
 });
@@ -21,25 +19,15 @@ const DispatchUserContext = createContext<ICurrentUserContextUpdaters>({
 
 const CurrentUserContext: React.FC = (props) => {
     const { children } = props;
-    const { addToast } = useToasts();
-    const [mutate, { data, isLoading: loading, reset }] = useMutation(
-        (user: Omit<ICurrentUserContext, 'loading' | 'userLoggedIn' | 'journeyId'>) => {
-            return createJourney(user).toPromise();
-        },
-        {
-            onError: () => {
-                addToast('There was an error creating this journey.', {
-                    appearance: 'error',
-                    autoDismiss: true,
-                });
-            },
-        }
-    );
+    const [mutate, { data, isLoading: loading, reset, error }] = useMutation((user: Omit<ICurrentUserContext, 'loading' | 'userLoggedIn' | 'journeyId'>) => {
+        return createJourney(user).toPromise();
+    });
     const [journeyId, setJourneyId] = useState('');
     const [context, setContext] = useState<Omit<ICurrentUserContext, 'journeyId'>>({
         ...data?.user,
         userLoggedIn: false,
         loading,
+        error,
     });
 
     const userContextUpdater: ICurrentUserContextUpdaters = {

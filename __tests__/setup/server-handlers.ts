@@ -31,7 +31,6 @@ const journey: IJourneyCreation = {
     user: {
         name: 'aname',
         lastName: 'alastname',
-        email: 'user@user.com',
     },
     id: 'aid',
     winner: sellers()[0],

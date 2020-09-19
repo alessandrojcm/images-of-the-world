@@ -6,7 +6,6 @@ from .utils import to_camel
 class User(BaseModel):
     name: str
     last_name: str
-    email: EmailStr
 
     class Config:
         alias_generator = to_camel

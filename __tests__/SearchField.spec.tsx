@@ -58,7 +58,7 @@ describe('SearchField test suite', () => {
                 <SearchField onSubmit={submit} />
             </TestWrapper>
         );
-        await waitFor(() => screen.queryByText('Loading...'));
+        await waitFor(() => {});
 
         await act(async () => {
             await userEvent.type(screen.getByPlaceholderText('Search for an image.', { exact: false }), "Mighty cats'   '{enter}");

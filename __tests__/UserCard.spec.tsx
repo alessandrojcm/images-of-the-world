@@ -15,6 +15,6 @@ describe('UserCard test suite', () => {
 
         await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
 
-        expect(screen.getByText('aname')).toBeInTheDocument();
+        expect(screen.getByText('aname', { exact: false })).toBeInTheDocument();
     });
 });
