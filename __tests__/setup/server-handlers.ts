@@ -34,7 +34,7 @@ const journey: IJourneyCreation = {
         email: 'user@user.com',
     },
     id: 'aid',
-    winner: null,
+    winner: sellers()[0],
 };
 
 const returnImage = () => {
@@ -69,7 +69,10 @@ export default [
         );
     }),
     rest.get('*/journey/:id', (req, res, ctx) => {
-        return res(ctx.json({ sellers: getSellersDict(sellers()) }));
+        return res(ctx.json(journey));
+    }),
+    rest.get('*/journey/:id/sellers', (req, res, ctx) => {
+        return res(ctx.json(Object.values(getSellersDict(sellers()))));
     }),
     rest.post('*/journey', (req, res, ctx) => {
         return res(ctx.json(journey));

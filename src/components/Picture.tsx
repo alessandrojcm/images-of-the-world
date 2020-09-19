@@ -58,6 +58,7 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
     useEffect(() => {
         if (!photoId) {
             setSrc(null);
+            return;
         }
 
         if (!image) {
@@ -65,37 +66,35 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
         } else {
             setSrc(image);
         }
-    }, [placeholderImage, image, photoId]);
-
-    if (src !== null) {
-        return (
-            <Figure className={className}>
-                <Image className={className} src={src || undefined} alt={alt} onClick={() => photoId && onClick(photoId)} />
-                {authorProfileUrl && author && (
-                    <Figcaption>
-                        <a href={authorProfileUrl} target="_blank" rel="noreferrer">
-                            {t('photoCaption', { val: author })}
-                        </a>
-                    </Figcaption>
-                )}
-            </Figure>
-        );
-    }
+    }, [placeholderImage, image, photoId, setSrc]);
 
     return (
         <Figure className={className}>
-            <ContentLoader
-                animate={isLoading}
-                height="39vh"
-                width="100%"
-                foregroundColor={tailwind.theme.colors.orange['100']}
-                backgroundColor={tailwind.theme.colors.orange['200']}
-                backgroundOpacity={0.85}
-                gradientRatio={1}
-                speed={1.5}
-                title={isLoading ? t('loadingImage') : t('selectImage')}>
-                <rect height="50vh" width="100%" />
-            </ContentLoader>
+            {src ? (
+                <>
+                    <Image className={className} src={src} alt={alt} onClick={() => photoId && onClick(photoId)} />
+                    {authorProfileUrl && author && (
+                        <Figcaption>
+                            <a href={authorProfileUrl} target="_blank" rel="noreferrer">
+                                {t('photoCaption', { val: author })}
+                            </a>
+                        </Figcaption>
+                    )}
+                </>
+            ) : (
+                <ContentLoader
+                    animate={isLoading}
+                    height="39vh"
+                    width="100%"
+                    foregroundColor={tailwind.theme.colors.orange['100']}
+                    backgroundColor={tailwind.theme.colors.orange['200']}
+                    backgroundOpacity={0.85}
+                    gradientRatio={1}
+                    speed={1.5}
+                    title={isLoading ? t('loadingImage') : t('selectImage')}>
+                    <rect height="50vh" width="100%" />
+                </ContentLoader>
+            )}
         </Figure>
     );
 };

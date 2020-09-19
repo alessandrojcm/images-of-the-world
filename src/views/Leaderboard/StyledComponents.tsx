@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro';
 
-import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
+import { GoArrowLeft, GoArrowRight, GoSearch } from 'react-icons/go';
 import Button from '../../components/Button';
 
 const Table = tw.table`
@@ -30,11 +30,6 @@ const TableBody = tw.tbody`
     text-center
 `;
 
-const TableRow = tw.tr`
-    cursor-pointer
-    hover:text-primary
-`;
-
 const TableButton = tw(Button)`border-none`;
 
 const TableFooter = tw.tfoot`
@@ -56,4 +51,6 @@ const ArrowRight = styled(GoArrowRight)`
     }}
 `;
 
-export { Table, TableHeader, TableBody, TableRow, TableButton, TableFooter, ArrowLeft, ArrowRight };
+const Details = tw(GoSearch)`text-black text-center hover:text-primary mt-2`;
+
+export { Table, TableHeader, TableBody, TableButton, TableFooter, ArrowLeft, ArrowRight, Details };

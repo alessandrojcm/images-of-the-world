@@ -2,7 +2,8 @@
     "siteTitle": "Imágenes del mundo",
     "mainTitle": "¡Bienvenido a imágenes del mundo!",
     "mainSubtitle": "¿Quieres empezar tu viaje?",
-    "leaderboard": "Revisa aventuras pasadas",
+    "leaderboardButton": "Revisa aventuras pasadas",
+    "leaderboard": "Aventuras pasadas",
     "start": "¡Empecemos!",
     "name": "Nombre",
     "lastName": "Apellido",
@@ -25,5 +26,10 @@
     "tryAgain":"Intenta de nuevo.",
     "winner": "Ganador",
     "winnerPoints": "Puntos del ganador",
-    "user": "Usuario"
+    "user": "Usuario",
+    "seeMore": "Detalles",
+    "journeyUser": "Usuario de la aventura",
+    "journeySellers": "Vendedores de la aventura",
+    "journeySeller": "{{sellerName}}, {{p}} puntos.",
+    "winnerSeller": "{{sellerName}}, ganador."
 }

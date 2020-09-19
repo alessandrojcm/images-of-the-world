@@ -15,7 +15,7 @@ const Home = () => {
             <Subtitle>{t('mainSubtitle')}</Subtitle>
             <ButtonsContainer>
                 <LeaderBoardButton>
-                    <Link to="leaderboard">{t('leaderboard')}</Link>
+                    <Link to="leaderboard">{t('leaderboardButton')}</Link>
                 </LeaderBoardButton>
                 <StartButton>
                     <Link to="journey">{t('start')}</Link>

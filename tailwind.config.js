@@ -70,6 +70,9 @@ module.exports = {
             width: {
                 '1/2-screen': '50vw',
             },
+            height: {
+                '1/2': '50%',
+            },
         },
     },
     variants: { borderColor: ['responsive', 'hover', 'focus', 'active', 'disabled'] },

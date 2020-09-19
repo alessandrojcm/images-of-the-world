@@ -1,17 +1,21 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Column, usePagination, useTable } from 'react-table';
 import { usePaginatedQuery } from 'react-query';
+import { useHistory } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import { FinishedJourney, IJourneyPagination } from '~types/models';
 import { getJourneys } from '../../core/apis/iotwApi';
-import { ArrowLeft, ArrowRight, Table, TableBody, TableButton, TableFooter, TableHeader, TableRow } from './StyledComponents';
+import { ArrowLeft, ArrowRight, Details, Table, TableBody, TableButton, TableFooter, TableHeader } from './StyledComponents';
+import { Title } from '../../components/Typography';
+import { IconButton } from '../../components/Button';
 import Container from '../../components/Container';
 
 type FetchInfo = { size: number; after?: string; before?: string };
 
 const LeaderBoard: React.FC = () => {
     const { t, i18n } = useTranslation();
+    const { push } = useHistory();
 
     const [fetchInfo, setFetchInfo] = useState<FetchInfo>({
         size: 10,
@@ -41,6 +45,11 @@ const LeaderBoard: React.FC = () => {
                 Header: t('user') as string,
                 accessor: ({ user: { name, lastName } }) => `${name} ${lastName}`,
             },
+            {
+                Header: t('seeMore') as string,
+                accessor: ({ id }) => id as string,
+                id: 'journeyId',
+            },
         ],
         [resolvedData, i18n.language]
     );
@@ -59,6 +68,7 @@ const LeaderBoard: React.FC = () => {
             initialState: {
                 pageIndex: 0,
             },
+            getRowId: (row) => row.id as string,
             pageCount: resolvedData?.items ? Math.ceil(resolvedData?.items / fetchInfo.size) : 0,
             manualPagination: true,
         },
@@ -87,6 +97,7 @@ const LeaderBoard: React.FC = () => {
 
     return (
         <Container>
+            <Title>{t('leaderboard')}</Title>
             <Table {...getTableProps()}>
                 <TableHeader>
                     {headerGroups.map((headerGroup) => (
@@ -101,11 +112,21 @@ const LeaderBoard: React.FC = () => {
                     {page.map((row) => {
                         prepareRow(row);
                         return (
-                            <TableRow {...row.getRowProps()}>
+                            <tr {...row.getRowProps()}>
                                 {row.cells.map((cell) => {
+                                    if (cell.column.id === 'journeyId') {
+                                        return (
+                                            <IconButton
+                                                onClick={() => {
+                                                    push(`/leaderboard/${cell.row.id}`);
+                                                }}>
+                                                <Details />
+                                            </IconButton>
+                                        );
+                                    }
                                     return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
                                 })}
-                            </TableRow>
+                            </tr>
                         );
                     })}
                 </TableBody>
