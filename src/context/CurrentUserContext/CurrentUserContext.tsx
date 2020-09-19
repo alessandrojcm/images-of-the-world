@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 
 import { ICurrentUserContext, ICurrentUserContextUpdaters } from '../../types/props';
@@ -22,13 +22,14 @@ const CurrentUserContext: React.FC = (props) => {
     const [mutate, { data, isLoading: loading, reset, error }] = useMutation((user: Omit<ICurrentUserContext, 'loading' | 'userLoggedIn' | 'journeyId'>) => {
         return createJourney(user).toPromise();
     });
-    const [journeyId, setJourneyId] = useState('');
+
     const [context, setContext] = useState<Omit<ICurrentUserContext, 'journeyId'>>({
         ...data?.user,
         userLoggedIn: false,
         loading,
         error,
     });
+    const [journeyId, setJourneyId] = useState('');
 
     const userContextUpdater: ICurrentUserContextUpdaters = {
         setUser: useCallback(
@@ -50,6 +51,13 @@ const CurrentUserContext: React.FC = (props) => {
             setJourneyId('');
         }, [reset, setContext, setJourneyId]),
     };
+
+    useEffect(() => {
+        setContext((curr) => ({
+            ...curr,
+            error,
+        }));
+    }, [error, setContext]);
 
     return (
         <UserContext.Provider value={{ ...context, journeyId }}>
