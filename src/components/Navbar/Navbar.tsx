@@ -1,9 +1,9 @@
 import React from 'react';
-
-import tw, { css, styled } from 'twin.macro';
-
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GoHome } from 'react-icons/go';
+import tw, { css, styled } from 'twin.macro';
+
 import TranslationSelector from './TranslationSelector';
 
 const NavbarStyle = tw.nav`
@@ -31,7 +31,8 @@ const Navbar = () => {
 
     return (
         <NavbarStyle>
-            <div
+            <Link
+                to="/"
                 css={css`
                     ${tw`flex`}
                 `}>
@@ -42,7 +43,7 @@ const Navbar = () => {
                     `}>
                     {t('siteTitle')}
                 </h1>
-            </div>
+            </Link>
             <TranslationSelector />
         </NavbarStyle>
     );
