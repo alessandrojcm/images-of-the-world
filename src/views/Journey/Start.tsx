@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, Prompt } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import { useTranslation } from 'react-i18next';
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import ErrorComponent from '../../components/ErrorComponent';
@@ -16,6 +17,7 @@ const Start = () => {
     const { push } = useHistory();
     const { userLoggedIn } = useCurrentUser();
     const { setSearchTerm } = useJourneyDispatchers();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!winner) {
@@ -30,6 +32,7 @@ const Start = () => {
 
     return (
         <Container>
+            <Prompt message={t('journeyExitPrompt')} />
             <SearchBar disabled={Object.keys(sellers ?? {}).length === 0 || Boolean(term)} onSubmit={setSearchTerm} />
             {Object.values(sellers ?? {}).map((seller) => (
                 <ErrorBoundary FallbackComponent={ErrorComponent} onReset={() => setSearchTerm(null)}>

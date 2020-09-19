@@ -31,5 +31,6 @@
     "journeyUser": "Journey user",
     "journeySellers": "Journey sellers",
     "journeySeller": "{{sellerName}}, {{p}} points.",
-    "winnerSeller": "{{sellerName}}, winner."
+    "winnerSeller": "{{sellerName}}, winner.",
+    "journeyExitPrompt": "This journey has not ended, are you sure you want to leave?"
 }

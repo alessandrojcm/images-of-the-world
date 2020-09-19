@@ -31,5 +31,6 @@
     "journeyUser": "Usuario de la aventura",
     "journeySellers": "Vendedores de la aventura",
     "journeySeller": "{{sellerName}}, {{p}} puntos.",
-    "winnerSeller": "{{sellerName}}, ganador."
+    "winnerSeller": "{{sellerName}}, ganador.",
+    "journeyExitPrompt": "Esta aventura no ha terminado, seguro que quieres salir?"
 }
