@@ -3,7 +3,7 @@ import React from 'react';
 import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import BaseSlider, { CustomArrowProps } from 'react-slick';
 import { useId } from '@react-aria/utils';
-import tw, { styled } from 'twin.macro';
+import tw, { styled, css } from 'twin.macro';
 import './slick-theme.css';
 import './slick.css';
 
@@ -41,8 +41,20 @@ const Carousel: React.FC<{ imageIds: string[] }> = (props) => {
     return (
         <Slider adaptiveHeight lazyLoad="ondemand" infinite nextArrow={<CustomArrowRight />} prevArrow={<CustomArrowLeft />}>
             {imageIds.map((image) => (
-                // @ts-ignore
-                <Picture photo={{ id: image }} width={first} key={useId()} />
+                <div
+                    css={css`
+                        display: flex !important;
+                        justify-content: center;
+                        align-items: center;
+                    `}>
+                    <div
+                        css={css`
+                            width: 50% !important;
+                        `}>
+                        {/* @ts-ignore */}
+                        <Picture photo={{ id: image }} width={first} key={useId()} />
+                    </div>
+                </div>
             ))}
         </Slider>
     );
