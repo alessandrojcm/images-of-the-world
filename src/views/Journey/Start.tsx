@@ -31,11 +31,11 @@ const Start = () => {
     return (
         <Container>
             <SearchBar disabled={Object.keys(sellers ?? {}).length === 0 || Boolean(term)} onSubmit={setSearchTerm} />
-            <ErrorBoundary FallbackComponent={ErrorComponent} onReset={() => setSearchTerm(null)}>
-                {Object.values(sellers ?? {}).map((seller) => (
+            {Object.values(sellers ?? {}).map((seller) => (
+                <ErrorBoundary FallbackComponent={ErrorComponent} onReset={() => setSearchTerm(null)}>
                     <ImageOfTheWorld seller={seller} key={seller.id} />
-                ))}
-            </ErrorBoundary>
+                </ErrorBoundary>
+            ))}
             <JourneyDisplay />
         </Container>
     );
