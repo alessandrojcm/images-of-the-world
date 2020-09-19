@@ -5,6 +5,7 @@ const Container = tw.div`
     justify-around
     items-center
     w-full
+    h-full
 `;
 
 const Aside = tw.aside`
