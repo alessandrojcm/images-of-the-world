@@ -3,6 +3,8 @@ import { queryCache, useQuery } from 'react-query';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { useTranslation } from 'react-i18next';
 import tw, { css } from 'twin.macro';
+import ContentLoader from 'react-content-loader';
+import tailwind from '../../../tailwind.config.js';
 
 import { getJourneysSellers } from '../../core/apis/iotwApi';
 import ErrorComponent from '../ErrorComponent';
@@ -22,10 +24,6 @@ const SellersList: React.FC<{ journeyId: string; queryKey: string }> = (props) =
         }
     );
 
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
-
     return (
         <>
             <h1
@@ -34,26 +32,42 @@ const SellersList: React.FC<{ journeyId: string; queryKey: string }> = (props) =
                 `}>
                 {t('journeySellers')}
             </h1>
-            {data?.map((seller) => {
-                return (
-                    <summary
-                        css={css`
-                            ${tw`
+            {isLoading ? (
+                <ContentLoader
+                    speed={2}
+                    width={400}
+                    height={150}
+                    viewBox="0 0 400 150"
+                    foregroundOpacity={0.75}
+                    foregroundColor={tailwind.theme.colors.black}
+                    backgroundColor={tailwind.theme.colors.black}
+                    {...props}>
+                    <rect x="5" y="16" rx="0" ry="0" width="90%" height="30" />
+                    <rect x="5" y="56" rx="0" ry="0" width="100%" height="30" />
+                    <rect x="5" y="97" rx="0" ry="0" width="80%" height="30" />
+                </ContentLoader>
+            ) : (
+                data?.map((seller) => {
+                    return (
+                        <summary
+                            css={css`
+                                ${tw`
                                 font-body
                                 text-lg
                                 list-none
                              `}
-                        `}
-                        key={seller.id}>
-                        <p>
-                            {t('journeySeller', {
-                                sellerName: seller.sellerName,
-                                p: seller.points,
-                            })}
-                        </p>
-                    </summary>
-                );
-            })}
+                            `}
+                            key={seller.id}>
+                            <p>
+                                {t('journeySeller', {
+                                    sellerName: seller.sellerName,
+                                    p: seller.points,
+                                })}
+                            </p>
+                        </summary>
+                    );
+                })
+            )}
         </>
     );
 };
