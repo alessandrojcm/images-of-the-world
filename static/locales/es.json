@@ -30,5 +30,6 @@
     "seeMore": "Detalles",
     "journeyUser": "Usuario de la aventura",
     "journeySellers": "Vendedores de la aventura",
-    "journeySeller": "{{sellerName}}, {{p}} puntos."
+    "journeySeller": "{{sellerName}}, {{p}} puntos.",
+    "winnerSeller": "{{sellerName}}, ganador."
 }
