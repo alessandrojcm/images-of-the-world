@@ -8,16 +8,15 @@ import { IPhoto } from '~types/models';
 import tailwind from '../../tailwind.config.js';
 
 const imageSrc = (src: string | undefined) => css`
-    filter: ${!src ? 'blur(20px);' : ''} ${tw`bg-no-repeat bg-cover`};
+    filter: ${!src ? 'blur(20px);' : ''};
     transition: all 0.2s ease-out;
 `;
 
 const Image = styled.img`
     ${tw`
+      max-h-47vh
       cursor-pointer
-      block
       object-cover
-      h-full
       w-full
       rounded-t`}
     ${(props) => imageSrc(props.src)}
@@ -30,7 +29,7 @@ const Figure = styled.figure`
       border-orange-100
       rounded-t
       border-4
-      h-auto`};
+    `};
 `;
 
 const Figcaption = tw.figcaption`

@@ -7,7 +7,7 @@ export default styled.div`
     min-w-0
     grid
     grid-cols-6
-    grid-rows-6
+    grid-rows-7
     pt-8
     pr-8
     pl-8

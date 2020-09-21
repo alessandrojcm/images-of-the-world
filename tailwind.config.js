@@ -63,6 +63,7 @@ module.exports = {
             },
             maxHeight: {
                 '40vh': '40vh',
+                '47vh': '47vh',
             },
             minHeight: {
                 '40vh': '40vh',
@@ -72,6 +73,9 @@ module.exports = {
             },
             height: {
                 '1/2': '50%',
+            },
+            gridTemplateRows: {
+                7: 'repeat(7, minmax(0, 1fr))',
             },
         },
     },
