@@ -8,7 +8,7 @@ import { useSearchFieldState } from '@react-stately/searchfield';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ValidationState } from '@react-types/shared';
-import { CgClose, CgSearch } from 'react-icons/cg/index';
+import { CgClose, CgSearch } from 'react-icons/cg';
 import { InputStyle } from './common-styles';
 import { useJourneyState } from '../context/JourneyStateContext';
 
@@ -29,12 +29,14 @@ const SearchContainer = styled.div`
     items-center`};
     span {
         ${tw`pl-2 inline-block rounded-l flex items-center`}
+        ${({ disabled = false }: { disabled: boolean }) => (disabled ? tw`bg-opacity-50` : tw`bg-opacity-100`)}
     }
     button {
         ${tw`pr-2 rounded-r`}
+        ${({ disabled = false }: { disabled: boolean }) => (disabled ? tw`bg-opacity-50` : tw`bg-opacity-100`)}
     }
-    input:disabled ~ button {
-        ${tw`bg-opacity-75 cursor-not-allowed hover:text-black`}
+    input:disabled {
+        ${tw`bg-opacity-50 cursor-not-allowed hover:text-black`}
     }
 `;
 
@@ -82,7 +84,7 @@ const SearchBar: React.FC<{ onSubmit: (query: string) => void; disabled?: boolea
     }, [searchState.setValue, searchTerm]);
 
     return (
-        <SearchContainer>
+        <SearchContainer disabled={disabled}>
             <span css={iconStyle}>
                 <CgSearch />
             </span>
