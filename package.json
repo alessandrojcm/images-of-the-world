@@ -17,7 +17,8 @@
         "test": "jest --bail --runInBand",
         "e2e:gui": "cypress open",
         "e2e:gui:serve": "concurrently 'yarn develop' 'yarn e2e:gui'",
-        "e2e:cli": "cypress run"
+        "e2e:cli": "cypress run",
+        "postbuild": "cp -r static/* dist/"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.10.4",
