@@ -1,0 +1,20 @@
+CreateCollection({name: 'journeys'})
+CreateIndex({
+  name: 'all_journeys',
+  terms: [{binding: "finished"}],
+  source: {
+    collection: Collection('journeys'),
+    fields: {
+      finished: Query(
+        Lambda('x',
+          If(IsNull(Select(['data', 'winner'], Var('x'), null)), 'non_finished', 'finished')
+        )
+      )
+    }
+  }
+})
+CreateIndex({
+  name: 'get_journey_by_id',
+  source: Collection('journeys'),
+  terms: [{field: ['data', 'id']}]
+})

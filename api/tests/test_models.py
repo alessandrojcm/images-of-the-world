@@ -48,16 +48,7 @@ class TestJourneyModel:
 
         journey.delete()
 
-    def test_get_active_journeys(self):
-        pass
-        return
-        journeys = Journey.get_active_journeys_by_email('user@auser.com')
-
-        assert len(journeys) > 0
-
     def test_get_journeys(self):
         journeys = Journey.get_journeys()
 
         assert journeys.get('journeys') is not None
-        assert journeys.get('after') is not None
-        assert journeys.get('items') is not None

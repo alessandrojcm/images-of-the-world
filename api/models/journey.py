@@ -1,4 +1,3 @@
-from collections import namedtuple
 from typing import Optional, Dict, Union, List
 from uuid import uuid4
 
@@ -30,7 +29,6 @@ def fauna_to_object(document: dict):
     )
 
 
-# TODO: List journeys for leaderboard
 class Journey(DocumentBase):
     _collection_name = 'journeys'
     winner: Optional[ImageSeller]
@@ -84,27 +82,6 @@ class Journey(DocumentBase):
             return None
 
         return fauna_to_object(result.get('data')[0])
-
-    @classmethod
-    def get_active_journeys_by_email(cls, email: str):
-        result = session().query(
-            q.map_(
-                q.lambda_('journey', q.get(q.var('journey'))),
-                q.paginate(
-                    q.match(q.index('get-active-journeys'), str(email))
-                )
-            )
-        )
-
-        if len(result["data"]) == 0:
-            return []
-
-        active_journeys = []
-
-        for journey in result.get('data'):
-            active_journeys.append(fauna_to_object(journey))
-
-        return active_journeys
 
     @classmethod
     def get_journeys(cls, size=10, finished=True, after: Union[str, None] = None, before: Union[str, None] = None):
