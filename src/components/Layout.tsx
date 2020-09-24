@@ -5,7 +5,7 @@ import { useRouteMatch } from 'react-router-dom';
 import Navbar from './Navbar';
 import BackgroundImage from './BackgroundImage';
 
-const BACKGROUND_IMAGE_ID = 'W_-6PWGbYaU';
+const BACKGROUND_IMAGE_ID = 'ONpGBpns3cs';
 
 const MainLayout = styled.main`
     ${tw` flex
