@@ -7,11 +7,12 @@ import Home from './Home';
 
 import CurrentUserContext from '../context/CurrentUserContext/CurrentUserContext';
 import Toast from '../components/Toast';
+import FullPageLoader from '../components/FullPageLoader';
 
-const LazyDetails = loadable(() => import('./JourneyDetails'));
-const LazyLeaderBoard = loadable(() => import('./Leaderboard'));
-const LazyRegistration = loadable(() => import('./Registration'));
-const LazyJourney = loadable(() => import('./Journey'));
+const LazyDetails = loadable(() => import('./JourneyDetails'), { fallback: <FullPageLoader transparent /> });
+const LazyLeaderBoard = loadable(() => import('./Leaderboard'), { fallback: <FullPageLoader transparent /> });
+const LazyRegistration = loadable(() => import('./Registration'), { fallback: <FullPageLoader transparent /> });
+const LazyJourney = loadable(() => import('./Journey'), { fallback: <FullPageLoader transparent /> });
 
 const Router: React.FC = () => {
     return (

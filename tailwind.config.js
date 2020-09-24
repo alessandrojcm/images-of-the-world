@@ -77,6 +77,9 @@ module.exports = {
             gridTemplateRows: {
                 7: 'repeat(7, minmax(0, 1fr))',
             },
+            backgroundColor: {
+                transparent: 'transparent',
+            },
         },
     },
     variants: { borderColor: ['responsive', 'hover', 'focus', 'active', 'disabled'] },
