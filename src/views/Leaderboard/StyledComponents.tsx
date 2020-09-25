@@ -10,6 +10,7 @@ const Table = tw.table`
     bg-opacity-75
     rounded
     p-5
+    min-h-full
 `;
 
 const TableHeader = tw.thead`
@@ -19,7 +20,7 @@ const TableHeader = tw.thead`
     text-xl
     text-shadow
     text-center
-    rounded-t
+    rounded-t-full
 `;
 
 const TableBody = tw.tbody`
