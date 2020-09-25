@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 
-import { Redirect, useHistory, Prompt } from 'react-router-dom';
-import { ErrorBoundary } from 'react-error-boundary';
+import { Prompt, Redirect, useHistory } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
 import { useCurrentUser } from '../../context/CurrentUserContext';
-import ErrorComponent from '../../components/ErrorComponent';
 import Container from './styledComponents';
 import ImageOfTheWorld from '../../components/ImageOfTheWorld';
 import SearchBar from '../../components/SearchBar';
@@ -35,9 +33,7 @@ const Start = () => {
             <Prompt message={t('journeyExitPrompt')} />
             <SearchBar disabled={Object.keys(sellers ?? {}).length === 0 || Boolean(term)} onSubmit={setSearchTerm} />
             {Object.values(sellers ?? {}).map((seller) => (
-                <ErrorBoundary FallbackComponent={ErrorComponent} onReset={() => setSearchTerm(null)}>
-                    <ImageOfTheWorld seller={seller} key={seller.id} />
-                </ErrorBoundary>
+                <ImageOfTheWorld seller={seller} key={seller.id} handleError={() => setSearchTerm(null)} />
             ))}
             <JourneyDisplay />
         </Container>

@@ -19,6 +19,10 @@ export const Section = tw.section`
     overflow-hidden
 `;
 
+export const ErrorSection = styled(Section)`
+    ${tw`row-start-3 hover:translate-y-0`}
+`;
+
 export const Details = styled.span`
     ${tw`bg-orange-100 cursor-pointer block rounded-b`};
     & > * {

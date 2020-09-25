@@ -3,17 +3,30 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import { css } from 'twin.macro';
-import { useErrorHandler } from 'react-error-boundary';
+import { ErrorBoundary, FallbackProps, useErrorHandler } from 'react-error-boundary';
 import { IImageOfTheWorld } from '~types/models';
 
-import { Details, Section } from './StyledComponents';
+import { Details, ErrorSection, Section } from './StyledComponents';
 import { useJourneyDispatchers, useJourneyState } from '../../context/JourneyStateContext';
 import { getJourneySeller } from '../../core/apis/iotwApi';
 import useRandomImage from '../../utils/hooks/useRandomImage';
 import useMatchMedia from '../../utils/hooks/useProgressiveImage/useMatchMedia';
 import Picture from '../Picture';
+import ErrorComponent from '../ErrorComponent';
 
-const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (props) => {
+type IImageOfThrWorldProps = IImageOfTheWorld & { className?: string };
+
+const CustomErrorHandler: React.FC<FallbackProps> = (props) => {
+    const { children, ...rest } = props;
+
+    return (
+        <ErrorSection>
+            <ErrorComponent {...rest}>{children}</ErrorComponent>
+        </ErrorSection>
+    );
+};
+
+const ImageOfTheWorld: React.FC<IImageOfThrWorldProps> = (props) => {
     const { seller: initialCache, className = '' } = props;
 
     const [first] = useMatchMedia('(min-width: 640px)', '(min-width: 768px)', '(min-width: 1024px)', '(min-width: 1280px)');
@@ -54,4 +67,13 @@ const ImageOfTheWorld: React.FC<IImageOfTheWorld & { className?: string }> = (pr
     );
 };
 
-export default ImageOfTheWorld;
+const ImageOfTheWorldWithErrorBoundary: React.FC<IImageOfThrWorldProps & { handleError: () => void }> = (props) => {
+    const { handleError, ...rest } = props;
+    return (
+        <ErrorBoundary FallbackComponent={CustomErrorHandler} onReset={handleError}>
+            <ImageOfTheWorld {...rest} />
+        </ErrorBoundary>
+    );
+};
+
+export default ImageOfTheWorldWithErrorBoundary;
