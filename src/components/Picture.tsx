@@ -52,11 +52,12 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
     const { id: photoId } = photo ?? { id: null };
 
     const [src, setSrc] = useState<string | null>(null);
-    const { placeholderImage, image, alt, authorProfileUrl, author, isLoading } = useProgressiveImage(photoId, width, photo);
+    const { placeholderImage, image, alt, authorProfileUrl, author, isLoading, clear } = useProgressiveImage(photoId, width, photo);
 
     useEffect(() => {
         if (!photoId) {
             setSrc(null);
+            clear();
             return;
         }
 
@@ -65,7 +66,7 @@ const Picture: React.FC<{ photo: IPhoto | undefined; width: number; className?: 
         } else {
             setSrc(image);
         }
-    }, [placeholderImage, image, photoId, setSrc]);
+    }, [placeholderImage, image, photoId, setSrc, clear]);
 
     return (
         <Figure className={className}>

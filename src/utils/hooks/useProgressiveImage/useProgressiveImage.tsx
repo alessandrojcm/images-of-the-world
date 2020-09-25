@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useId } from '@react-aria/utils';
 import { QueryConfig, useQuery } from 'react-query';
@@ -32,7 +32,7 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
 
     const queryKey = useId();
 
-    const { data, isLoading: rawLoading } = useQuery([`image-url-${queryKey}`, { photoId: initialPhoto?.id ?? photoId }], getRawUrl, {
+    const { data, isLoading: rawLoading, remove: clearRaw } = useQuery([`image-url-${queryKey}`, { photoId: initialPhoto?.id ?? photoId }], getRawUrl, {
         ...commonQueryOptions,
         enabled: photoId,
         ...(initialPhoto &&
@@ -46,13 +46,13 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
             }),
     });
 
-    const { isLoading: placeholderLoading } = useQuery([`placeholder-image-${queryKey}`, { photoUrl: data?.photoUrl ?? null }], getPlaceHolderImageAsBase64, {
+    const { isLoading: placeholderLoading, remove: clearPlaceholder } = useQuery([`placeholder-image-${queryKey}`, { photoUrl: data?.photoUrl ?? null }], getPlaceHolderImageAsBase64, {
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setPlaceholderImage(url),
     });
 
-    const { isLoading: fullQualityLoading } = useQuery([`image-${queryKey}`, { photoUrl: data?.photoUrl ?? null, width }], getHighQualityImageAsBase64, {
+    const { isLoading: fullQualityLoading, remove: clearFullQuality } = useQuery([`image-${queryKey}`, { photoUrl: data?.photoUrl ?? null, width }], getHighQualityImageAsBase64, {
         ...commonQueryOptions,
         enabled: data?.photoUrl ?? undefined,
         onSuccess: (url: string) => setImage(url),
@@ -65,6 +65,13 @@ const useProgressiveImage = (photoId: string | null, width: number, initialPhoto
         ...(data?.alt && { alt: data.alt }),
         ...(data?.author && { author: data.author }),
         ...(data?.authorProfileUrl && { authorProfileUrl: data.authorProfileUrl }),
+        clear: useCallback(() => {
+            clearRaw();
+            clearPlaceholder();
+            clearFullQuality();
+            setPlaceholderImage(null);
+            setImage(null);
+        }, [clearRaw, clearPlaceholder, clearFullQuality, setPlaceholderImage, setImage]),
     };
 };
 
