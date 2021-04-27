@@ -133,9 +133,9 @@
         "react-table": "^7.5.0",
         "react-toast-notifications": "^2.4.0",
         "rxjs": "^6.6.0",
-        "tailwindcss": "^1.7.5",
+        "tailwindcss": "^2.0.0",
         "tailwindcss-typography": "^3.1.0",
-        "twin.macro": "^1.7.0",
+        "twin.macro": "^2.0.0",
         "yup": "^0.29.3"
     },
     "husky": {
