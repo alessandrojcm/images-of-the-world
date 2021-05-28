@@ -94,7 +94,7 @@ uvloop==0.14.0; sys_platform != "win32" and sys_platform != "cygwin" and platfor
     --hash=sha256:bcac356d62edd330080aed082e78d4b580ff260a677508718f88016333e2c9c5 \
     --hash=sha256:4315d2ec3ca393dd5bc0b0089d23101276778c304d42faff5dc4579cb6caef09 \
     --hash=sha256:123ac9c0c7dd71464f58f1b4ee0bbd81285d96cdda8bc3519281b8973e3a461e
-websockets==8.0.2 \
+websockets==9.1 \
     --hash=sha256:e906128532a14b9d264a43eb48f9b3080d53a9bda819ab45bf56b8039dc606ac \
     --hash=sha256:83e63aa73331b9ca21af61df8f115fb5fbcba3f281bee650a4ad16a40cd1ef15 \
     --hash=sha256:e9102043a81cdc8b7c8032ff4bce39f6229e4ac39cb2010946c912eeb84e2cb6 \
